@@ -1,4 +1,4 @@
-import 'package:bittchainpro/ui/widgets/ex_empty_view.dart';
+import 'package:jinglin/ui/widgets/ex_empty_view.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 

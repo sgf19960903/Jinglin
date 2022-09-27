@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:bittchainpro/common/res/res_path.dart';
-import 'package:bittchainpro/generated/l10n.dart';
+import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/generated/l10n.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ExRefreshFooterView extends StatelessWidget {
@@ -13,7 +13,7 @@ class ExRefreshFooterView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(hintColor==null) hintColor = AppColors().commonTextColor;
+    if(hintColor==null) hintColor = AppColors.textColor;
     return ClassicFooter(
       loadStyle: LoadStyle.ShowWhenLoading,
       noDataText: S.of(context).text_3,

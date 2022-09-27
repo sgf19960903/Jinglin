@@ -1,4 +1,10 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/ui/base/base_state.dart';
+import 'package:jinglin/ui/widgets/ex_list_view.dart';
+import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
 ///author - Tongzongwen
@@ -11,9 +17,150 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends BaseState<HomePage> {
+
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return widgetBuild(
+      hasHeaderBg: true,
+      hasHeaderIntroImg: true,
+      child: Column(
+        children: [
+          _bannerWidget(),
+          _tabListWidget(),
+          _friendListWidget().exp(),
+        ],
+      )
+    );
+  }
+
+
+  //轮播图
+  Widget _bannerWidget(){
+    return Swiper(
+      viewportFraction: 0.9,
+      itemHeight: 150,
+      itemCount: 3,
+      autoplay: true,
+      scale: 1,
+      itemBuilder: (_,index) => AppImage().defaultBannerBg.image(w: double.infinity,h: 150,fit: BoxFit.fill).clipRRect(radius: 12).container(padL: 4.w,padR: 4.w,radius: 12),
+    ).container(h: 150,marginT: 8,/*padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR*/);
+  }
+
+
+  //列表tab列表
+  Widget _tabListWidget(){
+    List<String> tabNameList = [S.of(context).text_33,S.of(context).text_34,];
+    return Row(
+      children: List.generate(2, (index) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ExTextView(tabNameList[index],
+            color: index==0? AppColors.textColor : AppColors.grayColor,
+            size: index==0?18:16,
+          ).container(h: 24),
+          "".container(
+            w: 16.w,
+            h: 3,
+            radius: 1.5,
+            bgColor: index==0?AppColors.white:Colors.transparent,
+            gradient: LinearGradient(
+              colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
+            ),
+          )
+        ],
+      ).onTap(() {
+
+      }).container(marginR: 24.w,)),
+    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 15);
+  }
+
+
+  //交友列表
+  Widget _friendListWidget(){
+    return ExListView(
+      itemCount: 10,
+      padding: EdgeInsets.only(left: AppSizes.pagePaddingLR,right: AppSizes.pagePaddingLR,top: 13),
+      itemBuilder: (_,index){
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //用户头像
+            AppImage().iconWechat.image(w: 64.w,h: 64.w,),
+            //间距
+            "".container(w: 12.w),
+            //用户其他信息
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                //用户名、位置
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ExTextView("是朱不是猪",).exp(),
+                    AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
+                    ExTextView("北京",
+                      color: AppColors.grayColor,
+                    ),
+                  ],
+                ),
+                //性别、个性签名、搭讪
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        //性别
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                            ExTextView("24",
+                              color: AppColors.white,
+                              size: AppSizes.hintFontSize,
+                            ).container(marginL: 2.w),
+                          ],
+                        ).container(padL: 3.w,padR: 3.w,padT: 2,padB: 2,marginT: 8,bgColor: AppColors.womanColor,radius: 99),
+                        //个性签名
+                        ExTextView("没留下什么东西",
+                          color: AppColors.grayColor,
+                          size: AppSizes.contentFontSize,
+                        ).container(marginT: 8),
+                      ],
+                    ).exp(),
+                    //搭讪按钮
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppImage().iconFlashWhite.image(w: 16.w,h: 16.w,),
+                        ExTextView(S.of(context).text_35,
+                          color: AppColors.white,
+                          size: AppSizes.contentFontSize,
+                        ).container(marginL: 2.w),
+                      ],
+                    ).container(
+                      h: 32,
+                      padL: 8.w,
+                      padR: 8.w,
+                      marginT: 6,
+                      radius: 999,
+                      bgColor: AppColors.white,
+                      gradient: LinearGradient(
+                        colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
+                      ),
+                    ),
+                  ],
+                ),
+                "".container(w: double.infinity,h: 0.5,bgColor: AppColors.borderColor,marginT: 16),
+
+              ],
+            ).exp(),
+          ],
+        ).container(marginB: 16,);
+      }
+    );
   }
 }

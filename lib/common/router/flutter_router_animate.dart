@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:jinglin/lib/common/router/router_manager.dart';
+import 'package:jinglin/common/router/router_manager.dart';
 
 /// Created  on 2020/4/7.
 /// @author Grey

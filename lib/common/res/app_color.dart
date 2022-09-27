@@ -35,6 +35,8 @@ class AppColors {
   static const Color noSelectedButtonBg = Color(0xFFEEEEEE);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
+  //成功颜色
+  static const Color successColor = Color(0xFF00FF00);
 
 }
 

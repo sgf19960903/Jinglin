@@ -20,6 +20,7 @@ class ExTextView extends StatefulWidget {
     this.textLineHeight, /// 文本间距
     this.isStrutStyle = kIsWeb,
     this.fontFamily,
+    this.lineHeight,
   }) : super(key: key);
 
 
@@ -37,6 +38,7 @@ class ExTextView extends StatefulWidget {
   double? textLineHeight; /// 文本间距
   bool isStrutStyle;
   String? fontFamily;
+  double? lineHeight;
   _ExTextViewState? state;
 
   @override

@@ -1,8 +1,8 @@
-import 'package:bittchainpro/generated/l10n.dart';
+import 'package:jinglin/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:bittchainpro/common/utils/toast_util.dart';
-import 'package:bittchainpro/generated/l10n.dart';
+import 'package:jinglin/common/utils/toast_util.dart';
+import 'package:jinglin/generated/l10n.dart';
 
 
 class ClipboardUtil {

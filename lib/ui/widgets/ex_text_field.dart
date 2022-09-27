@@ -1,4 +1,4 @@
-import 'package:bittchainpro/common/res/res_path.dart';
+import 'package:jinglin/common/res/res_path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -92,8 +92,8 @@ class ExTextFiledState extends State<ExTextFiled>{
   @override
   void initState() {
     super.initState();
-    if(widget.hintTextColor==null) widget.hintTextColor = AppColors().commonGrayColor;
-    if(widget.textColor==null) widget.textColor = AppColors().commonTextColor;
+    if(widget.hintTextColor==null) widget.hintTextColor = AppColors.grayColor;
+    if(widget.textColor==null) widget.textColor = AppColors.textColor;
   }
 
   @override
@@ -125,7 +125,7 @@ class ExTextFiledState extends State<ExTextFiled>{
       strutStyle: kIsWeb?StrutStyle(forceStrutHeight: true, height: 1):null,
       style: TextStyle(
         fontSize: widget.textSize.sp,
-        color: widget.textColor??AppColors().commonTextColor,
+        color: widget.textColor??AppColors.textColor,
         fontWeight: widget.textIsBold ? FontWeight.bold : FontWeight.normal,
       ),
       toolbarOptions: ToolbarOptions(
@@ -139,7 +139,7 @@ class ExTextFiledState extends State<ExTextFiled>{
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: widget.hintTextSize.sp,
-          color: widget.hintTextColor??AppColors().commonTextColor,
+          color: widget.hintTextColor??AppColors.textColor,
           fontWeight: widget.hintTextIsBold ? FontWeight.bold : FontWeight.normal,
         ),
         prefixIcon: widget.prefixWidget,
@@ -148,24 +148,24 @@ class ExTextFiledState extends State<ExTextFiled>{
         suffixIconConstraints: widget.suffixConstraints,
         enabledBorder: widget.hasBorder
             ? UnderlineInputBorder(
-          borderSide: BorderSide(color: widget.borderColor??AppColors().lineColor, width: widget.borderWidth),
+          borderSide: BorderSide(color: widget.borderColor??AppColors.lineColor, width: widget.borderWidth),
         )
-            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor??AppColors().lineColor, width: widget.borderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
+            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor??AppColors.lineColor, width: widget.borderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
             :OutlineInputBorder(borderSide: BorderSide.none),
         border: widget.hasBorder
             ? UnderlineInputBorder(
-          borderSide: BorderSide(color: widget.borderColor??AppColors().lineColor, width: widget.borderWidth),
+          borderSide: BorderSide(color: widget.borderColor??AppColors.lineColor, width: widget.borderWidth),
         )
-            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor??AppColors().lineColor, width: widget.borderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
+            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.borderColor??AppColors.lineColor, width: widget.borderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
             :OutlineInputBorder(borderSide: BorderSide.none),
         focusedBorder: widget.hasBorder
             ? UnderlineInputBorder(
           borderSide: BorderSide(
-              color: widget.foucsBorderColor??AppColors().lineColor,
+              color: widget.foucsBorderColor??AppColors.lineColor,
               width:
               widget.foucsBorderWidth == 0 ? widget.borderWidth : widget.foucsBorderWidth),
         )
-            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.foucsBorderColor??AppColors().lineColor, width: widget.foucsBorderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
+            : widget.hasWholeBorder? OutlineInputBorder(borderSide: BorderSide(color: widget.foucsBorderColor??AppColors.lineColor, width: widget.foucsBorderWidth),borderRadius: BorderRadius.all(Radius.circular(widget.borderRadius)))
             :OutlineInputBorder(borderSide: BorderSide.none),
       ),
     );

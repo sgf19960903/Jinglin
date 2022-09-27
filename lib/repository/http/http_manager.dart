@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:bittchainpro/application/app.dart';
-import 'package:bittchainpro/common/utils/dialog/common_dialog_util.dart';
-import 'package:bittchainpro/common/utils/log_util.dart';
-import 'package:bittchainpro/repository/http/intercept/dio_log_interceptor.dart';
-import 'package:bittchainpro/repository/http/intercept/network_interceptor.dart';
-import 'package:bittchainpro/repository/http/response_handle.dart';
+import 'package:jinglin/application/app.dart';
+import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
+import 'package:jinglin/common/utils/log_util.dart';
+import 'package:jinglin/repository/http/intercept/dio_log_interceptor.dart';
+import 'package:jinglin/repository/http/intercept/network_interceptor.dart';
+import 'package:jinglin/repository/http/response_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 

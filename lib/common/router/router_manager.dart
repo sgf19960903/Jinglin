@@ -1,5 +1,6 @@
 
-import 'package:jinglin/lib/ui/main_page.dart';
+
+import 'package:jinglin/ui/main_page.dart';
 
 import 'flutter_router.dart';
 

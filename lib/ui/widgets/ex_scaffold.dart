@@ -35,7 +35,7 @@ class ExScaffold extends StatelessWidget {
     return Scaffold(
       key: key,
       appBar: appBar,
-      backgroundColor: backgroundColor==null?AppColors().commonBgColor:backgroundColor,
+      backgroundColor: backgroundColor==null?AppColors.pageColor:backgroundColor,
       body: child,
       bottomNavigationBar: bottomNavigationBar,
       resizeToAvoidBottomInset: bottomInset,
@@ -48,7 +48,7 @@ class ExScaffold extends StatelessWidget {
     return Platform.isAndroid ? Scaffold(
       key: key,
       appBar: appBar,
-      backgroundColor: backgroundColor==null?AppColors().commonBgColor:backgroundColor,
+      backgroundColor: backgroundColor==null?AppColors.pageColor:backgroundColor,
       body: child,
       bottomNavigationBar: bottomNavigationBar,
       resizeToAvoidBottomInset: bottomInset,
@@ -59,7 +59,7 @@ class ExScaffold extends StatelessWidget {
       FocusScope.of(context).unfocus();
     }) : CupertinoPageScaffold(
       navigationBar: appBar,
-      backgroundColor: backgroundColor==null?AppColors().commonBgColor:backgroundColor,
+      backgroundColor: backgroundColor==null?AppColors.pageColor:backgroundColor,
       key: key,
       resizeToAvoidBottomInset: bottomInset,
       child: Material(

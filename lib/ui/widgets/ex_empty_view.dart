@@ -1,6 +1,6 @@
-import 'package:bittchainpro/common/res/res_path.dart';
-import 'package:bittchainpro/generated/l10n.dart';
-import 'package:bittchainpro/ui/widgets/ex_text_view.dart';
+import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,15 +30,15 @@ class ExEmptyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(emptyText==null) emptyText = S.of(context).text_344;
-    if(emptyImg==null) emptyImg = AppImage().iconEmpty;
+    if(emptyImg==null) emptyImg = AppImage().emptyBg;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        "${emptyImg??AppImage().iconEmpty}".image(w: imgWidth.w,h: imgHeight),
+        "${emptyImg??AppImage().emptyBg}".image(w: imgWidth.w,h: imgHeight),
         ExTextView("${emptyText??""}",
-          color: hintColor??AppColors().commonGrayColor,
+          color: hintColor??AppColors.grayColor,
           size: fontSize,
         ).container(marginT: 0),
       ],

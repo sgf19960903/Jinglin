@@ -1,5 +1,5 @@
 
-import 'package:bittchainpro/common/router/router_manager.dart';
+import 'package:jinglin/common/router/router_manager.dart';
 import 'package:flutter/material.dart';
 
 class NavigatorUtil {

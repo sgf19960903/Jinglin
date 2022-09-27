@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bittchainpro/common/res/res_path.dart';
-import 'package:bittchainpro/generated/l10n.dart';
-import 'package:bittchainpro/ui/widgets/ex_text_view.dart';
+import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class ExRefreshHeaderView extends StatelessWidget {
@@ -14,9 +14,9 @@ class ExRefreshHeaderView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if(hintColor==null) hintColor = AppColors().commonGreenColor;
+    if(hintColor==null) hintColor = AppColors.successColor;
     return WaterDropHeader(
-      waterDropColor: AppColors().commonGreenColor,
+      waterDropColor: AppColors.successColor,
       complete: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

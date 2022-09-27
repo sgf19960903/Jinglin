@@ -430,60 +430,60 @@ class S {
     );
   }
 
-  /// `Withdrawals`
+  /// `收到点赞`
   String get text_41 {
     return Intl.message(
-      'Withdrawals',
+      '收到点赞',
       name: 'text_41',
       desc: '',
       args: [],
     );
   }
 
-  /// `Funds Transfer`
+  /// `收到评论`
   String get text_42 {
     return Intl.message(
-      'Funds Transfer',
+      '收到评论',
       name: 'text_42',
       desc: '',
       args: [],
     );
   }
 
-  /// `Order Center`
+  /// `系统通知`
   String get text_45 {
     return Intl.message(
-      'Order Center',
+      '系统通知',
       name: 'text_45',
       desc: '',
       args: [],
     );
   }
 
-  /// `Redeem`
+  /// `最新`
   String get text_46 {
     return Intl.message(
-      'Redeem',
+      '最新',
       name: 'text_46',
       desc: '',
       args: [],
     );
   }
 
-  /// `Logout`
+  /// `关注`
   String get text_47 {
     return Intl.message(
-      'Logout',
+      '关注',
       name: 'text_47',
       desc: '',
       args: [],
     );
   }
 
-  /// `Scan code to download APP`
+  /// `发动态`
   String get text_48 {
     return Intl.message(
-      'Scan code to download APP',
+      '发动态',
       name: 'text_48',
       desc: '',
       args: [],

@@ -57,8 +57,8 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
       children: [
         //返回按钮
         "${backImage??AppImage().iconBackBlack}".image(w: AppSizes.iconSize.w,h: AppSizes.titleHeight,).onTap(() {
-          if(backCallback==null) return Navigator.of(context).pop();
-          backCallback!();
+          // if(backCallback==null) return Navigator.of(context).pop();
+          // backCallback!();
         }).container(align: Alignment.centerLeft),
         //文字
         if(title!=null) ExTextView(title!,
@@ -71,7 +71,7 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
         //右边菜单选项
         if(actionWidgets!=null) Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          mainAxisSize: MainAxsSize.min,
+          mainAxisSize: MainAxisSize.min,
           children: actionWidgets!,
         ),
       ],

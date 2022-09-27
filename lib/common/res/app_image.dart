@@ -31,6 +31,7 @@ class AppImage {
   String pageHeaderBg = "assets/images/page_header_bg.png";
   String praiseButtonBg = "assets/images/praise_button_bg.png";
   String sysmsgButtonBg = "assets/images/sysmsg_button_bg.png";
+  String defaultBannerBg = "assets/images/default_banner_bg.png";
 
 
   ///Icon
