@@ -450,10 +450,10 @@ class S {
     );
   }
 
-  /// `系统通知`
+  /// `系统消息`
   String get text_45 {
     return Intl.message(
-      '系统通知',
+      '系统消息',
       name: 'text_45',
       desc: '',
       args: [],
@@ -490,40 +490,40 @@ class S {
     );
   }
 
-  /// `More User Side`
+  /// `回复`
   String get text_49 {
     return Intl.message(
-      'More User Side',
+      '回复',
       name: 'text_49',
       desc: '',
       args: [],
     );
   }
 
-  /// `Chinese`
+  /// `您还没有收到点赞`
   String get text_50 {
     return Intl.message(
-      'Chinese',
+      '您还没有收到点赞',
       name: 'text_50',
       desc: '',
       args: [],
     );
   }
 
-  /// `Traditional Chinese`
+  /// `您还没有收到评论`
   String get text_51 {
     return Intl.message(
-      'Traditional Chinese',
+      '您还没有收到评论',
       name: 'text_51',
       desc: '',
       args: [],
     );
   }
 
-  /// `Whether to continue exit`
+  /// `暂无系统消息`
   String get text_52 {
     return Intl.message(
-      'Whether to continue exit',
+      '暂无系统消息',
       name: 'text_52',
       desc: '',
       args: [],

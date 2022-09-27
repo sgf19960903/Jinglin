@@ -10,6 +10,7 @@ class ExTextView extends StatefulWidget {
     this.color,
     this.size=AppSizes.fontSize,
     this.isBold=false,
+    this.isRegular=true,
     this.decoration=TextDecoration.none,
     this.decorationStyle=TextDecorationStyle.solid,
     this.decorationColor=Colors.white,
@@ -28,6 +29,7 @@ class ExTextView extends StatefulWidget {
   Color? color;
   double size;
   bool isBold;
+  bool isRegular;//是否为常规字体大小
   TextDecoration decoration;
   TextDecorationStyle decorationStyle;
   Color decorationColor;
@@ -81,7 +83,7 @@ class _ExTextViewState extends State<ExTextView> {
       style: TextStyle(
         color: widget.color??AppColors.textColor,
         fontSize: widget.size,
-        fontWeight: widget.isBold?FontWeight.bold:FontWeight.w500,
+        fontWeight: widget.isBold?FontWeight.bold:(widget.isRegular?FontWeight.w400:FontWeight.w500),
         decoration: widget.decoration,
         decorationStyle: widget.decorationStyle,
         decorationColor: widget.decorationColor,

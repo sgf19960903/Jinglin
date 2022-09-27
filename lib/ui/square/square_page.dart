@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/ui/widgets/ex_dynamic_widget.dart';
+import 'package:jinglin/ui/widgets/ex_list_view.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
@@ -27,6 +31,7 @@ class _SquarePageState extends BaseState<SquarePage> {
         children: [
           _noticeTabWidget(),
           _listFilterTabWidget(),
+          _dynamicListWidget().exp(),
         ],
       ),
     );
@@ -82,7 +87,11 @@ class _SquarePageState extends BaseState<SquarePage> {
               boxConstraints: BoxConstraints(maxWidth: 40,minWidth: 24),
             ),
           ],
-        ).container(h: 72,marginL: index==0?0:8.w,marginR: (index==bgList.length-1)?0:8.w).exp();
+        ).container(h: 72,marginL: index==0?0:8.w,marginR: (index==bgList.length-1)?0:8.w).onTap(() {
+          if(index==0) NavigatorUtil.gotPage(context, RouterName.praiseNotice);
+          else if(index==1) NavigatorUtil.gotPage(context, RouterName.commentNotice);
+          else if(index==2) NavigatorUtil.gotPage(context, RouterName.sysNotice);
+        }).exp();
       }),
     ).container(padT: 14,padB: 21,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
   }
@@ -113,6 +122,16 @@ class _SquarePageState extends BaseState<SquarePage> {
 
       }).container(marginR: 16.w,)),
     ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 3);
+  }
+
+
+  //动态裂变
+  Widget _dynamicListWidget(){
+    return ExListView(
+      itemCount: 10,
+      padding: EdgeInsets.all(16.w),
+      itemBuilder: (_,index) => ExDynamicWidget(index),
+    );
   }
 
 }

@@ -1,15 +1,18 @@
+/// 首页
+/// @Author Tongzongwen
+/// @Date 2022/9/26
+/// @Description TODO
+
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_list_view.dart';
+import 'package:jinglin/ui/widgets/ex_sliver_persistent_header_delegate.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
-///author - Tongzongwen
-///首页
-///time - 2022-09-26
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -25,11 +28,23 @@ class _HomePageState extends BaseState<HomePage> {
     return widgetBuild(
       hasHeaderBg: true,
       hasHeaderIntroImg: true,
-      child: Column(
-        children: [
-          _bannerWidget(),
-          _tabListWidget(),
-          _friendListWidget().exp(),
+      child: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: _bannerWidget(),
+          ),
+          SliverPersistentHeader(
+            floating: true,
+            pinned: true,
+            delegate: ExSliverPersistentHeaderDelegate(
+                child: _tabListWidget(),
+                maxHeight: 27,
+                minHeight: 27,
+            ),
+          ),
+          SliverToBoxAdapter(
+              child: _friendListWidget(),
+          ),
         ],
       )
     );
@@ -45,7 +60,7 @@ class _HomePageState extends BaseState<HomePage> {
       autoplay: true,
       scale: 1,
       itemBuilder: (_,index) => AppImage().defaultBannerBg.image(w: double.infinity,h: 150,fit: BoxFit.fill).clipRRect(radius: 12).container(padL: 4.w,padR: 4.w,radius: 12),
-    ).container(h: 150,marginT: 8,/*padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR*/);
+    ).container(h: 150,marginT: 8,marginB: 15,/*padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR*/);
   }
 
 
@@ -73,7 +88,7 @@ class _HomePageState extends BaseState<HomePage> {
       ).onTap(() {
 
       }).container(marginR: 24.w,)),
-    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 15);
+    ).container(bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
   }
 
 
@@ -81,6 +96,8 @@ class _HomePageState extends BaseState<HomePage> {
   Widget _friendListWidget(){
     return ExListView(
       itemCount: 10,
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: AppSizes.pagePaddingLR,right: AppSizes.pagePaddingLR,top: 13),
       itemBuilder: (_,index){
         return Row(

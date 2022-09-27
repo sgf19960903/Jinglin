@@ -1,9 +1,11 @@
+/// 个人中心
+/// @Author Tongzongwen
+/// @Date 2022/9/26
+/// @Description TODO
+
 import 'package:flutter/material.dart';
 
 
-///author - Tongzongwen
-///个人中心页
-///time - 2022-09-26
 class MinePage extends StatefulWidget {
   const MinePage({Key? key}) : super(key: key);
 

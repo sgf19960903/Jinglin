@@ -10,6 +10,8 @@ class AppColors {
   static const Color themeColor = Color(0xFFF04664);
   //页面颜色
   static const Color pageColor = Color(0xFFFFFFFF);
+  //页面浅灰颜色
+  static const Color pageGrayColor = Color(0xFFF8F9FB);
   //线、边框颜色
   static const Color lineColor = Color(0xFF000000);
   //正常字体颜色
@@ -29,14 +31,18 @@ class AppColors {
   static const Color gradientButtonBeginColor = Color(0xFFFC6986);
   //渐变按钮结束颜色
   static const Color gradientButtonEndColor = Color(0xFFE82E4D);
+  //成功颜色
+  static const Color successColor = Color(0xFF00FF00);
 
   static const Color grayHintColor = Color(0xFF999999);
   static const Color errorHintColor = Color(0xFFDB877B);
   static const Color noSelectedButtonBg = Color(0xFFEEEEEE);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
-  //成功颜色
-  static const Color successColor = Color(0xFF00FF00);
+
+
+  static const Color color_CCCCCC = Color(0xFFCCCCCC);
+  static const Color color_BBBBBB = Color(0xFFBBBBBB);
 
 }
 

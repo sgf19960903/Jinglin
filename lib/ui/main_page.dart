@@ -1,3 +1,7 @@
+/// 主界面
+/// @Author Tongzongwen
+/// @Date 2022/9/26
+/// @Description TODO
 
 import 'dart:async';
 
@@ -16,7 +20,6 @@ import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 import 'chat/chat_page.dart';
 import 'mine/mine_page.dart';
-
 
 
 class MainPage extends StatefulWidget {

@@ -1,9 +1,10 @@
+/// 聊天首页
+/// @Author Tongzongwen
+/// @Date 2022/9/26
+/// @Description TODO
+
 import 'package:flutter/material.dart';
 
-
-///author - Tongzongwen
-///聊天首页
-///time - 2022-09-26
 class ChatPage extends StatefulWidget {
   const ChatPage({Key? key}) : super(key: key);
 

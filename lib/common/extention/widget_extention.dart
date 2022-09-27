@@ -164,7 +164,7 @@ extension WidgetExtention on Widget {
     String? bgImg,
     bool hasBorder=false,
     Color borderColor=Colors.transparent,
-    double borderWidth=1,
+    double borderWidth=0.3,
     bool onlyBottomBorder=false,
     double radius=-1,
     Gradient? gradient,

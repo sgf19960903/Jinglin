@@ -46,19 +46,19 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
 
   //渐变背景 -- 包含装天蓝
   Widget _gradientBgWidget(){
-    if(!isGradientBg) "".container(w: double.infinity,h: AppSizes.titleHeight+paddingTop,bgColor: titleColor);
+    if(!isGradientBg) return "".container(w: double.infinity,h: AppSizes.titleHeight+paddingTop,bgColor: titleColor);
     return AppImage().mineHeaderBg.image(w: double.infinity,h: AppSizes.titleHeight+paddingTop,fit: BoxFit.fill);
   }
 
 
   //标题区域
-  Widget _titleWidget(){
+  Widget _titleWidget(BuildContext context){
     return titleWidget ?? Stack(
       children: [
         //返回按钮
         "${backImage??AppImage().iconBackBlack}".image(w: AppSizes.iconSize.w,h: AppSizes.titleHeight,).onTap(() {
-          // if(backCallback==null) return Navigator.of(context).pop();
-          // backCallback!();
+          if(backCallback==null) return Navigator.of(context).pop();
+          backCallback!();
         }).container(align: Alignment.centerLeft),
         //文字
         if(title!=null) ExTextView(title!,
@@ -75,7 +75,7 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
           children: actionWidgets!,
         ),
       ],
-    ).container(h: AppSizes.titleHeight,padL: 12.w,padR: 12.w);
+    ).container(h: AppSizes.titleHeight,padL: 12.w,padR: 12.w,marginT: paddingTop,onlyBottomBorder: true,borderColor: AppColors.borderColor,borderWidth: 0.3);
   }
 
 
@@ -84,7 +84,7 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
     return Stack(
       children: [
         _gradientBgWidget(),
-        _titleWidget(),
+        _titleWidget(context),
       ],
     );
   }

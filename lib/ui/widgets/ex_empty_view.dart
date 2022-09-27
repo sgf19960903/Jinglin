@@ -7,14 +7,15 @@ import 'package:provider/provider.dart';
 class ExEmptyView extends StatelessWidget {
   ExEmptyView({
     Key? key,
-    this.imgWidth=250,
-    this.imgHeight=66,
+    this.imgWidth=174,
+    this.imgHeight=174,
     this.textImgInterval=10,
     this.height,
     this.emptyImg,
     this.emptyText,
-    this.fontSize=13,
+    this.fontSize=16,
     this.hintColor,
+    this.marginT,
   }) : super(key: key);
 
   double imgWidth;
@@ -25,6 +26,7 @@ class ExEmptyView extends StatelessWidget {
   String? emptyText;
   double fontSize;
   Color? hintColor;
+  double? marginT;
 
 
   @override
@@ -33,15 +35,14 @@ class ExEmptyView extends StatelessWidget {
     if(emptyImg==null) emptyImg = AppImage().emptyBg;
 
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         "${emptyImg??AppImage().emptyBg}".image(w: imgWidth.w,h: imgHeight),
         ExTextView("${emptyText??""}",
-          color: hintColor??AppColors.grayColor,
+          color: hintColor??AppColors.color_BBBBBB,
           size: fontSize,
         ).container(marginT: 0),
       ],
-    ).container(h: height??230,w: double.infinity);
+    ).container(w: double.infinity,marginT: marginT??120);
   }
 }
