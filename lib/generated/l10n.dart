@@ -530,243 +530,243 @@ class S {
     );
   }
 
-  /// `Name`
+  /// `说点什么吧...`
   String get text_53 {
     return Intl.message(
-      'Name',
+      '说点什么吧...',
       name: 'text_53',
       desc: '',
       args: [],
     );
   }
 
-  /// `Price`
+  /// `发送`
   String get text_54 {
     return Intl.message(
-      'Price',
+      '发送',
       name: 'text_54',
       desc: '',
       args: [],
     );
   }
 
-  /// `Today's ups and downs`
+  /// `楼主`
   String get text_55 {
     return Intl.message(
-      'Today\'s ups and downs',
+      '楼主',
       name: 'text_55',
       desc: '',
       args: [],
     );
   }
 
-  /// `Perfectly compatible with multiple terminals to meet the trading needs of various scenarios at any time`
-  String get text_56 {
+  /// `共{name}条回复`
+  String text_56(Object name) {
     return Intl.message(
-      'Perfectly compatible with multiple terminals to meet the trading needs of various scenarios at any time',
+      '共$name条回复',
       name: 'text_56',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `View real-time quotes at any time`
+  /// `举报`
   String get text_57 {
     return Intl.message(
-      'View real-time quotes at any time',
+      '举报',
       name: 'text_57',
       desc: '',
       args: [],
     );
   }
 
-  /// `Buy and sell BTC, ETH, XRP, OKB and other digital assets easily`
+  /// `举报类型`
   String get text_58 {
     return Intl.message(
-      'Buy and sell BTC, ETH, XRP, OKB and other digital assets easily',
+      '举报类型',
       name: 'text_58',
       desc: '',
       args: [],
     );
   }
 
-  /// `Get alerts on price changes of cryptocurrencies you care about`
+  /// `必填`
   String get text_59 {
     return Intl.message(
-      'Get alerts on price changes of cryptocurrencies you care about',
+      '必填',
       name: 'text_59',
       desc: '',
       args: [],
     );
   }
 
-  /// `View Bitcoin Spot, Futures, Options Prices`
+  /// `选填`
   String get text_60 {
     return Intl.message(
-      'View Bitcoin Spot, Futures, Options Prices',
+      '选填',
       name: 'text_60',
       desc: '',
       args: [],
     );
   }
 
-  /// `Compare cryptocurrency prices across exchanges`
+  /// `举报原因`
   String get text_61 {
     return Intl.message(
-      'Compare cryptocurrency prices across exchanges',
+      '举报原因',
       name: 'text_61',
       desc: '',
       args: [],
     );
   }
 
-  /// `Quote of the day`
+  /// `请输入您举报的原因，有利于我们核实`
   String get text_62 {
     return Intl.message(
-      'Quote of the day',
+      '请输入您举报的原因，有利于我们核实',
       name: 'text_62',
       desc: '',
       args: [],
     );
   }
 
-  /// `Identity`
+  /// `上传图片`
   String get text_63 {
     return Intl.message(
-      'Identity',
+      '上传图片',
       name: 'text_63',
       desc: '',
       args: [],
     );
   }
 
-  /// `Completing personal authentication helps protect your account and increase your withdrawal limit and trading privileges`
-  String get text_64 {
+  /// `最多可上传{name}张`
+  String text_64(Object name) {
     return Intl.message(
-      'Completing personal authentication helps protect your account and increase your withdrawal limit and trading privileges',
+      '最多可上传$name张',
       name: 'text_64',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `Go to`
+  /// `删除`
   String get text_65 {
     return Intl.message(
-      'Go to',
+      '删除',
       name: 'text_65',
       desc: '',
       args: [],
     );
   }
 
-  /// `Login Password`
+  /// `提交`
   String get text_66 {
     return Intl.message(
-      'Login Password',
+      '提交',
       name: 'text_66',
       desc: '',
       args: [],
     );
   }
 
-  /// `Used to protect the security of your account`
+  /// `上传`
   String get text_67 {
     return Intl.message(
-      'Used to protect the security of your account',
+      '上传',
       name: 'text_67',
       desc: '',
       args: [],
     );
   }
 
-  /// `Change`
+  /// `广告及垃圾信息`
   String get text_68 {
     return Intl.message(
-      'Change',
+      '广告及垃圾信息',
       name: 'text_68',
       desc: '',
       args: [],
     );
   }
 
-  /// `Funding password`
+  /// `色情污秽或低俗内容`
   String get text_69 {
     return Intl.message(
-      'Funding password',
+      '色情污秽或低俗内容',
       name: 'text_69',
       desc: '',
       args: [],
     );
   }
 
-  /// `Used to protect the security of funds`
+  /// `涉及政治信息或不实言论`
   String get text_70 {
     return Intl.message(
-      'Used to protect the security of funds',
+      '涉及政治信息或不实言论',
       name: 'text_70',
       desc: '',
       args: [],
     );
   }
 
-  /// `Settings`
+  /// `恶意攻击或侮辱诽谤`
   String get text_71 {
     return Intl.message(
-      'Settings',
+      '恶意攻击或侮辱诽谤',
       name: 'text_71',
       desc: '',
       args: [],
     );
   }
 
-  /// `Change password`
+  /// `其他`
   String get text_72 {
     return Intl.message(
-      'Change password',
+      '其他',
       name: 'text_72',
       desc: '',
       args: [],
     );
   }
 
-  /// `Original password`
+  /// `发布`
   String get text_73 {
     return Intl.message(
-      'Original password',
+      '发布',
       name: 'text_73',
       desc: '',
       args: [],
     );
   }
 
-  /// `New password`
+  /// `这一刻你想说什么...`
   String get text_74 {
     return Intl.message(
-      'New password',
+      '这一刻你想说什么...',
       name: 'text_74',
       desc: '',
       args: [],
     );
   }
 
-  /// `Confirm new password`
+  /// `全部评论`
   String get text_75 {
     return Intl.message(
-      'Confirm new password',
+      '全部评论',
       name: 'text_75',
       desc: '',
       args: [],
     );
   }
 
-  /// `Set up a password for funds`
-  String get text_76 {
+  /// `{name}条评论`
+  String text_76(Object name) {
     return Intl.message(
-      'Set up a password for funds',
+      '$name条评论',
       name: 'text_76',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 

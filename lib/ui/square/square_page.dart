@@ -56,7 +56,9 @@ class _SquarePageState extends BaseState<SquarePage> {
       gradient: LinearGradient(
         colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
       ),
-    );
+    ).onTap(() {
+      NavigatorUtil.gotPage(context, RouterName.publishDynamic);
+    });
   }
 
   //点赞、评论、系统消息

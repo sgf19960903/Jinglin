@@ -33,15 +33,14 @@ class AppColors {
   static const Color gradientButtonEndColor = Color(0xFFE82E4D);
   //成功颜色
   static const Color successColor = Color(0xFF00FF00);
+  //按钮未选中颜色
+  static const Color buttonNotSelected = Color(0xFFCCCCCC);
 
   static const Color grayHintColor = Color(0xFF999999);
   static const Color errorHintColor = Color(0xFFDB877B);
   static const Color noSelectedButtonBg = Color(0xFFEEEEEE);
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
-
-
-  static const Color color_CCCCCC = Color(0xFFCCCCCC);
   static const Color color_BBBBBB = Color(0xFFBBBBBB);
 
 }

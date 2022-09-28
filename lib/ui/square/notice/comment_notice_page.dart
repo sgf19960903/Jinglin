@@ -102,7 +102,7 @@ class _CommentNoticePageState extends BaseState<CommentNoticePage> {
           padR: 12.w,
           radius: 999,
           hasBorder: true,
-          borderColor: AppColors.color_CCCCCC,
+          borderColor: AppColors.buttonNotSelected,
         ),
       ],
     ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR);

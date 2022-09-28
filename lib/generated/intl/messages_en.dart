@@ -39,6 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m7(name) => "BTC Sell Vol ${name} BTC";
 
+  static String m8(name) => "共${name}条回复";
+
+  static String m9(name) => "最多可上传${name}张";
+
+  static String m10(name) => "${name}条评论";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "app_name": MessageLookupByLibrary.simpleMessage("鲸邻交友"),
@@ -529,43 +535,32 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_50": MessageLookupByLibrary.simpleMessage("您还没有收到点赞"),
         "text_51": MessageLookupByLibrary.simpleMessage("您还没有收到评论"),
         "text_52": MessageLookupByLibrary.simpleMessage("暂无系统消息"),
-        "text_53": MessageLookupByLibrary.simpleMessage("Name"),
-        "text_54": MessageLookupByLibrary.simpleMessage("Price"),
-        "text_55":
-            MessageLookupByLibrary.simpleMessage("Today\'s ups and downs"),
-        "text_56": MessageLookupByLibrary.simpleMessage(
-            "Perfectly compatible with multiple terminals to meet the trading needs of various scenarios at any time"),
-        "text_57": MessageLookupByLibrary.simpleMessage(
-            "View real-time quotes at any time"),
-        "text_58": MessageLookupByLibrary.simpleMessage(
-            "Buy and sell BTC, ETH, XRP, OKB and other digital assets easily"),
-        "text_59": MessageLookupByLibrary.simpleMessage(
-            "Get alerts on price changes of cryptocurrencies you care about"),
+        "text_53": MessageLookupByLibrary.simpleMessage("说点什么吧..."),
+        "text_54": MessageLookupByLibrary.simpleMessage("发送"),
+        "text_55": MessageLookupByLibrary.simpleMessage("楼主"),
+        "text_56": m8,
+        "text_57": MessageLookupByLibrary.simpleMessage("举报"),
+        "text_58": MessageLookupByLibrary.simpleMessage("举报类型"),
+        "text_59": MessageLookupByLibrary.simpleMessage("必填"),
         "text_6": MessageLookupByLibrary.simpleMessage("获取验证码"),
-        "text_60": MessageLookupByLibrary.simpleMessage(
-            "View Bitcoin Spot, Futures, Options Prices"),
-        "text_61": MessageLookupByLibrary.simpleMessage(
-            "Compare cryptocurrency prices across exchanges"),
-        "text_62": MessageLookupByLibrary.simpleMessage("Quote of the day"),
-        "text_63": MessageLookupByLibrary.simpleMessage("Identity"),
-        "text_64": MessageLookupByLibrary.simpleMessage(
-            "Completing personal authentication helps protect your account and increase your withdrawal limit and trading privileges"),
-        "text_65": MessageLookupByLibrary.simpleMessage("Go to"),
-        "text_66": MessageLookupByLibrary.simpleMessage("Login Password"),
-        "text_67": MessageLookupByLibrary.simpleMessage(
-            "Used to protect the security of your account"),
-        "text_68": MessageLookupByLibrary.simpleMessage("Change"),
-        "text_69": MessageLookupByLibrary.simpleMessage("Funding password"),
+        "text_60": MessageLookupByLibrary.simpleMessage("选填"),
+        "text_61": MessageLookupByLibrary.simpleMessage("举报原因"),
+        "text_62": MessageLookupByLibrary.simpleMessage("请输入您举报的原因，有利于我们核实"),
+        "text_63": MessageLookupByLibrary.simpleMessage("上传图片"),
+        "text_64": m9,
+        "text_65": MessageLookupByLibrary.simpleMessage("删除"),
+        "text_66": MessageLookupByLibrary.simpleMessage("提交"),
+        "text_67": MessageLookupByLibrary.simpleMessage("上传"),
+        "text_68": MessageLookupByLibrary.simpleMessage("广告及垃圾信息"),
+        "text_69": MessageLookupByLibrary.simpleMessage("色情污秽或低俗内容"),
         "text_7": MessageLookupByLibrary.simpleMessage("我已阅读并同意"),
-        "text_70": MessageLookupByLibrary.simpleMessage(
-            "Used to protect the security of funds"),
-        "text_71": MessageLookupByLibrary.simpleMessage("Settings"),
-        "text_72": MessageLookupByLibrary.simpleMessage("Change password"),
-        "text_73": MessageLookupByLibrary.simpleMessage("Original password"),
-        "text_74": MessageLookupByLibrary.simpleMessage("New password"),
-        "text_75": MessageLookupByLibrary.simpleMessage("Confirm new password"),
-        "text_76":
-            MessageLookupByLibrary.simpleMessage("Set up a password for funds"),
+        "text_70": MessageLookupByLibrary.simpleMessage("涉及政治信息或不实言论"),
+        "text_71": MessageLookupByLibrary.simpleMessage("恶意攻击或侮辱诽谤"),
+        "text_72": MessageLookupByLibrary.simpleMessage("其他"),
+        "text_73": MessageLookupByLibrary.simpleMessage("发布"),
+        "text_74": MessageLookupByLibrary.simpleMessage("这一刻你想说什么..."),
+        "text_75": MessageLookupByLibrary.simpleMessage("全部评论"),
+        "text_76": m10,
         "text_77": MessageLookupByLibrary.simpleMessage("Reset Funds Password"),
         "text_78":
             MessageLookupByLibrary.simpleMessage("Confirm Funding Password"),

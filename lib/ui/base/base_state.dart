@@ -20,6 +20,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     ExTitleView? appBar,
     bool hasHeaderBg = false,
     bool hasHeaderIntroImg = false,
+    bool bottomInsert = false,
     Widget? floatWidget,
     Color? bgColor,
   }){
@@ -30,6 +31,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
       floatButton: floatWidget,
       appBar: appBar,
       backgroundColor: bgColor,
+      bottomInset: bottomInsert,
       child: Stack(
         children: [
           if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: 150,fit: BoxFit.fill),

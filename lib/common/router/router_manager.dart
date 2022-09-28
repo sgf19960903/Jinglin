@@ -1,6 +1,10 @@
 
 
 import 'package:jinglin/ui/main_page.dart';
+import 'package:jinglin/ui/mine/feedback/report_page.dart';
+import 'package:jinglin/ui/square/dynamic/big_photo_page.dart';
+import 'package:jinglin/ui/square/dynamic/dynamic_detail_page.dart';
+import 'package:jinglin/ui/square/dynamic/publish_dynamic_page.dart';
 import 'package:jinglin/ui/square/notice/comment_notice_page.dart';
 import 'package:jinglin/ui/square/notice/praise_notice_page.dart';
 import 'package:jinglin/ui/square/notice/system_notice_page.dart';
@@ -31,6 +35,14 @@ class RouterName {
   static const String commentNotice = "commentNotice";
   //系统通知页
   static const String sysNotice = "sysNotice";
+  //动态详情
+  static const String dynamicDetail = "dynamicDetail";
+  //发布动态
+  static const String publishDynamic = "publishDynamic";
+  //举报
+  static const String report = "report";
+  //大图浏览
+  static const String bigPhoto = "bigPhoto";
 
 }
 
@@ -54,6 +66,22 @@ Router generateRoute() {
     ),
     RouterName.sysNotice: BaseRouter(
       routerBuilder: (context, match, settings) => SystemNoticePage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.dynamicDetail: BaseRouter(
+      routerBuilder: (context, match, settings) => DynamicDetailPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.publishDynamic: BaseRouter(
+      routerBuilder: (context, match, settings) => PublishDynamicPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.report: BaseRouter(
+      routerBuilder: (context, match, settings) => ReportPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.bigPhoto: BaseRouter(
+      routerBuilder: (context, match, settings) => BigPhotoPage(),
       animate: RouterAnimate.slide_left,
     ),
 

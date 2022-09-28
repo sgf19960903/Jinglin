@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
@@ -19,12 +21,14 @@ class ExDynamicWidget extends StatelessWidget {
     return Column(
       children: [
         _userInfoWidget(context),
-        _contentWidget(),
+        _contentWidget(context),
         _locationWidget(),
-        _praiseCommentWidget(),
+        _praiseCommentWidget(context),
         "".container(h: 0.5,bgColor: AppColors.borderColor,marginT: 12,marginB: 16,),
       ],
-    );
+    ).onTap(() {
+      NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+    });
   }
 
   //用户信息、搭讪按钮
@@ -75,21 +79,27 @@ class ExDynamicWidget extends StatelessWidget {
 
 
   //图片展示
-  Widget _photoWidget(List<String> photoList){
+  Widget _photoWidget(BuildContext context,List<String> photoList){
     int len = photoList.length;
     //按图片数量返回布局
     double photoSize = 0;
     double smallPhotoSize = 0;
     if(len==1) {
       photoSize = 180.w;
-      return photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).container(marginT: 8);
+      return photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).container(marginT: 8).onTap(() {
+        NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+      });
     } else if(len==2) {
       photoSize = 140.w;
       return Row(
         children: [
-          photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8),
+          photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+          }),
           "".container(w: 4.w),
-          photoList[1].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8),
+          photoList[1].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+          }),
         ],
       ).container(marginT: 8);
     } else if(len>=3) {
@@ -99,13 +109,17 @@ class ExDynamicWidget extends StatelessWidget {
       return Row(
         children: [
           //第一张图
-          photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8),
+          photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+          }),
           "".container(w: 4.w),
           //第二张、第三张
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              photoList[1].image(w: smallPhotoSize,h: smallPhotoSize,fit: BoxFit.fill).clipRRect(radius: 8),
+              photoList[1].image(w: smallPhotoSize,h: smallPhotoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
+                NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+              }),
               "".container(h: 4.w),
               //显示隐藏了多少张图片
               Stack(
@@ -116,7 +130,9 @@ class ExDynamicWidget extends StatelessWidget {
                     size: 16,
                   ).container(w: smallPhotoSize,h: smallPhotoSize,radius: 8,align: Alignment.center,bgColor: AppColors.black.withOpacity(0.4)),
                 ],
-              ),
+              ).onTap(() {
+                NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+              }),
             ],
           ),
         ],
@@ -135,13 +151,13 @@ class ExDynamicWidget extends StatelessWidget {
         "".image(w: 200.w,h: 300,fit: BoxFit.contain).clipRRect(radius: 8.w),
         AppImage().iconPlayVideo.image(w: 48.w,h: 48.w,),
       ],
-    ).container(w: 200.w,h: 300,marginT: 8);
+    ).container(w: 200.w,h: 300,marginT: 8,radius: 8,bgColor: AppColors.black.withOpacity(0.4));
   }
 
 
 
   //动态内容
-  Widget _contentWidget(){
+  Widget _contentWidget(BuildContext context){
     List<String> photoList = [AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,];
     String videoImg = "";
     return Column(
@@ -153,7 +169,7 @@ class ExDynamicWidget extends StatelessWidget {
           maxLines: 99,
         ),
         //图片
-        _photoWidget(photoList),
+        _photoWidget(context,photoList),
         //视频
         _videoWidget(videoImg),
       ],
@@ -175,7 +191,7 @@ class ExDynamicWidget extends StatelessWidget {
   }
 
   //点赞数、评论数、举报
-  Widget _praiseCommentWidget(){
+  Widget _praiseCommentWidget(BuildContext context){
     return Row(
       children: [
         //点赞
@@ -205,11 +221,13 @@ class ExDynamicWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconHintGray.image(w: 20.w,h: 20.w,),
-            ExTextView("举报",
+            ExTextView(S.of(context).text_57,
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.report);
+        }),
       ],
     ).container(marginT: 12);
   }
