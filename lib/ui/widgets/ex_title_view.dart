@@ -53,7 +53,11 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
 
   //标题区域
   Widget _titleWidget(BuildContext context){
-    return titleWidget ?? Stack(
+    if(titleWidget!=null) return titleWidget!.container(
+        marginL: AppSizes.iconSize.w + (titleCenter?0:AppSizes.pagePaddingLR),
+        marginR: AppSizes.iconSize.w + (titleCenter?0:AppSizes.pagePaddingLR)
+    );
+    return Stack(
       children: [
         //返回按钮
         "${backImage??AppImage().iconBackBlack}".image(w: AppSizes.iconSize.w,h: AppSizes.titleHeight,).onTap(() {
