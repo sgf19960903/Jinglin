@@ -1,7 +1,23 @@
 
 
+import 'package:jinglin/ui/chat/chat_session_page.dart';
+import 'package:jinglin/ui/chat/chat_settings_page.dart';
+import 'package:jinglin/ui/chat/user_home_page.dart';
+import 'package:jinglin/ui/chat/user_home_page_settings.dart';
+import 'package:jinglin/ui/login/improve_user_info_page.dart';
+import 'package:jinglin/ui/login/login_page.dart';
 import 'package:jinglin/ui/main_page.dart';
+import 'package:jinglin/ui/mine/Crop/crop_photo_page.dart';
+import 'package:jinglin/ui/mine/diamond/my_diamond_page.dart';
+import 'package:jinglin/ui/mine/fans/my_fans_page.dart';
 import 'package:jinglin/ui/mine/feedback/report_page.dart';
+import 'package:jinglin/ui/mine/feedback/suggest_feedback_page.dart';
+import 'package:jinglin/ui/mine/follow/my_follow_page.dart';
+import 'package:jinglin/ui/mine/income/apply_withdraw_page.dart';
+import 'package:jinglin/ui/mine/income/my_income_page.dart';
+import 'package:jinglin/ui/mine/info/personal_info_page.dart';
+import 'package:jinglin/ui/mine/info/update_phone_page.dart';
+import 'package:jinglin/ui/mine/settings/push_settings_page.dart';
 import 'package:jinglin/ui/square/dynamic/big_photo_page.dart';
 import 'package:jinglin/ui/square/dynamic/dynamic_detail_page.dart';
 import 'package:jinglin/ui/square/dynamic/publish_dynamic_page.dart';
@@ -44,6 +60,38 @@ class RouterName {
   //大图浏览
   static const String bigPhoto = "bigPhoto";
 
+
+  //聊天会话
+  static const String chatSession = "chatSession";
+  //用户主页
+  static const String userHomePage = "userHomePage";
+  //聊天设置
+  static const String chatSettings = "chatSettings";
+  //用户主页设置
+  static const String userHomePageSettings = "userHomePageSettings";
+  //个人信息
+  static const String personalInfo = "personalInfo";
+  //推送设置
+  static const String pushSettings = "pushSettings";
+  //意见反馈
+  static const String suggestFeedback = "suggestFeedback";
+  //我的收益
+  static const String myIncome = "myIncome";
+  //我的钻石
+  static const String myDiamond = "myDiamond";
+  //申请提现
+  static const String applyWithDraw = "applyWithDraw";
+  //我的关注
+  static const String myFollow = "myFollow";
+  //我的粉丝
+  static const String myFans = "myFans";
+  //修改手机号
+  static const String updatePhone = "updatePhone";
+  //完善信息--首次登录
+  static const String improveInfo = "improveInfo";
+  //裁剪图片
+  static const String cropPhoto = "cropPhoto";
+
 }
 
 Router generateRoute() {
@@ -52,6 +100,10 @@ Router generateRoute() {
     //   routerBuilder: (context, match, settings) => TextHtml(),
     //   animate: RouterAnimate.slide_left,
     // ),
+    RouterName.login: BaseRouter(
+      routerBuilder: (context, match, settings) => LoginPage(),
+      animate: RouterAnimate.slide_left,
+    ),
     RouterName.main: BaseRouter(
       routerBuilder: (context, match, settings) => MainPage(),
       animate: RouterAnimate.slide_left,
@@ -85,6 +137,66 @@ Router generateRoute() {
       animate: RouterAnimate.slide_left,
     ),
 
+    RouterName.chatSession: BaseRouter(
+      routerBuilder: (context, match, settings) => ChatSessionPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.chatSettings: BaseRouter(
+      routerBuilder: (context, match, settings) => ChatSettingsPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.userHomePage: BaseRouter(
+      routerBuilder: (context, match, settings) => UserHomePage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.userHomePageSettings: BaseRouter(
+      routerBuilder: (context, match, settings) => UserHomePageSettings(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.personalInfo: BaseRouter(
+      routerBuilder: (context, match, settings) => PersonalInfoPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.pushSettings: BaseRouter(
+      routerBuilder: (context, match, settings) => PushSettingsPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.suggestFeedback: BaseRouter(
+      routerBuilder: (context, match, settings) => SuggestFeedbackPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.myIncome: BaseRouter(
+      routerBuilder: (context, match, settings) => MyIncomePage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.myDiamond: BaseRouter(
+      routerBuilder: (context, match, settings) => MyDiamondPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.applyWithDraw: BaseRouter(
+      routerBuilder: (context, match, settings) => ApplyWithDrawPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.myFans: BaseRouter(
+      routerBuilder: (context, match, settings) => MyFansPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.myFollow: BaseRouter(
+      routerBuilder: (context, match, settings) => MyFollowPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.updatePhone: BaseRouter(
+      routerBuilder: (context, match, settings) => UpdatePhonePage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.improveInfo: BaseRouter(
+      routerBuilder: (context, match, settings) => ImproveUserInfoPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.cropPhoto: BaseRouter(
+      routerBuilder: (context, match, settings) => CropPhotoPage(),
+      animate: RouterAnimate.slide_left,
+    ),
 
   });
 }

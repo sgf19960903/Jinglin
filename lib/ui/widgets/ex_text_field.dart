@@ -139,7 +139,7 @@ class ExTextFiledState extends State<ExTextFiled>{
         hintText: widget.hintText,
         hintStyle: TextStyle(
           fontSize: widget.hintTextSize.sp,
-          color: widget.hintTextColor??AppColors.textColor,
+          color: widget.hintTextColor??AppColors.color_BBBBBB,
           fontWeight: widget.hintTextIsBold ? FontWeight.bold : FontWeight.normal,
         ),
         prefixIcon: widget.prefixWidget,

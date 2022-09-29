@@ -29,7 +29,7 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
     this.titleColor=AppColors.pageColor,
     this.backImage,
     this.showBackItem = true,
-    this.bottomLine = false,
+    this.bottomLine = true,
     this.menuImage,
     this.menuCallBack,
     this.titleCenter=false,
@@ -93,7 +93,7 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
           children: actionWidgets!,
         ),
       ],
-    ).container(h: AppSizes.titleHeight,padL: 12.w,padR: 12.w,marginT: paddingTop,onlyBottomBorder: true,borderColor: AppColors.borderColor,borderWidth: 0.3);
+    ).container(h: AppSizes.titleHeight,padL: 12.w,padR: 12.w,marginT: paddingTop,onlyBottomBorder: bottomLine,borderColor: AppColors.borderColor,borderWidth: 0.3);
   }
 
 

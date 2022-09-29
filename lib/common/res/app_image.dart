@@ -32,6 +32,7 @@ class AppImage {
   String praiseButtonBg = "assets/images/praise_button_bg.png";
   String sysmsgButtonBg = "assets/images/sysmsg_button_bg.png";
   String defaultBannerBg = "assets/images/default_banner_bg.png";
+  String improveHeaderBg = "assets/images/improve_header_bg.png";
 
 
   ///Icon
@@ -134,6 +135,8 @@ class AppImage {
   String iconWomanGray = "assets/images/icon_woman_gray.png";
   String iconWomanPink = "assets/images/icon_woman_pink.png";
   String iconBackBlack = "assets/images/icon_back_black.png";
+  String iconPhoneGray = "assets/images/icon_phone_gray.png";
+  String iconBackWhite = "assets/images/icon_back_white.png";
 
 
 

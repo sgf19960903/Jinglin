@@ -18,7 +18,7 @@ import 'package:jinglin/ui/square/square_page.dart';
 import 'package:jinglin/ui/widgets/ex_scaffold.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
-import 'chat/chat_page.dart';
+import 'chat/chat_home_page.dart';
 import 'mine/mine_page.dart';
 
 
@@ -33,7 +33,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver,RouteAw
   List<String> normalIconList = [];
   List<String> selectedIconList = [];
   List<String> textList = [];
-  List<Widget> widgetList = [HomePage(),SquarePage(),ChatPage(),MinePage()];
+  List<Widget> widgetList = [HomePage(),SquarePage(),ChatHomePage(),MinePage()];
   int _currentPage = 0;
   int lastClickBackTimeStamp = 0;
   Timer? _quoTimer;
