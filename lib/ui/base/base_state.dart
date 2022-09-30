@@ -20,6 +20,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
   Widget widgetBuild({
     required Widget child,
     ExTitleView? appBar,
+    double bgHeaderHeight = 150,
     bool hasHeaderBg = false,
     bool hasHeaderIntroImg = false,
     bool bottomInsert = false,
@@ -38,7 +39,7 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
       bottomInset: bottomInsert,
       child: Stack(
         children: [
-          if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: 150,fit: BoxFit.fill),
+          if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: bgHeaderHeight,fit: BoxFit.fill),
           if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
           child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
         ],

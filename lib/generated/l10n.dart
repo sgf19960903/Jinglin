@@ -770,240 +770,240 @@ class S {
     );
   }
 
-  /// `Reset Funds Password`
+  /// `设置`
   String get text_77 {
     return Intl.message(
-      'Reset Funds Password',
+      '设置',
       name: 'text_77',
       desc: '',
       args: [],
     );
   }
 
-  /// `Confirm Funding Password`
+  /// `粉丝`
   String get text_78 {
     return Intl.message(
-      'Confirm Funding Password',
+      '粉丝',
       name: 'text_78',
       desc: '',
       args: [],
     );
   }
 
-  /// `Set up successfully`
+  /// `我的动态`
   String get text_79 {
     return Intl.message(
-      'Set up successfully',
+      '我的动态',
       name: 'text_79',
       desc: '',
       args: [],
     );
   }
 
-  /// `Authentication`
+  /// `我的收益`
   String get text_80 {
     return Intl.message(
-      'Authentication',
+      '我的收益',
       name: 'text_80',
       desc: '',
       args: [],
     );
   }
 
-  /// `Personal Identification`
+  /// `聊天就有收益，所见即所得`
   String get text_81 {
     return Intl.message(
-      'Personal Identification',
+      '聊天就有收益，所见即所得',
       name: 'text_81',
       desc: '',
       args: [],
     );
   }
 
-  /// `Acknowledgement`
+  /// `推送设置`
   String get text_82 {
     return Intl.message(
-      'Acknowledgement',
+      '推送设置',
       name: 'text_82',
       desc: '',
       args: [],
     );
   }
 
-  /// `Primary Authentication`
+  /// `意见反馈`
   String get text_83 {
     return Intl.message(
-      'Primary Authentication',
+      '意见反馈',
       name: 'text_83',
       desc: '',
       args: [],
     );
   }
 
-  /// `Increase withdrawal amount, 24 hours limit 200BTC`
+  /// `退出登录`
   String get text_84 {
     return Intl.message(
-      'Increase withdrawal amount, 24 hours limit 200BTC',
+      '退出登录',
       name: 'text_84',
       desc: '',
       args: [],
     );
   }
 
-  /// `Advanced Certification`
+  /// `我的钻石`
   String get text_85 {
     return Intl.message(
-      'Advanced Certification',
+      '我的钻石',
       name: 'text_85',
       desc: '',
       args: [],
     );
   }
 
-  /// `Submit for approval`
+  /// `快点去寻找心动的她吧！`
   String get text_86 {
     return Intl.message(
-      'Submit for approval',
+      '快点去寻找心动的她吧！',
       name: 'text_86',
       desc: '',
       args: [],
     );
   }
 
-  /// `Anti-Money Laundering Agreement Download`
+  /// `个人资料`
   String get text_87 {
     return Intl.message(
-      'Anti-Money Laundering Agreement Download',
+      '个人资料',
       name: 'text_87',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please upload a handheld photo ID`
+  /// `自我介绍`
   String get text_88 {
     return Intl.message(
-      'Please upload a handheld photo ID',
+      '自我介绍',
       name: 'text_88',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please upload a photo of the AML agreement`
+  /// `手机号`
   String get text_89 {
     return Intl.message(
-      'Please upload a photo of the AML agreement',
+      '手机号',
       name: 'text_89',
       desc: '',
       args: [],
     );
   }
 
-  /// `Nationality`
+  /// `不可修改`
   String get text_90 {
     return Intl.message(
-      'Nationality',
+      '不可修改',
       name: 'text_90',
       desc: '',
       args: [],
     );
   }
 
-  /// `Surname`
+  /// `输入您的个性签名吧~`
   String get text_91 {
     return Intl.message(
-      'Surname',
+      '输入您的个性签名吧~',
       name: 'text_91',
       desc: '',
       args: [],
     );
   }
 
-  /// `First name`
+  /// `性别`
   String get text_92 {
     return Intl.message(
-      'First name',
+      '性别',
       name: 'text_92',
       desc: '',
       args: [],
     );
   }
 
-  /// `Type of document`
+  /// `保存修改`
   String get text_93 {
     return Intl.message(
-      'Type of document',
+      '保存修改',
       name: 'text_93',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID number`
+  /// `删除动态`
   String get text_94 {
     return Intl.message(
-      'ID number',
+      '删除动态',
       name: 'text_94',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please upload front photo`
+  /// `修改手机号`
   String get text_95 {
     return Intl.message(
-      'Please upload front photo',
+      '修改手机号',
       name: 'text_95',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please upload the reverse photo`
+  /// `更换手机号后，下次登录请使用新手机号登录`
   String get text_96 {
     return Intl.message(
-      'Please upload the reverse photo',
+      '更换手机号后，下次登录请使用新手机号登录',
       name: 'text_96',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please enter`
+  /// `新手机号`
   String get text_97 {
     return Intl.message(
-      'Please enter',
+      '新手机号',
       name: 'text_97',
       desc: '',
       args: [],
     );
   }
 
-  /// `Why do I have to authenticate`
+  /// `请填写新手机号`
   String get text_98 {
     return Intl.message(
-      'Why do I have to authenticate',
+      '请填写新手机号',
       name: 'text_98',
       desc: '',
       args: [],
     );
   }
 
-  /// `Real-name authentication is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential`
+  /// `验证码`
   String get text_99 {
     return Intl.message(
-      'Real-name authentication is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential',
+      '验证码',
       name: 'text_99',
       desc: '',
       args: [],
     );
   }
 
-  /// `Which countries are temporarily not supported`
+  /// `确认修改`
   String get text_100 {
     return Intl.message(
-      'Which countries are temporarily not supported',
+      '确认修改',
       name: 'text_100',
       desc: '',
       args: [],

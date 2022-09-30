@@ -124,7 +124,7 @@ class ExTextFiledState extends State<ExTextFiled>{
       onTap: widget.onTap,
       strutStyle: kIsWeb?StrutStyle(forceStrutHeight: true, height: 1):null,
       style: TextStyle(
-        fontSize: widget.textSize.sp,
+        fontSize: widget.textSize,
         color: widget.textColor??AppColors.textColor,
         fontWeight: widget.textIsBold ? FontWeight.bold : FontWeight.normal,
       ),
@@ -138,7 +138,7 @@ class ExTextFiledState extends State<ExTextFiled>{
         contentPadding: widget.padding??EdgeInsets.zero,
         hintText: widget.hintText,
         hintStyle: TextStyle(
-          fontSize: widget.hintTextSize.sp,
+          fontSize: widget.hintTextSize,
           color: widget.hintTextColor??AppColors.color_BBBBBB,
           fontWeight: widget.hintTextIsBold ? FontWeight.bold : FontWeight.normal,
         ),

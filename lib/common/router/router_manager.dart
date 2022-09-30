@@ -9,6 +9,7 @@ import 'package:jinglin/ui/login/login_page.dart';
 import 'package:jinglin/ui/main_page.dart';
 import 'package:jinglin/ui/mine/Crop/crop_photo_page.dart';
 import 'package:jinglin/ui/mine/diamond/my_diamond_page.dart';
+import 'package:jinglin/ui/mine/dynamic/my_dynamic_page.dart';
 import 'package:jinglin/ui/mine/fans/my_fans_page.dart';
 import 'package:jinglin/ui/mine/feedback/report_page.dart';
 import 'package:jinglin/ui/mine/feedback/suggest_feedback_page.dart';
@@ -17,6 +18,7 @@ import 'package:jinglin/ui/mine/income/apply_withdraw_page.dart';
 import 'package:jinglin/ui/mine/income/my_income_page.dart';
 import 'package:jinglin/ui/mine/info/personal_info_page.dart';
 import 'package:jinglin/ui/mine/info/update_phone_page.dart';
+import 'package:jinglin/ui/mine/settings/privacy_settings_page.dart';
 import 'package:jinglin/ui/mine/settings/push_settings_page.dart';
 import 'package:jinglin/ui/square/dynamic/big_photo_page.dart';
 import 'package:jinglin/ui/square/dynamic/dynamic_detail_page.dart';
@@ -91,6 +93,10 @@ class RouterName {
   static const String improveInfo = "improveInfo";
   //裁剪图片
   static const String cropPhoto = "cropPhoto";
+  //我的动态
+  static const String myDynamic = "myDynamic";
+  //隐私设置
+  static const String privacySettings = "privacySettings";
 
 }
 
@@ -195,6 +201,14 @@ Router generateRoute() {
     ),
     RouterName.cropPhoto: BaseRouter(
       routerBuilder: (context, match, settings) => CropPhotoPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.myDynamic: BaseRouter(
+      routerBuilder: (context, match, settings) => MyDynamicPage(),
+      animate: RouterAnimate.slide_left,
+    ),
+    RouterName.privacySettings: BaseRouter(
+      routerBuilder: (context, match, settings) => PrivacySettingsPage(),
       animate: RouterAnimate.slide_left,
     ),
 

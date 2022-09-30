@@ -12,15 +12,19 @@ import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
 class ExDynamicWidget extends StatelessWidget {
-  ExDynamicWidget(this.index,{Key? key}) : super(key: key);
+  ExDynamicWidget(this.index,{
+    Key? key,
+    this.isSelf = false,
+  }) : super(key: key);
   int index = 0;
+  bool isSelf = false;//是否为当前用户动态
 
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _userInfoWidget(context),
+        if(!isSelf) _userInfoWidget(context),
         _contentWidget(context),
         _locationWidget(),
         _praiseCommentWidget(context),
@@ -74,7 +78,7 @@ class ExDynamicWidget extends StatelessWidget {
 
         ),
       ],
-    );
+    ).container(marginB: 12);
   }
 
 
@@ -173,7 +177,7 @@ class ExDynamicWidget extends StatelessWidget {
         //视频
         _videoWidget(videoImg),
       ],
-    ).container(marginT: 12);
+    );
   }
 
   //当前位置
@@ -217,7 +221,7 @@ class ExDynamicWidget extends StatelessWidget {
         ),
         "".container(w: 32.w,),
         //举报
-        Row(
+        if(!isSelf) Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconHintGray.image(w: 20.w,h: 20.w,),
@@ -228,6 +232,17 @@ class ExDynamicWidget extends StatelessWidget {
         ).onTap(() {
           NavigatorUtil.gotPage(context, RouterName.report);
         }),
+        "".container().exp(),
+        //删除动态
+        if(isSelf) Row(
+          children: [
+            AppImage().iconDeleteGray.image(w: 20.w,h: 20.w),
+            ExTextView(S.of(context).text_94,
+              size: 14,
+              color: AppColors.grayColor,
+            ).container(marginL: 2.w),
+          ],
+        ),
       ],
     ).container(marginT: 12);
   }

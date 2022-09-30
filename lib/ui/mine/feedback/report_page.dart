@@ -183,7 +183,7 @@ class _ReportPageState extends BaseState<ReportPage> {
       align: Alignment.center,
       bgColor: AppColors.white,
       gradient: LinearGradient(colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor])
-    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 6,padB: 6+paddingBottom,bgColor: AppColors.white);
+    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 6,padB: 26+paddingBottom,bgColor: AppColors.white);
   }
 
 }

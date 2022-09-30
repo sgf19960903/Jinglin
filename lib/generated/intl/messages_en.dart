@@ -51,8 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_0": MessageLookupByLibrary.simpleMessage("登录"),
         "text_1": MessageLookupByLibrary.simpleMessage("注册"),
         "text_10": MessageLookupByLibrary.simpleMessage("请填写手机号"),
-        "text_100": MessageLookupByLibrary.simpleMessage(
-            "Which countries are temporarily not supported"),
+        "text_100": MessageLookupByLibrary.simpleMessage("确认修改"),
         "text_101": MessageLookupByLibrary.simpleMessage(
             "Real name verification is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential"),
         "text_102": MessageLookupByLibrary.simpleMessage("Already registered"),
@@ -561,42 +560,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_74": MessageLookupByLibrary.simpleMessage("这一刻你想说什么..."),
         "text_75": MessageLookupByLibrary.simpleMessage("全部评论"),
         "text_76": m10,
-        "text_77": MessageLookupByLibrary.simpleMessage("Reset Funds Password"),
-        "text_78":
-            MessageLookupByLibrary.simpleMessage("Confirm Funding Password"),
-        "text_79": MessageLookupByLibrary.simpleMessage("Set up successfully"),
+        "text_77": MessageLookupByLibrary.simpleMessage("设置"),
+        "text_78": MessageLookupByLibrary.simpleMessage("粉丝"),
+        "text_79": MessageLookupByLibrary.simpleMessage("我的动态"),
         "text_8": MessageLookupByLibrary.simpleMessage("《用户协议》"),
-        "text_80": MessageLookupByLibrary.simpleMessage("Authentication"),
-        "text_81":
-            MessageLookupByLibrary.simpleMessage("Personal Identification"),
-        "text_82": MessageLookupByLibrary.simpleMessage("Acknowledgement"),
-        "text_83":
-            MessageLookupByLibrary.simpleMessage("Primary Authentication"),
-        "text_84": MessageLookupByLibrary.simpleMessage(
-            "Increase withdrawal amount, 24 hours limit 200BTC"),
-        "text_85":
-            MessageLookupByLibrary.simpleMessage("Advanced Certification"),
-        "text_86": MessageLookupByLibrary.simpleMessage("Submit for approval"),
-        "text_87": MessageLookupByLibrary.simpleMessage(
-            "Anti-Money Laundering Agreement Download"),
-        "text_88": MessageLookupByLibrary.simpleMessage(
-            "Please upload a handheld photo ID"),
-        "text_89": MessageLookupByLibrary.simpleMessage(
-            "Please upload a photo of the AML agreement"),
+        "text_80": MessageLookupByLibrary.simpleMessage("我的收益"),
+        "text_81": MessageLookupByLibrary.simpleMessage("聊天就有收益，所见即所得"),
+        "text_82": MessageLookupByLibrary.simpleMessage("推送设置"),
+        "text_83": MessageLookupByLibrary.simpleMessage("意见反馈"),
+        "text_84": MessageLookupByLibrary.simpleMessage("退出登录"),
+        "text_85": MessageLookupByLibrary.simpleMessage("我的钻石"),
+        "text_86": MessageLookupByLibrary.simpleMessage("快点去寻找心动的她吧！"),
+        "text_87": MessageLookupByLibrary.simpleMessage("个人资料"),
+        "text_88": MessageLookupByLibrary.simpleMessage("自我介绍"),
+        "text_89": MessageLookupByLibrary.simpleMessage("手机号"),
         "text_9": MessageLookupByLibrary.simpleMessage("《隐私协议》"),
-        "text_90": MessageLookupByLibrary.simpleMessage("Nationality"),
-        "text_91": MessageLookupByLibrary.simpleMessage("Surname"),
-        "text_92": MessageLookupByLibrary.simpleMessage("First name"),
-        "text_93": MessageLookupByLibrary.simpleMessage("Type of document"),
-        "text_94": MessageLookupByLibrary.simpleMessage("ID number"),
-        "text_95":
-            MessageLookupByLibrary.simpleMessage("Please upload front photo"),
-        "text_96": MessageLookupByLibrary.simpleMessage(
-            "Please upload the reverse photo"),
-        "text_97": MessageLookupByLibrary.simpleMessage("Please enter"),
-        "text_98": MessageLookupByLibrary.simpleMessage(
-            "Why do I have to authenticate"),
-        "text_99": MessageLookupByLibrary.simpleMessage(
-            "Real-name authentication is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential")
+        "text_90": MessageLookupByLibrary.simpleMessage("不可修改"),
+        "text_91": MessageLookupByLibrary.simpleMessage("输入您的个性签名吧~"),
+        "text_92": MessageLookupByLibrary.simpleMessage("性别"),
+        "text_93": MessageLookupByLibrary.simpleMessage("保存修改"),
+        "text_94": MessageLookupByLibrary.simpleMessage("删除动态"),
+        "text_95": MessageLookupByLibrary.simpleMessage("修改手机号"),
+        "text_96": MessageLookupByLibrary.simpleMessage("更换手机号后，下次登录请使用新手机号登录"),
+        "text_97": MessageLookupByLibrary.simpleMessage("新手机号"),
+        "text_98": MessageLookupByLibrary.simpleMessage("请填写新手机号"),
+        "text_99": MessageLookupByLibrary.simpleMessage("验证码")
       };
 }
