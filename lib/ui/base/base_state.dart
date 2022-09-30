@@ -5,14 +5,16 @@
 
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/provider/base/base_provider.dart';
 import 'package:jinglin/ui/widgets/ex_scaffold.dart';
 import 'package:jinglin/ui/widgets/ex_title_view.dart';
+import 'package:provider/provider.dart';
 
 
 abstract class BaseState<T extends StatefulWidget> extends State<T> {
   bool hasHeaderBg = false;//是否有顶部header背景
   bool hasHeaderIntroImg = false;//是否有顶部Header描述图片
-
+  BaseProvider? _provider;
 
 
   Widget widgetBuild({
@@ -23,11 +25,13 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     bool bottomInsert = false,
     Widget? floatWidget,
     Color? bgColor,
+    BaseProvider? provider,
   }){
+    _provider = provider;
     double headerHeight = 0;
     if(hasHeaderBg) headerHeight = headerHeight + paddingTop;
     if(hasHeaderIntroImg) headerHeight = headerHeight + AppSizes.titleHeight;
-    return ExScaffold(
+    /*if(provider==null) */return ExScaffold(
       floatButton: floatWidget,
       appBar: appBar,
       backgroundColor: bgColor,
@@ -40,10 +44,31 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
         ],
       )
     );
+    LogUtil.printM("创建Provider...");
+    return ChangeNotifierProvider.value(
+      value: provider,
+      child: ExScaffold(
+          floatButton: floatWidget,
+          appBar: appBar,
+          backgroundColor: bgColor,
+          bottomInset: bottomInsert,
+          child: Stack(
+            children: [
+              if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: 150,fit: BoxFit.fill),
+              if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
+              child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
+            ],
+          )
+      ),
+    );
   }
 
 
-
+  @override
+  void dispose() {
+    _provider?.dispose();
+    super.dispose();
+  }
 
 
 }

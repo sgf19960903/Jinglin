@@ -7,10 +7,12 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/provider/home/home_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_list_view.dart';
 import 'package:jinglin/ui/widgets/ex_sliver_persistent_header_delegate.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
+import 'package:provider/provider.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -21,6 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends BaseState<HomePage> {
+  HomeProvider _provider = HomeProvider();
 
 
   @override
@@ -28,24 +31,22 @@ class _HomePageState extends BaseState<HomePage> {
     return widgetBuild(
       hasHeaderBg: true,
       hasHeaderIntroImg: true,
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: _bannerWidget(),
-          ),
-          SliverPersistentHeader(
-            floating: true,
-            pinned: true,
-            delegate: ExSliverPersistentHeaderDelegate(
-                child: _tabListWidget(),
-                maxHeight: 27,
-                minHeight: 27,
+      provider: _provider,
+      child: ChangeNotifierProvider.value(
+        value: _provider,
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: _bannerWidget(),
             ),
-          ),
-          SliverToBoxAdapter(
+            SliverToBoxAdapter(
+              child: _tabListWidget(),
+            ),
+            SliverToBoxAdapter(
               child: _friendListWidget(),
-          ),
-        ],
+            ),
+          ],
+        ),
       )
     );
   }
@@ -68,25 +69,30 @@ class _HomePageState extends BaseState<HomePage> {
   Widget _tabListWidget(){
     List<String> tabNameList = [S.of(context).text_33,S.of(context).text_34,];
     return Row(
-      children: List.generate(2, (index) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ExTextView(tabNameList[index],
-            color: index==0? AppColors.textColor : AppColors.grayColor,
-            size: index==0?18:16,
-          ).container(h: 24),
-          "".container(
-            w: 16.w,
-            h: 3,
-            radius: 1.5,
-            bgColor: index==0?AppColors.white:Colors.transparent,
-            gradient: LinearGradient(
-              colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
-            ),
-          )
-        ],
+      children: List.generate(2, (index) => Selector(
+        builder: (_,int tabIndex,child){
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ExTextView(tabNameList[index],
+                color: index==tabIndex? AppColors.textColor : AppColors.grayColor,
+                size: index==tabIndex?18:16,
+              ).container(h: 24),
+              "".container(
+                w: 16.w,
+                h: 3,
+                radius: 1.5,
+                bgColor: index==tabIndex?AppColors.white:Colors.transparent,
+                gradient: LinearGradient(
+                  colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
+                ),
+              )
+            ],
+          );
+        },
+        selector: (_,HomeProvider p) => p.listTabIndex
       ).onTap(() {
-
+        _provider.changeListTabIndex(index);
       }).container(marginR: 24.w,)),
     ).container(bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
   }

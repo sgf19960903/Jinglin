@@ -108,19 +108,19 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver,RouteAw
       ),
     ).willPop(() {
       //连续返回两次退出App
-      // int nowTimeStamp = DateTime.now().millisecondsSinceEpoch;
-      // if(lastClickBackTimeStamp==0){
-      //   lastClickBackTimeStamp = nowTimeStamp;
-      //   ToastUtil.showMsg(S.of(context).text_359);
-      //   return Future.value(false);
-      // }else{
-      //   int diff = nowTimeStamp - lastClickBackTimeStamp;
-      //   if(diff>1000){
-      //     lastClickBackTimeStamp = nowTimeStamp;
-      //     ToastUtil.showMsg(S.of(context).text_359);
-      //     return Future.value(false);
-      //   }
-      // }
+      int nowTimeStamp = DateTime.now().millisecondsSinceEpoch;
+      if(lastClickBackTimeStamp==0){
+        lastClickBackTimeStamp = nowTimeStamp;
+        ToastUtil.showMsg(S.of(context).text_359);
+        return Future.value(false);
+      }else{
+        int diff = nowTimeStamp - lastClickBackTimeStamp;
+        if(diff>1000){
+          lastClickBackTimeStamp = nowTimeStamp;
+          ToastUtil.showMsg(S.of(context).text_359);
+          return Future.value(false);
+        }
+      }
       return Future.value(true);
     });
   }
@@ -140,12 +140,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver,RouteAw
           ],
         ).onTap(() {
           FocusScope.of(context).unfocus();
-          if(!App.isLogin&&index==3) {
-            NavigatorUtil.gotPage(context, RouterName.login);
-            return;
-          }
           App.mainPageController.jumpToPage(index);
-          // App.mainPageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.easeIn);
         }).exp();
       }),
     ).container(h: 48+paddingBottom,padB: paddingBottom);

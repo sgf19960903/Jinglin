@@ -126,7 +126,6 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
     String videoUrl = "";
     int photoLen = photoList.length;
     int hidePhotoNum = photoLen-maxShowPhotoCount;//隐藏图片数量
-    print("图片数量：$photoLen");
     int showPhotoLen = min(photoLen, maxShowPhotoCount);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

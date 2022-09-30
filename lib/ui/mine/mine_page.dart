@@ -4,6 +4,7 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/ui/base/base_state.dart';
 
 
 class MinePage extends StatefulWidget {
@@ -13,9 +14,30 @@ class MinePage extends StatefulWidget {
   State<MinePage> createState() => _MinePageState();
 }
 
-class _MinePageState extends State<MinePage> {
+class _MinePageState extends BaseState<MinePage> {
+
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return widgetBuild(
+      hasHeaderBg: true,
+      hasHeaderIntroImg: true,
+      child: Stack(
+        children: [
+
+        ],
+      ),
+    );
   }
+
+
+  //用户信息
+  Widget _infoWidget(){
+    return Column(
+      children: [
+
+      ],
+    );
+  }
+
 }

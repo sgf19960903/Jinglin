@@ -1,3 +1,8 @@
+/// 通用空白视图
+/// @Author Tongzongwen
+/// @Date 2022/9/28 5:55 下午
+/// @Description TODO
+///
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
