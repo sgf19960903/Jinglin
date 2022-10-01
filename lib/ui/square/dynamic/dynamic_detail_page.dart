@@ -6,6 +6,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/dialog/square_dialog_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
@@ -27,6 +28,7 @@ class DynamicDetailPage extends StatefulWidget {
 
 class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
   int maxShowPhotoCount = 9;//最大显示图片数量
+  bool isSelf = false;
 
 
   @override
@@ -34,7 +36,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
     return widgetBuild(
       bottomInsert: true,
       appBar: ExTitleView(
-        titleWidget: _titleWidget(),
+        title: isSelf?S.of(context).text_128:null,
+        titleCenter: true,
+        titleWidget: isSelf?null:_titleWidget(),
       ),
       child: Column(
         children: [
@@ -210,7 +214,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
         ),
         "".container(w: 32.w,),
         //举报
-        Row(
+        if(!isSelf) Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconHintGray.image(w: 20.w,h: 20.w,),
@@ -219,6 +223,27 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
             ).container(marginL: 2.w),
           ],
         ),
+        "".container().exp(),
+        //删除动态
+        if(isSelf) Row(
+          children: [
+            AppImage().iconDeleteGray.image(w: 20.w,h: 20.w),
+            ExTextView(S.of(context).text_94,
+              size: 14,
+              color: AppColors.grayColor,
+            ).container(marginL: 2.w),
+          ],
+        ).onTap(() {
+          CommonDialogUtil.showSureDialog(context,
+              title: S.of(context).text_94,
+              content: S.of(context).text_126,
+              leftButtonText: S.of(context).text_127,
+              rightButtonText: S.of(context).text_65,
+              rightClickFunc: (){
+
+              }
+          );
+        }),
       ],
     ).container(marginT: 12,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR);
   }

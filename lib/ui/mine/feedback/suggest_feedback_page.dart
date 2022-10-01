@@ -4,7 +4,12 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
+import 'package:jinglin/ui/widgets/ex_text_field.dart';
+import 'package:jinglin/ui/widgets/ex_text_view.dart';
+import 'package:jinglin/ui/widgets/ex_title_view.dart';
 
 
 class SuggestFeedbackPage extends StatefulWidget {
@@ -18,7 +23,123 @@ class _SuggestFeedbackPageState extends BaseState<SuggestFeedbackPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return widgetBuild(
+      bgColor: AppColors.pageGrayColor,
+      appBar: ExTitleView(
+        title: S.of(context).text_83,
+        titleCenter: true,
+      ),
+      child: Column(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                _suggestContentWidget(),
+                _photoLoadWidget(),
+              ],
+            ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR),
+          ).exp(),
+          _commitWidget(),
+        ],
+      ),
+    );
   }
-}
 
+
+  //反馈内容
+  Widget _suggestContentWidget(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        //反馈内容说明
+        ExTextView(S.of(context).text_121,
+          isRegular: false,
+        ),
+        //反馈内容输入框
+        ExTextFiled(
+          hintText: S.of(context).text_122,
+          hintTextColor: AppColors.color_BBBBBB,
+          padding: EdgeInsets.zero,
+          maxLines: 10,
+        ).container(h: 100,marginT: 12,pad: 16.w,radius: 12,bgColor: AppColors.pageColor),
+      ],
+    ).container(marginT: 16);
+  }
+
+
+  //图片上传
+  Widget _photoLoadWidget(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        //图片上传最大数量说明
+        Row(
+          children: [
+            ExTextView(S.of(context).text_63,
+              isRegular: false,
+            ),
+            ExTextView("(${S.of(context).text_60})",
+              color: AppColors.grayColor,
+            ).container(marginL: 4.w).exp(),
+            ExTextView(S.of(context).text_64("3"),
+              color: AppColors.grayColor,
+            )
+          ],
+        ),
+        //图片列表
+        Row(
+          children: [
+            //图片列表
+            Row(
+              children: List.generate(2, (index) {
+                return Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    AppImage().iconWechat.image(w: 100.w,h: 100.w,fit: BoxFit.fill).clipRRect(radius: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppImage().iconDelete.image(w: 16.w,h: 16.w,),
+                        ExTextView(S.of(context).text_65,
+                          color: AppColors.white,
+                        ).container(marginL: 2.w)
+                      ],
+                    ).container(h: 24,bgColor: AppColors.black.withOpacity(0.4),bottomLeftRadius: 12,bottomRightRadius: 12),
+                  ],
+                ).container(w: 100.w,h: 100.w,marginR: 12.w);
+              }),
+            ),
+            //上传按钮
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                AppImage().iconAdd.image(w: 28.w,h: 28.w,),
+                ExTextView(S.of(context).text_67,
+                  color: AppColors.textColor,
+                  size: 13,
+                ).container(marginT: 1)
+              ],
+            ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.white,),
+
+          ],
+        ).container(marginT: 12)
+      ],
+    ).container(marginT: 16);
+  }
+
+  //提交按钮
+  Widget _commitWidget(){
+    return ExTextView(S.of(context).text_66,
+      color: AppColors.white,
+    ).container(
+        h: AppSizes.buttonHeight,
+        radius: 8,
+        align: Alignment.center,
+        bgColor: AppColors.white,
+        gradient: LinearGradient(colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor])
+    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 6,padB: 26+paddingBottom,bgColor: AppColors.white);
+  }
+
+}

@@ -1010,553 +1010,553 @@ class S {
     );
   }
 
-  /// `Real name verification is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential`
+  /// `可提现金额`
   String get text_101 {
     return Intl.message(
-      'Real name verification is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential',
+      '可提现金额',
       name: 'text_101',
       desc: '',
       args: [],
     );
   }
 
-  /// `Already registered`
+  /// `申请提现`
   String get text_102 {
     return Intl.message(
-      'Already registered',
+      '申请提现',
       name: 'text_102',
       desc: '',
       args: [],
     );
   }
 
-  /// `Primary review in progress`
+  /// `申请中`
   String get text_103 {
     return Intl.message(
-      'Primary review in progress',
+      '申请中',
       name: 'text_103',
       desc: '',
       args: [],
     );
   }
 
-  /// `Primary audit not approved`
+  /// `总收益`
   String get text_104 {
     return Intl.message(
-      'Primary audit not approved',
+      '总收益',
       name: 'text_104',
       desc: '',
       args: [],
     );
   }
 
-  /// `Primary audit passed`
+  /// `提现成功`
   String get text_105 {
     return Intl.message(
-      'Primary audit passed',
+      '提现成功',
       name: 'text_105',
       desc: '',
       args: [],
     );
   }
 
-  /// `Advanced review in progress`
+  /// `提现失败`
   String get text_106 {
     return Intl.message(
-      'Advanced review in progress',
+      '提现失败',
       name: 'text_106',
       desc: '',
       args: [],
     );
   }
 
-  /// `Advanced review failed`
-  String get text_107 {
+  /// `{name}月`
+  String text_107(Object name) {
     return Intl.message(
-      'Advanced review failed',
+      '$name月',
       name: 'text_107',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `Advanced review passed`
+  /// `提现预计五个工作日内到账，若遇到周末及法定节假日，提现到账日期顺延。`
   String get text_108 {
     return Intl.message(
-      'Advanced review passed',
+      '提现预计五个工作日内到账，若遇到周末及法定节假日，提现到账日期顺延。',
       name: 'text_108',
       desc: '',
       args: [],
     );
   }
 
-  /// `Passport`
+  /// `提现金额`
   String get text_109 {
     return Intl.message(
-      'Passport',
+      '提现金额',
       name: 'text_109',
       desc: '',
       args: [],
     );
   }
 
-  /// `ID card`
+  /// `1.钻石仅能用于享受我公司服务体系下直接运营的产品和服务，不可交易； \n2.在您使用充值服务前，请确保您已满18周岁且具有相应的民事行为能力。 禁止未成年使用充值服务。`
   String get text_110 {
     return Intl.message(
-      'ID card',
+      '1.钻石仅能用于享受我公司服务体系下直接运营的产品和服务，不可交易； \n2.在您使用充值服务前，请确保您已满18周岁且具有相应的民事行为能力。 禁止未成年使用充值服务。',
       name: 'text_110',
       desc: '',
       args: [],
     );
   }
 
-  /// `Driver's License`
+  /// `套餐说明:`
   String get text_111 {
     return Intl.message(
-      'Driver\'s License',
+      '套餐说明:',
       name: 'text_111',
       desc: '',
       args: [],
     );
   }
 
-  /// `US`
+  /// `《用户充值协议》`
   String get text_112 {
     return Intl.message(
-      'US',
+      '《用户充值协议》',
       name: 'text_112',
       desc: '',
       args: [],
     );
   }
 
-  /// `China`
+  /// `充值即默认同意`
   String get text_113 {
     return Intl.message(
-      'China',
+      '充值即默认同意',
       name: 'text_113',
       desc: '',
       args: [],
     );
   }
 
-  /// `South Korea`
+  /// `钻`
   String get text_114 {
     return Intl.message(
-      'South Korea',
+      '钻',
       name: 'text_114',
       desc: '',
       args: [],
     );
   }
 
-  /// `Japan`
+  /// `剩余钻石`
   String get text_115 {
     return Intl.message(
-      'Japan',
+      '剩余钻石',
       name: 'text_115',
       desc: '',
       args: [],
     );
   }
 
-  /// `Hong Kong, China`
+  /// `钻石套餐选择`
   String get text_116 {
     return Intl.message(
-      'Hong Kong, China',
+      '钻石套餐选择',
       name: 'text_116',
       desc: '',
       args: [],
     );
   }
 
-  /// `Taiwan, China`
-  String get text_117 {
+  /// `送{name}钻`
+  String text_117(Object name) {
     return Intl.message(
-      'Taiwan, China',
+      '送$name钻',
       name: 'text_117',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `Russia`
+  /// `消息是否以通知栏形式通知`
   String get text_118 {
     return Intl.message(
-      'Russia',
+      '消息是否以通知栏形式通知',
       name: 'text_118',
       desc: '',
       args: [],
     );
   }
 
-  /// `France`
+  /// `消息是否通知有声音`
   String get text_119 {
     return Intl.message(
-      'France',
+      '消息是否通知有声音',
       name: 'text_119',
       desc: '',
       args: [],
     );
   }
 
-  /// `United Kingdom`
+  /// `消息是否通知有震动`
   String get text_120 {
     return Intl.message(
-      'United Kingdom',
+      '消息是否通知有震动',
       name: 'text_120',
       desc: '',
       args: [],
     );
   }
 
-  /// `Germany`
+  /// `反馈内容`
   String get text_121 {
     return Intl.message(
-      'Germany',
+      '反馈内容',
       name: 'text_121',
       desc: '',
       args: [],
     );
   }
 
-  /// `Brazil`
+  /// `请输入您反馈的内容...`
   String get text_122 {
     return Intl.message(
-      'Brazil',
+      '请输入您反馈的内容...',
       name: 'text_122',
       desc: '',
       args: [],
     );
   }
 
-  /// `Italy`
+  /// `确认`
   String get text_123 {
     return Intl.message(
-      'Italy',
+      '确认',
       name: 'text_123',
       desc: '',
       args: [],
     );
   }
 
-  /// `Canada`
+  /// `是否授权软件屏蔽手机通讯录里的用户?\n屏蔽后他们将看不到自己的信息。`
   String get text_124 {
     return Intl.message(
-      'Canada',
+      '是否授权软件屏蔽手机通讯录里的用户?\n屏蔽后他们将看不到自己的信息。',
       name: 'text_124',
       desc: '',
       args: [],
     );
   }
 
-  /// `Spain`
+  /// `确定要退出当前账号？`
   String get text_125 {
     return Intl.message(
-      'Spain',
+      '确定要退出当前账号？',
       name: 'text_125',
       desc: '',
       args: [],
     );
   }
 
-  /// `Malaysia`
+  /// `动态删除后将无法恢复，是否要删除？`
   String get text_126 {
     return Intl.message(
-      'Malaysia',
+      '动态删除后将无法恢复，是否要删除？',
       name: 'text_126',
       desc: '',
       args: [],
     );
   }
 
-  /// `Singapore`
+  /// `暂不删除`
   String get text_127 {
     return Intl.message(
-      'Singapore',
+      '暂不删除',
       name: 'text_127',
       desc: '',
       args: [],
     );
   }
 
-  /// `Indonesia`
+  /// `动态详情`
   String get text_128 {
     return Intl.message(
-      'Indonesia',
+      '动态详情',
       name: 'text_128',
       desc: '',
       args: [],
     );
   }
 
-  /// `Philippines`
+  /// `支付宝`
   String get text_129 {
     return Intl.message(
-      'Philippines',
+      '支付宝',
       name: 'text_129',
       desc: '',
       args: [],
     );
   }
 
-  /// `Vietnam`
+  /// `微信`
   String get text_130 {
     return Intl.message(
-      'Vietnam',
+      '微信',
       name: 'text_130',
       desc: '',
       args: [],
     );
   }
 
-  /// `India`
+  /// `关注Ta`
   String get text_131 {
     return Intl.message(
-      'India',
+      '关注Ta',
       name: 'text_131',
       desc: '',
       args: [],
     );
   }
 
-  /// `Bhutan`
+  /// `取消关注`
   String get text_132 {
     return Intl.message(
-      'Bhutan',
+      '取消关注',
       name: 'text_132',
       desc: '',
       args: [],
     );
   }
 
-  /// `Finland`
+  /// `确定取消关注？`
   String get text_133 {
     return Intl.message(
-      'Finland',
+      '确定取消关注？',
       name: 'text_133',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sweden`
+  /// `暂不取消`
   String get text_134 {
     return Intl.message(
-      'Sweden',
+      '暂不取消',
       name: 'text_134',
       desc: '',
       args: [],
     );
   }
 
-  /// `Norway`
+  /// `女`
   String get text_135 {
     return Intl.message(
-      'Norway',
+      '女',
       name: 'text_135',
       desc: '',
       args: [],
     );
   }
 
-  /// `Iceland`
+  /// `男`
   String get text_136 {
     return Intl.message(
-      'Iceland',
+      '男',
       name: 'text_136',
       desc: '',
       args: [],
     );
   }
 
-  /// `Denmark`
+  /// `确定`
   String get text_137 {
     return Intl.message(
-      'Denmark',
+      '确定',
       name: 'text_137',
       desc: '',
       args: [],
     );
   }
 
-  /// `Zimbabwe`
+  /// `清除未读`
   String get text_138 {
     return Intl.message(
-      'Zimbabwe',
+      '清除未读',
       name: 'text_138',
       desc: '',
       args: [],
     );
   }
 
-  /// `Netherlands`
+  /// `不再提醒`
   String get text_139 {
     return Intl.message(
-      'Netherlands',
+      '不再提醒',
       name: 'text_139',
       desc: '',
       args: [],
     );
   }
 
-  /// `Thailand`
+  /// `聊天就有收益，所见即所得，快点去寻找心动的他吧！`
   String get text_140 {
     return Intl.message(
-      'Thailand',
+      '聊天就有收益，所见即所得，快点去寻找心动的他吧！',
       name: 'text_140',
       desc: '',
       args: [],
     );
   }
 
-  /// `Request successful`
+  /// `余额不足!`
   String get text_141 {
     return Intl.message(
-      'Request successful',
+      '余额不足!',
       name: 'text_141',
       desc: '',
       args: [],
     );
   }
 
-  /// `Parameter error`
+  /// `马上充值，别错过缘分`
   String get text_142 {
     return Intl.message(
-      'Parameter error',
+      '马上充值，别错过缘分',
       name: 'text_142',
       desc: '',
       args: [],
     );
   }
 
-  /// `Account cannot be empty`
+  /// `去充值`
   String get text_143 {
     return Intl.message(
-      'Account cannot be empty',
+      '去充值',
       name: 'text_143',
       desc: '',
       args: [],
     );
   }
 
-  /// `Password cannot be empty`
+  /// `暂不充值`
   String get text_144 {
     return Intl.message(
-      'Password cannot be empty',
+      '暂不充值',
       name: 'text_144',
       desc: '',
       args: [],
     );
   }
 
-  /// `Account number error`
+  /// `置顶聊天`
   String get text_145 {
     return Intl.message(
-      'Account number error',
+      '置顶聊天',
       name: 'text_145',
       desc: '',
       args: [],
     );
   }
 
-  /// `Password error`
+  /// `加入黑名单`
   String get text_146 {
     return Intl.message(
-      'Password error',
+      '加入黑名单',
       name: 'text_146',
       desc: '',
       args: [],
     );
   }
 
-  /// `Wrong information, please contact administrator`
+  /// `移除黑名单`
   String get text_147 {
     return Intl.message(
-      'Wrong information, please contact administrator',
+      '移除黑名单',
       name: 'text_147',
       desc: '',
       args: [],
     );
   }
 
-  /// `Currency does not exist`
+  /// `清除聊天记录`
   String get text_148 {
     return Intl.message(
-      'Currency does not exist',
+      '清除聊天记录',
       name: 'text_148',
       desc: '',
       args: [],
     );
   }
 
-  /// `The number of purchases is out of range`
+  /// `关于TA`
   String get text_149 {
     return Intl.message(
-      'The number of purchases is out of range',
+      '关于TA',
       name: 'text_149',
       desc: '',
       args: [],
     );
   }
 
-  /// `Password inconsistent`
+  /// `动态`
   String get text_150 {
     return Intl.message(
-      'Password inconsistent',
+      '动态',
       name: 'text_150',
       desc: '',
       args: [],
     );
   }
 
-  /// `Account already exists`
+  /// `搭讪TA`
   String get text_151 {
     return Intl.message(
-      'Account already exists',
+      '搭讪TA',
       name: 'text_151',
       desc: '',
       args: [],
     );
   }
 
-  /// `Original password is incorrect`
+  /// `个人介绍`
   String get text_152 {
     return Intl.message(
-      'Original password is incorrect',
+      '个人介绍',
       name: 'text_152',
       desc: '',
       args: [],
     );
   }
 
-  /// `The new password cannot be empty`
-  String get text_153 {
+  /// `{name}岁`
+  String text_153(Object name) {
     return Intl.message(
-      'The new password cannot be empty',
+      '$name岁',
       name: 'text_153',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `Name cannot be empty`
-  String get text_154 {
+  /// `对方免费聊天次数剩余:{name}次`
+  String text_154(Object name) {
     return Intl.message(
-      'Name cannot be empty',
+      '对方免费聊天次数剩余:$name次',
       name: 'text_154',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `Last name cannot be empty`
-  String get text_155 {
+  /// `收益+{name}元`
+  String text_155(Object name) {
     return Intl.message(
-      'Last name cannot be empty',
+      '收益+$name元',
       name: 'text_155',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 

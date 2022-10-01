@@ -99,11 +99,11 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           color: AppColors.grayColor,
           size: 16,
         ),
-        ExTextView(S.of(context).text_90,
-          color: AppColors.grayColor,
-          size: 16,
+        ExTextView("(${S.of(context).text_90})",
+          color: AppColors.color_BBBBBB,
+          size: 14,
         ).container(marginL: 4.w),
-        ExTextView(S.of(context).app_name,
+        ExTextView(S.of(context).text_135,
           color: AppColors.grayColor,
           size: 16,
           textAlign: TextAlign.right,
@@ -129,7 +129,10 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         ).exp(),
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w).container(marginL: 4.w),
       ],
-    ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white);
+    ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white).onTap(() {
+      CommonDialogUtil.showDateChoiceDialog(context,);
+
+    });
   }
 
 
@@ -149,7 +152,9 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         ).exp(),
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w).container(marginL: 4.w),
       ],
-    ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white);
+    ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white).onTap(() {
+      CommonDialogUtil.showScrollChoiceDialog(context,List.generate(80, (index) => "${120+index}cm"),selectedIndex: 45);
+    });
   }
 
 

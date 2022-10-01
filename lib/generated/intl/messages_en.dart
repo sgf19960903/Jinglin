@@ -20,30 +20,40 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(quantity, code) =>
+  static String m0(name) => "${name}月";
+
+  static String m1(name) => "送${name}钻";
+
+  static String m2(name) => "${name}岁";
+
+  static String m3(name) => "对方免费聊天次数剩余:${name}次";
+
+  static String m4(name) => "收益+${name}元";
+
+  static String m5(quantity, code) =>
       "The minimum withdrawal quantity is ${quantity}${code}";
 
-  static String m1(quantity, code) =>
+  static String m6(quantity, code) =>
       "\nThe minimum number of coins to withdraw is:${quantity} ${code}. \n\nTo protect the safety of funds, when your account security policy changes, password changes, we will conduct manual review of coin withdrawals, please wait patiently for staff email contact. Please make sure that your computer and browser are secure to prevent information from being changed or leaked.";
 
-  static String m2(name) => "${name} block confirmation";
+  static String m7(name) => "${name} block confirmation";
 
-  static String m3(name) => "${name} Network Confirmation";
+  static String m8(name) => "${name} Network Confirmation";
 
-  static String m4(name) =>
+  static String m9(name) =>
       "Rate: ${name}% | Absenteeism fee paid at your own expense";
 
-  static String m5(name) => "距你${name}";
+  static String m10(name) => "距你${name}";
 
-  static String m6(name) => "BTC Buy Vol ${name} BTC";
+  static String m11(name) => "BTC Buy Vol ${name} BTC";
 
-  static String m7(name) => "BTC Sell Vol ${name} BTC";
+  static String m12(name) => "BTC Sell Vol ${name} BTC";
 
-  static String m8(name) => "共${name}条回复";
+  static String m13(name) => "共${name}条回复";
 
-  static String m9(name) => "最多可上传${name}张";
+  static String m14(name) => "最多可上传${name}张";
 
-  static String m10(name) => "${name}条评论";
+  static String m15(name) => "${name}条评论";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -52,85 +62,70 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_1": MessageLookupByLibrary.simpleMessage("注册"),
         "text_10": MessageLookupByLibrary.simpleMessage("请填写手机号"),
         "text_100": MessageLookupByLibrary.simpleMessage("确认修改"),
-        "text_101": MessageLookupByLibrary.simpleMessage(
-            "Real name verification is required to comply with current financial regulations or related policies. Real-name authentication is more helpful to protect your account security and avoid some fraudulent means. We will keep your information strictly confidential"),
-        "text_102": MessageLookupByLibrary.simpleMessage("Already registered"),
-        "text_103":
-            MessageLookupByLibrary.simpleMessage("Primary review in progress"),
-        "text_104":
-            MessageLookupByLibrary.simpleMessage("Primary audit not approved"),
-        "text_105":
-            MessageLookupByLibrary.simpleMessage("Primary audit passed"),
-        "text_106":
-            MessageLookupByLibrary.simpleMessage("Advanced review in progress"),
-        "text_107":
-            MessageLookupByLibrary.simpleMessage("Advanced review failed"),
-        "text_108":
-            MessageLookupByLibrary.simpleMessage("Advanced review passed"),
-        "text_109": MessageLookupByLibrary.simpleMessage("Passport"),
+        "text_101": MessageLookupByLibrary.simpleMessage("可提现金额"),
+        "text_102": MessageLookupByLibrary.simpleMessage("申请提现"),
+        "text_103": MessageLookupByLibrary.simpleMessage("申请中"),
+        "text_104": MessageLookupByLibrary.simpleMessage("总收益"),
+        "text_105": MessageLookupByLibrary.simpleMessage("提现成功"),
+        "text_106": MessageLookupByLibrary.simpleMessage("提现失败"),
+        "text_107": m0,
+        "text_108": MessageLookupByLibrary.simpleMessage(
+            "提现预计五个工作日内到账，若遇到周末及法定节假日，提现到账日期顺延。"),
+        "text_109": MessageLookupByLibrary.simpleMessage("提现金额"),
         "text_11": MessageLookupByLibrary.simpleMessage("请输入验证码"),
-        "text_110": MessageLookupByLibrary.simpleMessage("ID card"),
-        "text_111": MessageLookupByLibrary.simpleMessage("Driver\'s License"),
-        "text_112": MessageLookupByLibrary.simpleMessage("US"),
-        "text_113": MessageLookupByLibrary.simpleMessage("China"),
-        "text_114": MessageLookupByLibrary.simpleMessage("South Korea"),
-        "text_115": MessageLookupByLibrary.simpleMessage("Japan"),
-        "text_116": MessageLookupByLibrary.simpleMessage("Hong Kong, China"),
-        "text_117": MessageLookupByLibrary.simpleMessage("Taiwan, China"),
-        "text_118": MessageLookupByLibrary.simpleMessage("Russia"),
-        "text_119": MessageLookupByLibrary.simpleMessage("France"),
+        "text_110": MessageLookupByLibrary.simpleMessage(
+            "1.钻石仅能用于享受我公司服务体系下直接运营的产品和服务，不可交易； \n2.在您使用充值服务前，请确保您已满18周岁且具有相应的民事行为能力。 禁止未成年使用充值服务。"),
+        "text_111": MessageLookupByLibrary.simpleMessage("套餐说明:"),
+        "text_112": MessageLookupByLibrary.simpleMessage("《用户充值协议》"),
+        "text_113": MessageLookupByLibrary.simpleMessage("充值即默认同意"),
+        "text_114": MessageLookupByLibrary.simpleMessage("钻"),
+        "text_115": MessageLookupByLibrary.simpleMessage("剩余钻石"),
+        "text_116": MessageLookupByLibrary.simpleMessage("钻石套餐选择"),
+        "text_117": m1,
+        "text_118": MessageLookupByLibrary.simpleMessage("消息是否以通知栏形式通知"),
+        "text_119": MessageLookupByLibrary.simpleMessage("消息是否通知有声音"),
         "text_12": MessageLookupByLibrary.simpleMessage("当前手机号"),
-        "text_120": MessageLookupByLibrary.simpleMessage("United Kingdom"),
-        "text_121": MessageLookupByLibrary.simpleMessage("Germany"),
-        "text_122": MessageLookupByLibrary.simpleMessage("Brazil"),
-        "text_123": MessageLookupByLibrary.simpleMessage("Italy"),
-        "text_124": MessageLookupByLibrary.simpleMessage("Canada"),
-        "text_125": MessageLookupByLibrary.simpleMessage("Spain"),
-        "text_126": MessageLookupByLibrary.simpleMessage("Malaysia"),
-        "text_127": MessageLookupByLibrary.simpleMessage("Singapore"),
-        "text_128": MessageLookupByLibrary.simpleMessage("Indonesia"),
-        "text_129": MessageLookupByLibrary.simpleMessage("Philippines"),
+        "text_120": MessageLookupByLibrary.simpleMessage("消息是否通知有震动"),
+        "text_121": MessageLookupByLibrary.simpleMessage("反馈内容"),
+        "text_122": MessageLookupByLibrary.simpleMessage("请输入您反馈的内容..."),
+        "text_123": MessageLookupByLibrary.simpleMessage("确认"),
+        "text_124": MessageLookupByLibrary.simpleMessage(
+            "是否授权软件屏蔽手机通讯录里的用户?\n屏蔽后他们将看不到自己的信息。"),
+        "text_125": MessageLookupByLibrary.simpleMessage("确定要退出当前账号？"),
+        "text_126": MessageLookupByLibrary.simpleMessage("动态删除后将无法恢复，是否要删除？"),
+        "text_127": MessageLookupByLibrary.simpleMessage("暂不删除"),
+        "text_128": MessageLookupByLibrary.simpleMessage("动态详情"),
+        "text_129": MessageLookupByLibrary.simpleMessage("支付宝"),
         "text_13": MessageLookupByLibrary.simpleMessage("本机号码一键登录"),
-        "text_130": MessageLookupByLibrary.simpleMessage("Vietnam"),
-        "text_131": MessageLookupByLibrary.simpleMessage("India"),
-        "text_132": MessageLookupByLibrary.simpleMessage("Bhutan"),
-        "text_133": MessageLookupByLibrary.simpleMessage("Finland"),
-        "text_134": MessageLookupByLibrary.simpleMessage("Sweden"),
-        "text_135": MessageLookupByLibrary.simpleMessage("Norway"),
-        "text_136": MessageLookupByLibrary.simpleMessage("Iceland"),
-        "text_137": MessageLookupByLibrary.simpleMessage("Denmark"),
-        "text_138": MessageLookupByLibrary.simpleMessage("Zimbabwe"),
-        "text_139": MessageLookupByLibrary.simpleMessage("Netherlands"),
+        "text_130": MessageLookupByLibrary.simpleMessage("微信"),
+        "text_131": MessageLookupByLibrary.simpleMessage("关注Ta"),
+        "text_132": MessageLookupByLibrary.simpleMessage("取消关注"),
+        "text_133": MessageLookupByLibrary.simpleMessage("确定取消关注？"),
+        "text_134": MessageLookupByLibrary.simpleMessage("暂不取消"),
+        "text_135": MessageLookupByLibrary.simpleMessage("女"),
+        "text_136": MessageLookupByLibrary.simpleMessage("男"),
+        "text_137": MessageLookupByLibrary.simpleMessage("确定"),
+        "text_138": MessageLookupByLibrary.simpleMessage("清除未读"),
+        "text_139": MessageLookupByLibrary.simpleMessage("不再提醒"),
         "text_14": MessageLookupByLibrary.simpleMessage("切换手机号登录"),
-        "text_140": MessageLookupByLibrary.simpleMessage("Thailand"),
-        "text_141": MessageLookupByLibrary.simpleMessage("Request successful"),
-        "text_142": MessageLookupByLibrary.simpleMessage("Parameter error"),
-        "text_143":
-            MessageLookupByLibrary.simpleMessage("Account cannot be empty"),
-        "text_144":
-            MessageLookupByLibrary.simpleMessage("Password cannot be empty"),
-        "text_145":
-            MessageLookupByLibrary.simpleMessage("Account number error"),
-        "text_146": MessageLookupByLibrary.simpleMessage("Password error"),
-        "text_147": MessageLookupByLibrary.simpleMessage(
-            "Wrong information, please contact administrator"),
-        "text_148":
-            MessageLookupByLibrary.simpleMessage("Currency does not exist"),
-        "text_149": MessageLookupByLibrary.simpleMessage(
-            "The number of purchases is out of range"),
+        "text_140":
+            MessageLookupByLibrary.simpleMessage("聊天就有收益，所见即所得，快点去寻找心动的他吧！"),
+        "text_141": MessageLookupByLibrary.simpleMessage("余额不足!"),
+        "text_142": MessageLookupByLibrary.simpleMessage("马上充值，别错过缘分"),
+        "text_143": MessageLookupByLibrary.simpleMessage("去充值"),
+        "text_144": MessageLookupByLibrary.simpleMessage("暂不充值"),
+        "text_145": MessageLookupByLibrary.simpleMessage("置顶聊天"),
+        "text_146": MessageLookupByLibrary.simpleMessage("加入黑名单"),
+        "text_147": MessageLookupByLibrary.simpleMessage("移除黑名单"),
+        "text_148": MessageLookupByLibrary.simpleMessage("清除聊天记录"),
+        "text_149": MessageLookupByLibrary.simpleMessage("关于TA"),
         "text_15": MessageLookupByLibrary.simpleMessage("上传头像"),
-        "text_150":
-            MessageLookupByLibrary.simpleMessage("Password inconsistent"),
-        "text_151":
-            MessageLookupByLibrary.simpleMessage("Account already exists"),
-        "text_152": MessageLookupByLibrary.simpleMessage(
-            "Original password is incorrect"),
-        "text_153": MessageLookupByLibrary.simpleMessage(
-            "The new password cannot be empty"),
-        "text_154":
-            MessageLookupByLibrary.simpleMessage("Name cannot be empty"),
-        "text_155":
-            MessageLookupByLibrary.simpleMessage("Last name cannot be empty"),
+        "text_150": MessageLookupByLibrary.simpleMessage("动态"),
+        "text_151": MessageLookupByLibrary.simpleMessage("搭讪TA"),
+        "text_152": MessageLookupByLibrary.simpleMessage("个人介绍"),
+        "text_153": m2,
+        "text_154": m3,
+        "text_155": m4,
         "text_156": MessageLookupByLibrary.simpleMessage(
             "Please select the type of ID"),
         "text_157": MessageLookupByLibrary.simpleMessage(
@@ -325,14 +320,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_277": MessageLookupByLibrary.simpleMessage("Transfer"),
         "text_278":
             MessageLookupByLibrary.simpleMessage("Number of coins withdrawn"),
-        "text_279": m0,
+        "text_279": m5,
         "text_28": MessageLookupByLibrary.simpleMessage("保存"),
         "text_280": MessageLookupByLibrary.simpleMessage("Withdrawal address"),
         "text_281":
             MessageLookupByLibrary.simpleMessage("Withdrawal Instructions"),
         "text_282":
             MessageLookupByLibrary.simpleMessage("Number of withdrawals"),
-        "text_283": m1,
+        "text_283": m6,
         "text_284": MessageLookupByLibrary.simpleMessage("Address Book"),
         "text_285": MessageLookupByLibrary.simpleMessage(
             "More than 8 characters, at least letters + numbers, no spaces"),
@@ -354,8 +349,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please select a currency"),
         "text_296": MessageLookupByLibrary.simpleMessage(
             "Please enter the withdrawal address"),
-        "text_297": m2,
-        "text_298": m3,
+        "text_297": m7,
+        "text_298": m8,
         "text_299":
             MessageLookupByLibrary.simpleMessage("Coin withdrawal successful"),
         "text_3": MessageLookupByLibrary.simpleMessage("广场"),
@@ -365,7 +360,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cannot be less than the minimum number of coin withdrawals"),
         "text_301": MessageLookupByLibrary.simpleMessage("Use"),
         "text_302": MessageLookupByLibrary.simpleMessage("Redeem to"),
-        "text_303": m4,
+        "text_303": m9,
         "text_304": MessageLookupByLibrary.simpleMessage("exchange_rate"),
         "text_305":
             MessageLookupByLibrary.simpleMessage("Please enter the quantity"),
@@ -446,7 +441,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please set a new login password"),
         "text_359": MessageLookupByLibrary.simpleMessage(
             "Click back again to exit the program"),
-        "text_36": m5,
+        "text_36": m10,
         "text_360":
             MessageLookupByLibrary.simpleMessage("Please enter your last name"),
         "text_361": MessageLookupByLibrary.simpleMessage("Please enter a name"),
@@ -488,8 +483,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_383":
             MessageLookupByLibrary.simpleMessage("BTC Contract Long/Short"),
         "text_384": MessageLookupByLibrary.simpleMessage("USDT OTC Premium"),
-        "text_385": m6,
-        "text_386": m7,
+        "text_385": m11,
+        "text_386": m12,
         "text_387": MessageLookupByLibrary.simpleMessage(
             "BTC Contract Basis Difference"),
         "text_388": MessageLookupByLibrary.simpleMessage("Current Week"),
@@ -537,7 +532,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_53": MessageLookupByLibrary.simpleMessage("说点什么吧..."),
         "text_54": MessageLookupByLibrary.simpleMessage("发送"),
         "text_55": MessageLookupByLibrary.simpleMessage("楼主"),
-        "text_56": m8,
+        "text_56": m13,
         "text_57": MessageLookupByLibrary.simpleMessage("举报"),
         "text_58": MessageLookupByLibrary.simpleMessage("举报类型"),
         "text_59": MessageLookupByLibrary.simpleMessage("必填"),
@@ -546,7 +541,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_61": MessageLookupByLibrary.simpleMessage("举报原因"),
         "text_62": MessageLookupByLibrary.simpleMessage("请输入您举报的原因，有利于我们核实"),
         "text_63": MessageLookupByLibrary.simpleMessage("上传图片"),
-        "text_64": m9,
+        "text_64": m14,
         "text_65": MessageLookupByLibrary.simpleMessage("删除"),
         "text_66": MessageLookupByLibrary.simpleMessage("提交"),
         "text_67": MessageLookupByLibrary.simpleMessage("上传"),
@@ -559,7 +554,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_73": MessageLookupByLibrary.simpleMessage("发布"),
         "text_74": MessageLookupByLibrary.simpleMessage("这一刻你想说什么..."),
         "text_75": MessageLookupByLibrary.simpleMessage("全部评论"),
-        "text_76": m10,
+        "text_76": m15,
         "text_77": MessageLookupByLibrary.simpleMessage("设置"),
         "text_78": MessageLookupByLibrary.simpleMessage("粉丝"),
         "text_79": MessageLookupByLibrary.simpleMessage("我的动态"),

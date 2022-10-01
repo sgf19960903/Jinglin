@@ -175,8 +175,10 @@ class _ReportPageState extends BaseState<ReportPage> {
 
   //提交按钮
   Widget _commitWidget(){
-    return ExTextView(S.of(context).app_name,
+    return ExTextView(S.of(context).text_66,
       color: AppColors.white,
+      size: 16,
+      isRegular: false,
     ).container(
       h: AppSizes.buttonHeight,
       radius: 8,

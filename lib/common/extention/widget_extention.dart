@@ -164,7 +164,7 @@ extension WidgetExtention on Widget {
     String? bgImg,
     bool hasBorder=false,
     Color borderColor=Colors.transparent,
-    double borderWidth=0.3,
+    double borderWidth=0.5,
     bool onlyBottomBorder=false,
     double radius=-1,
     Gradient? gradient,
@@ -184,7 +184,7 @@ extension WidgetExtention on Widget {
       else imgProvider = FileImage(File(bgImg));
     }
     //给默认边框颜色
-    if(hasBorder&&borderColor==Colors.transparent) borderColor = AppColors.borderColor;
+    if((hasBorder||onlyBottomBorder)&&borderColor==Colors.transparent) borderColor = AppColors.borderColor;
     return Container(
       key: key,
       child: this,

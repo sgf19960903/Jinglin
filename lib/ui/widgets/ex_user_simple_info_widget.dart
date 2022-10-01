@@ -10,14 +10,18 @@ import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
 class ExUserSimpleInfoWidget extends StatelessWidget {
-  const ExUserSimpleInfoWidget({Key? key}) : super(key: key);
+  ExUserSimpleInfoWidget({Key? key,this.buttonWidget,}) : super(key: key);
+
+  Widget? buttonWidget;
+
+
 
   @override
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+        AppImage().iconWechat.image(w: 64.w,h: 64.w,).clipRRect(radius: 8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,25 +30,7 @@ class ExUserSimpleInfoWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ExTextView("小不点",).exp(),
-                //搭讪按钮
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppImage().iconFlashRed.image(w: 16.w,h: 16.w,),
-                    ExTextView(S.of(context).text_35,
-                      color: AppColors.themeColor,
-                      size: AppSizes.contentFontSize,
-                    ).container(marginL: 2.w),
-                  ],
-                ).container(
-                  h: 28,
-                  w: 82.w,
-                  radius: 999,
-                  hasBorder: true,
-                  borderColor: AppColors.themeColor,
-
-                ),
+                buttonWidget??Container(),
               ],
             ),
             Row(

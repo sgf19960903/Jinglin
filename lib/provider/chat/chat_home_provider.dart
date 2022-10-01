@@ -7,7 +7,7 @@ import 'package:jinglin/provider/base/base_provider.dart';
 
 
 class ChatHomeProvider extends BaseProvider {
-
+  int listTabIndex = 0;
 
 
 

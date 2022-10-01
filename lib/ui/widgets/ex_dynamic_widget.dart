@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
@@ -15,16 +16,18 @@ class ExDynamicWidget extends StatelessWidget {
   ExDynamicWidget(this.index,{
     Key? key,
     this.isSelf = false,
+    this.showUserInfo = true,
   }) : super(key: key);
   int index = 0;
   bool isSelf = false;//是否为当前用户动态
+  bool showUserInfo = true;//是否显示用户信息
 
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if(!isSelf) _userInfoWidget(context),
+        if(!isSelf&&showUserInfo) _userInfoWidget(context),
         _contentWidget(context),
         _locationWidget(),
         _praiseCommentWidget(context),
@@ -242,7 +245,17 @@ class ExDynamicWidget extends StatelessWidget {
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          CommonDialogUtil.showSureDialog(context,
+              title: S.of(context).text_94,
+              content: S.of(context).text_126,
+              leftButtonText: S.of(context).text_127,
+              rightButtonText: S.of(context).text_65,
+              rightClickFunc: (){
+
+              }
+          );
+        }),
       ],
     ).container(marginT: 12);
   }

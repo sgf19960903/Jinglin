@@ -25,7 +25,7 @@ class AppImage {
   String mineDiamondDetailBg = "assets/images/mine_diamond_detail_bg.png";
   String mineHeaderBg = "assets/images/mine_header_bg.png";
   String mineIncomeDetailBg = "assets/images/mine_income_detail_bg.png";
-  String myDiamondDetailBg = "assets/images/my_diamond_bg.png";
+  String myDiamondDetailBg = "assets/images/my_diamond_detail_bg.png";
   String oneKeyMatchBg = "assets/images/one_key_match_bg.png";
   String otherPageHeaderBg = "assets/images/other_page_header_bg.png";
   String pageHeaderBg = "assets/images/page_header_bg.png";
@@ -33,6 +33,10 @@ class AppImage {
   String sysmsgButtonBg = "assets/images/sysmsg_button_bg.png";
   String defaultBannerBg = "assets/images/default_banner_bg.png";
   String improveHeaderBg = "assets/images/improve_header_bg.png";
+  String diamondPackBg = "assets/images/diamond_pack_bg.png";
+  String diamondPackDicountBg = "assets/images/diamond_pack_discount_bg.png";
+  String userHomePageTabBg = "assets/images/user_home_page_tab_bg.png";
+  String tempBg = "assets/images/temp_bg.webp";
 
 
   ///Icon
@@ -137,6 +141,13 @@ class AppImage {
   String iconBackBlack = "assets/images/icon_back_black.png";
   String iconPhoneGray = "assets/images/icon_phone_gray.png";
   String iconBackWhite = "assets/images/icon_back_white.png";
+  String iconSwitchOn = "assets/images/icon_switch_on.png";
+  String iconSwitchOff = "assets/images/icon_switch_off.png";
+  String iconUsername = "assets/images/icon_username.png";
+  String iconBirth = "assets/images/icon_birth.png";
+  String iconSex = "assets/images/icon_sex.png";
+  String iconHeight = "assets/images/icon_height.png";
+  String iconCoin = "assets/images/icon_coin.png";
 
 
 

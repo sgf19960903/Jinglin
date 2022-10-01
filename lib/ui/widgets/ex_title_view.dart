@@ -62,6 +62,12 @@ class ExTitleView extends StatelessWidget implements ObstructingPreferredSizeWid
           backCallback!();
         }),
         titleWidget!.exp(),
+        //右边菜单选项
+        if(actionWidgets!=null) Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: actionWidgets!,
+        ),
       ],
     ).container(
       h: titleHeight,

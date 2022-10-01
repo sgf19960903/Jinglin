@@ -108,6 +108,12 @@
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_image_compress/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/plugins/flutter_my_picker-1.1.2/example/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

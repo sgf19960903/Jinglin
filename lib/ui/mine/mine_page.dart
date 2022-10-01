@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/app_color.dart';
 import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
@@ -221,7 +222,7 @@ class _MinePageState extends BaseState<MinePage> {
         AppImage().iconArrowRightWhite.image(w: 16.w,h: 16.w,).container(marginL: 10.w)
       ],
     ).container(h: 60,bgImg: AppImage().mineDiamondDetailBg,padL: 10.w,padR: AppSizes.pagePaddingLR).onTap(() {
-      NavigatorUtil.gotPage(context, RouterName.myIncome);
+      NavigatorUtil.gotPage(context, RouterName.myDiamond);
     });
   }
 
@@ -248,12 +249,27 @@ class _MinePageState extends BaseState<MinePage> {
             AppImage().iconArrowRight.image(w: 16.w,h: 16.w,),
           ],
         ).container(h: 56).onTap(() {
-          if(index==0) NavigatorUtil.gotPage(context, RouterName.privacySettings);
-          else if(index==1) NavigatorUtil.gotPage(context, RouterName.pushSettings);
-          else if(index==2) NavigatorUtil.gotPage(context, RouterName.suggestFeedback);
-          else if(index==3) {
+          //隐私设置
+          if(index==0) CommonDialogUtil.showSureDialog(context,
+            title: S.of(context).text_29,
+            content: S.of(context).text_124,
+            leftButtonText: S.of(context).text_31,
+            rightButtonText: S.of(context).text_32,
+            rightClickFunc: (){
 
-          }
+            }
+          );
+          //推送设置
+          else if(index==1) NavigatorUtil.gotPage(context, RouterName.pushSettings);
+          //意见反馈
+          else if(index==2) NavigatorUtil.gotPage(context, RouterName.suggestFeedback);
+          //退出登录
+          else if(index==3) CommonDialogUtil.showSureDialog(context,
+            title: S.of(context).text_125,
+            rightClickFunc: (){
+
+            }
+          );
         });
       },
       separatorBuilder: (_,index) => "".container(h: 0.5,bgColor: AppColors.borderColor),
