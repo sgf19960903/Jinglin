@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_dynamic_cite_widget.dart';
@@ -41,7 +43,9 @@ class _CommentNoticePageState extends BaseState<CommentNoticePage> {
                 ExDynamicCiteWidget().container(marginT: 8),
                 "".container(h: 0.3,bgColor: AppColors.borderColor,marginT: 16),
               ],
-            ).container(padT: 15,bgColor: AppColors.pageColor);
+            ).container(padT: 15,bgColor: AppColors.pageColor).onTap(() {
+              NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+            });
           },
         )
     );
@@ -71,25 +75,32 @@ class _CommentNoticePageState extends BaseState<CommentNoticePage> {
   Widget _userInfoWidget(){
     return Row(
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        Row(
           children: [
-            ExTextView("小不点",),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
-                ExTextView("24",
-                  color: AppColors.white,
-                  size: AppSizes.hintFontSize,
-                ).container(marginL: 2.w),
+                ExTextView("小不点",),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                    ExTextView("24",
+                      color: AppColors.white,
+                      size: AppSizes.hintFontSize,
+                    ).container(marginL: 2.w),
+                  ],
+                ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
               ],
-            ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
+            ).container(marginL: 12.w),
           ],
-        ).container(marginL: 12.w).exp(),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.userHomePage);
+        }),
+        "".container().exp(),
         //回复按钮
         ExTextView(S.of(context).text_49,
           color: AppColors.grayColor,

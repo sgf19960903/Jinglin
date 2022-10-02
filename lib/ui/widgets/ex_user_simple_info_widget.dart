@@ -5,6 +5,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
@@ -54,7 +56,9 @@ class ExUserSimpleInfoWidget extends StatelessWidget {
         ).container(marginL: 12.w).exp(),
 
       ],
-    ).container(marginT: 16);
+    ).onTap(() {
+      NavigatorUtil.gotPage(context, RouterName.userHomePage);
+    }).container(marginT: 16);
   }
 
 

@@ -130,6 +130,7 @@ abstract class _Router {
                 context,
                 UriParser(UriTemplate(route)).match(Uri.parse(settings.name!)),
                 settings,
+
               ),
               settings,
               transitionTime: baseRouter.transitionTime,

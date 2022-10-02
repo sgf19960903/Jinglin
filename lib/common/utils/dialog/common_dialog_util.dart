@@ -93,7 +93,7 @@ class CommonDialogUtil {
                           if(iconList!=null) iconList[index].image(w: 24.w,h: 24.w).container(marginR: 8.w),
                           ExTextView(contentList[index],
                             size: 16,
-                          ).container(w: 80.w,align: iconList!=null?Alignment.centerLeft:Alignment.center),
+                          ).container(align: iconList!=null?Alignment.centerLeft:Alignment.center),
                         ],
                       ).container(h: 56,align: Alignment.center,onlyBottomBorder: true,borderColor: AppColors.borderColor).onTap(() {
                         Navigator.of(context).pop();

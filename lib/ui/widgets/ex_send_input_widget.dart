@@ -4,6 +4,7 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_field.dart';
@@ -20,10 +21,12 @@ class ExSendInputWidget extends StatefulWidget {
 
 class _ExSendInputWidgetState extends State<ExSendInputWidget> {
   bool showExpress = false;//是否显示表情列表
+  FocusNode _focusNode = FocusNode();
+  FocusNode _focusNode1 = FocusNode();
 
   //焦点监听
   _nodeListener(){
-    if(!FocusScope.of(context).hasFocus) setState(() {
+    if(_focusNode.hasFocus) setState(() {
       showExpress = false;
     });
   }
@@ -31,14 +34,12 @@ class _ExSendInputWidgetState extends State<ExSendInputWidget> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      FocusScope.of(context).addListener(_nodeListener);
-    });
+    _focusNode.addListener(_nodeListener);
   }
 
   @override
   void dispose() {
-    FocusScope.of(context).removeListener(_nodeListener);
+    _focusNode.removeListener(_nodeListener);
     super.dispose();
   }
 
@@ -59,14 +60,21 @@ class _ExSendInputWidgetState extends State<ExSendInputWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 ExTextFiled(
+                  focusNode: _focusNode,
                   hintText: S.of(context).text_53,
                 ).exp(),
-                "${showExpress?AppImage().iconKeyBoard:AppImage().iconSmileyWhite}".image(w: 24.w,h: 24.w,).onTap(() {
-                  FocusScope.of(context).unfocus();
-                  setState(() {
-                    showExpress = !showExpress;
-                  });
-                }),
+                Focus(
+                  focusNode: _focusNode1,
+                  onFocusChange: (hasFocus){
+                    LogUtil.printE("当前焦点：$hasFocus");
+                  },
+                  child: "${showExpress?AppImage().iconKeyBoard:AppImage().iconSmileyWhite}".image(w: 24.w,h: 24.w,).onTap(() {
+                    FocusScope.of(context).unfocus();
+                    setState(() {
+                      showExpress = !showExpress;
+                    });
+                  })
+                ),
               ],
             ).container(h: 40,bgColor: AppColors.pageGrayColor,radius: 20,marginL: widget.hasPhotoEntry?0:12.w,padL: 10.w,padR: 10.w).exp(),
             //发送按钮
@@ -80,7 +88,7 @@ class _ExSendInputWidgetState extends State<ExSendInputWidget> {
         ).container(h: 56),
         if(showExpress) _expressListWidget(),
       ],
-    ).container();
+    );
   }
 
   //表情列表

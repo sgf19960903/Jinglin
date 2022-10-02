@@ -6,7 +6,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
@@ -19,7 +22,7 @@ class ExDynamicCiteWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _unameAndContentWidget(),
-        _photoListWidget(),
+        _photoListWidget(context),
         _videoWidget(),
       ],
     ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 10,padB: 8,bgColor: AppColors.pageGrayColor);
@@ -41,8 +44,8 @@ class ExDynamicCiteWidget extends StatelessWidget {
   }
 
   //图片列表
-  Widget _photoListWidget(){
-    List<String> photoList = [];
+  Widget _photoListWidget(BuildContext context){
+    List<String> photoList = [AppImage().iconWechat];
     int allPhotoLen = photoList.length;
     int maxLen = 3;
     int showLen = min(allPhotoLen, maxLen);
@@ -58,7 +61,12 @@ class ExDynamicCiteWidget extends StatelessWidget {
               size: 16,
             ).container(w: photoSize,h: photoSize,radius: 4.w,align: Alignment.center,bgColor: AppColors.black.withOpacity(0.4)),
           ],
-        );
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+            "photoList":photoList,
+            "photoIndex":index,
+          });
+        });
       }),
     ).container(h: photoSize,marginT: 10);
   }

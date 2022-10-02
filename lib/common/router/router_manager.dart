@@ -140,7 +140,7 @@ Router generateRoute() {
     ),
     RouterName.bigPhoto: BaseRouter(
       routerBuilder: (context, match, settings) => BigPhotoPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.fade,
     ),
 
     RouterName.chatSession: BaseRouter(
@@ -201,7 +201,7 @@ Router generateRoute() {
     ),
     RouterName.cropPhoto: BaseRouter(
       routerBuilder: (context, match, settings) => CropPhotoPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.fade,
     ),
     RouterName.myDynamic: BaseRouter(
       routerBuilder: (context, match, settings) => MyDynamicPage(),

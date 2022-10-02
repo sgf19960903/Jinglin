@@ -6,6 +6,8 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/provider/home/home_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
@@ -60,7 +62,9 @@ class _HomePageState extends BaseState<HomePage> {
       itemCount: 3,
       autoplay: true,
       scale: 1,
-      itemBuilder: (_,index) => AppImage().defaultBannerBg.image(w: double.infinity,h: 150,fit: BoxFit.fill).clipRRect(radius: 12).container(padL: 4.w,padR: 4.w,radius: 12),
+      itemBuilder: (_,index) => AppImage().defaultBannerBg.image(w: screenWidth,h: 150,fit: BoxFit.fill).clipRRect(radius: 12).container(padL: 4.w,padR: 4.w,radius: 12).onTap(() {
+        // NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+      }),
     ).container(h: 150,marginT: 8,marginB: 15,/*padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR*/);
   }
 
@@ -182,7 +186,9 @@ class _HomePageState extends BaseState<HomePage> {
               ],
             ).exp(),
           ],
-        ).container(marginB: 16,);
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.userHomePage);
+        }).container(marginB: 16,);
       }
     );
   }

@@ -129,7 +129,9 @@ class _ChatSettingsPageState extends BaseState<ChatSettingsPage> {
         ).exp(),
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w,),
       ],
-    ).container(h: 56,onlyBottomBorder: true,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR);
+    ).container(h: 56,onlyBottomBorder: true,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR).onTap(() {
+      NavigatorUtil.gotPage(context, RouterName.report);
+    });
   }
 
 }

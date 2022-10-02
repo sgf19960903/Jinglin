@@ -1560,20 +1560,20 @@ class S {
     );
   }
 
-  /// `Please select the type of ID`
-  String get text_156 {
+  /// `{name}赞`
+  String text_156(Object name) {
     return Intl.message(
-      'Please select the type of ID',
+      '$name赞',
       name: 'text_156',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `The ID number cannot be empty`
+  /// `图片裁剪失败,请重试`
   String get text_157 {
     return Intl.message(
-      'The ID number cannot be empty',
+      '图片裁剪失败,请重试',
       name: 'text_157',
       desc: '',
       args: [],

@@ -4,8 +4,10 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/camera_util.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
@@ -23,6 +25,7 @@ class PersonalInfoPage extends StatefulWidget {
 }
 
 class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
+  String photo = AppImage().iconWechat;
 
 
   @override
@@ -58,12 +61,24 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
   Widget _avatarWidget(){
     return Stack(
       children: [
-        AppImage().iconWechat.image(w: 90.w,h: 90.w,).clipRRect(radius: 8).container(marginL: 10.w,marginR: 10.w,marginB: 5),
+        photo.image(w: 90.w,h: 90.w,).clipRRect(radius: 8).container(marginL: 10.w,marginR: 10.w,marginB: 5),
         AppImage().iconCameraCircle.image(w: 20.w,h: 20.w).positioned(bottom: 0,right: 0,),
       ],
     ).onTap(() {
-      CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index){
-
+      CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
+        XFile? photoFile;
+        //拍摄
+        if(index==0) photoFile = await CameraUtil.takePhoto();
+        //相册
+        else if(index==1) photoFile = await CameraUtil.openGallery();
+        //没有获取到图片
+        if(photoFile==null) return;
+        //跳转到裁剪页面
+        NavigatorUtil.gotPage(context, RouterName.cropPhoto,param: photoFile,backFun: (value){
+          if(value!=null) setState(() {
+            photo = value;
+          });
+        });
       });
     }).container(marginT: 24,align: Alignment.center);
   }

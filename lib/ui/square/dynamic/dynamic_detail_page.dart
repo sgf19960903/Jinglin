@@ -6,8 +6,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/dialog/square_dialog_util.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_list_view.dart';
@@ -82,25 +84,33 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
   Widget _titleWidget(){
     return Row(
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        //用户信息
+        Row(
           children: [
-            ExTextView("小不点",),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
-                ExTextView("24",
-                  color: AppColors.white,
-                  size: AppSizes.hintFontSize,
-                ).container(marginL: 2.w),
+                ExTextView("小不点",),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                    ExTextView("24",
+                      color: AppColors.white,
+                      size: AppSizes.hintFontSize,
+                    ).container(marginL: 2.w),
+                  ],
+                ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
               ],
-            ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
+            ).container(marginL: 12.w),
           ],
-        ).container(marginL: 12.w).exp(),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.userHomePage);
+        }),
+        "".container().exp(),
         //搭讪按钮
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -158,7 +168,12 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
                   size: 16,
                 ).container(radius: 8,align: Alignment.center,bgColor: AppColors.black.withOpacity(0.4)),
               ],
-            );
+            ).onTap(() {
+              NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+                "photoList":photoList,
+                "photoIndex":index,
+              });
+            });
           }
         ),
         //视频
@@ -196,7 +211,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconPraiseGray.image(w: 20.w,h: 20.w,),
-            ExTextView("193赞",
+            ExTextView(S.of(context).text_156(152),
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
@@ -211,18 +226,22 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+
+        }),
         "".container(w: 32.w,),
         //举报
         if(!isSelf) Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconHintGray.image(w: 20.w,h: 20.w,),
-            ExTextView("举报",
+            ExTextView(S.of(context).text_57,
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.report);
+        }),
         "".container().exp(),
         //删除动态
         if(isSelf) Row(
@@ -282,7 +301,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill),
+        AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.userHomePage);
+        }),
         //评论列表
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -318,7 +339,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
                   ],
                 ),
                 //举报
-                AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w),
+                AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w).onTap(() {
+                  NavigatorUtil.gotPage(context, RouterName.report);
+                }),
               ],
             ),
             //当前评论内容

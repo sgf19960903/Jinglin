@@ -6,6 +6,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_list_view.dart';
 import 'package:jinglin/ui/widgets/ex_send_input_widget.dart';
@@ -96,7 +98,9 @@ class SquareDialogUtil {
                                       ],
                                     ),
                                     //举报
-                                    AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w),
+                                    AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w).onTap(() {
+                                      NavigatorUtil.gotPage(context, RouterName.report);
+                                    }),
                                   ],
                                 ),
                                 //当前评论内容

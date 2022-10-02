@@ -91,25 +91,35 @@ class ExDynamicWidget extends StatelessWidget {
     //按图片数量返回布局
     double photoSize = 0;
     double smallPhotoSize = 0;
-    if(len==1) {
+
+    if(len==1) {//一张图片
       photoSize = 180.w;
       return photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).container(marginT: 8).onTap(() {
-        NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+        NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+          "photoList":photoList,
+          "photoIndex":0,
+        });
       });
-    } else if(len==2) {
+    } else if(len==2) {//两张图片
       photoSize = 140.w;
       return Row(
         children: [
           photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
-            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+              "photoList":photoList,
+              "photoIndex":0,
+            });
           }),
           "".container(w: 4.w),
           photoList[1].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
-            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+              "photoList":photoList,
+              "photoIndex":1,
+            });
           }),
         ],
       ).container(marginT: 8);
-    } else if(len>=3) {
+    } else if(len>=3) {//三张以上图片
       photoSize = 180.w;
       smallPhotoSize = 88.w;
       int hidePhotoNum = len - 3;
@@ -117,7 +127,10 @@ class ExDynamicWidget extends StatelessWidget {
         children: [
           //第一张图
           photoList[0].image(w: photoSize,h: photoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
-            NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+            NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+              "photoList":photoList,
+              "photoIndex":0,
+            });
           }),
           "".container(w: 4.w),
           //第二张、第三张
@@ -125,7 +138,10 @@ class ExDynamicWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               photoList[1].image(w: smallPhotoSize,h: smallPhotoSize,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
-                NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+                NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+                  "photoList":photoList,
+                  "photoIndex":1,
+                });
               }),
               "".container(h: 4.w),
               //显示隐藏了多少张图片
@@ -138,7 +154,10 @@ class ExDynamicWidget extends StatelessWidget {
                   ).container(w: smallPhotoSize,h: smallPhotoSize,radius: 8,align: Alignment.center,bgColor: AppColors.black.withOpacity(0.4)),
                 ],
               ).onTap(() {
-                NavigatorUtil.gotPage(context, RouterName.bigPhoto);
+                NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+                  "photoList":photoList,
+                  "photoIndex":2,
+                });
               }),
             ],
           ),
@@ -206,7 +225,7 @@ class ExDynamicWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconPraiseGray.image(w: 20.w,h: 20.w,),
-            ExTextView("193赞",
+            ExTextView(S.of(context).text_156(152),
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
