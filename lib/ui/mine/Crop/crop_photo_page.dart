@@ -4,6 +4,7 @@
 /// @Description TODO
 
 import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -13,10 +14,12 @@ import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/utils/toast_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
+import 'package:jinglin/ui/widgets/ex_image_clipper.dart';
 import 'package:jinglin/ui/widgets/ex_rectangle_clipper.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:jinglin/ui/widgets/ex_title_view.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:image/image.dart' as img;
 
 
 class CropPhotoPage extends StatefulWidget {
@@ -27,14 +30,36 @@ class CropPhotoPage extends StatefulWidget {
 }
 
 class _CropPhotoPageState extends BaseState<CropPhotoPage> {
+  GlobalKey _bgKey = GlobalKey();//背景图Key
   GlobalKey _repaintKey = GlobalKey();//截图Key
   XFile? photoFile;
+  ui.Image? bgImage;
+  double cropWidth = 343.w;//裁剪宽度
+  double cropHeight = 343.w;//裁剪高度
   double currentScale = 1;//当年裁剪框缩放倍数
   double maxScale = 1;//最大缩放
-  double minScale = 0.5;//最小缩放
+  double minScale = 0.4;//最小缩放
+  double startScale = 0;//开始缩放倍数 -- 缩放以这个参数计算
   Offset downPos = Offset.zero;//当前down位置
   late Offset cropCurrentPos;//裁剪框当前位置
   bool scaling = false;//是否正在缩放
+
+
+  //显示真正裁剪视图、并进行裁剪
+  showRealCropWidget() async {
+    RenderRepaintBoundary renderRepaint =  _bgKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
+    ui.Image image = await renderRepaint.toImage();
+    ByteData? imageData = await image.toByteData(format: ui.ImageByteFormat.png);
+    if(imageData==null) return;
+    ui.Codec codec = await ui.instantiateImageCodec(imageData.buffer.asUint8List(),);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    bgImage = fi.image;
+    setState(() {});
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+      _cropPhoto();
+    });
+  }
+
 
   @override
   void initState() {
@@ -45,6 +70,7 @@ class _CropPhotoPageState extends BaseState<CropPhotoPage> {
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       photoFile = ModalRoute.of(context)?.settings.arguments as XFile?;
       setState(() {});
+      // loadImg();
     });
   }
 
@@ -71,78 +97,133 @@ class _CropPhotoPageState extends BaseState<CropPhotoPage> {
             isRegular: false,
             color: Colors.white,
           ).container(w: 60.w,h: 32,align: Alignment.center,radius: 999,bgColor: AppColors.themeColor).onTap(() async{
-            _cropPhoto();
+            showRealCropWidget();
           })
         ],
       ),
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          "${photoFile?.path}".image(w: screenWidth,fit: BoxFit.fitWidth),
-          // _cropFrameWidget(),
-          "".container(w: screenWidth,h: screenHeight,bgColor: AppColors.black.withOpacity(0.8)),
-          RepaintBoundary(
-            key: _repaintKey,
-            child: ClipPath(
-              clipper: ExRectangleClipper(
-                width: 343.w,
-                height: 343.w,
-                dx: cropCurrentPos.dx,
-                dy: cropCurrentPos.dy,
-              ),
+      child: GestureDetector(
+        onScaleStart: (startDetails){
+          scaling = true;
+          startScale = currentScale.toDouble();
+          downPos = Offset(startDetails.localFocalPoint.dx, startDetails.localFocalPoint.dy);
+        },
+        onScaleEnd: (endDetails) => scaling = false,
+        onScaleUpdate: (updateDetails){
+          double scale = updateDetails.scale;
+          //移动裁剪框
+          if(scale==1) {
+            double moveX = updateDetails.localFocalPoint.dx;
+            double moveY = updateDetails.localFocalPoint.dy;
+            // LogUtil.printE("移动位置：${downPos.dx}--${downPos.dy}--$moveX--$moveY}");
+            cropCurrentPos = Offset(cropCurrentPos.dx + (moveX - downPos.dx), cropCurrentPos.dy + (moveY - downPos.dy));
+            //移动到最左边 -- 不能超过屏幕最左
+            if(cropCurrentPos.dx<=0) cropCurrentPos = Offset(0, cropCurrentPos.dy);
+            //移动到最右边 -- 不能超过屏幕最右
+            if(cropCurrentPos.dx + cropWidth >= screenWidth) cropCurrentPos = Offset(screenWidth - cropWidth, cropCurrentPos.dy);
+            //移动到最上边 -- 不能超过标题之下
+            if(cropCurrentPos.dy<=0) cropCurrentPos = Offset(cropCurrentPos.dx, 0);
+            //移动到最底部 -- 不能超过底部
+            if(cropCurrentPos.dy + cropHeight >= screenHeight - 44 - paddingTop) cropCurrentPos = Offset(cropCurrentPos.dx, screenHeight - cropHeight - 44 - paddingTop);
+            downPos = Offset(moveX, moveY);
+            setState(() {});
+          }else {
+            //缩放裁剪框
+            currentScale = (startScale + scale - 1).clamp(minScale, maxScale);
+            cropWidth = screenWidth * currentScale;
+            cropHeight = screenWidth * currentScale;
+            //移动到最左边 -- 不能超过屏幕最左
+            if(cropCurrentPos.dx<=0) cropCurrentPos = Offset(0, cropCurrentPos.dy);
+            //移动到最右边 -- 不能超过屏幕最右
+            if(cropCurrentPos.dx + cropWidth >= screenWidth) cropCurrentPos = Offset(screenWidth - cropWidth, cropCurrentPos.dy);
+            //移动到最上边 -- 不能超过标题之下
+            if(cropCurrentPos.dy<=0) cropCurrentPos = Offset(cropCurrentPos.dx, 0);
+            //移动到最底部 -- 不能超过底部
+            if(cropCurrentPos.dy + cropHeight >= screenHeight - 44 - paddingTop) cropCurrentPos = Offset(cropCurrentPos.dx, screenHeight - cropHeight - 44 - paddingTop);
+            setState(() {});
+          }
+        },
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            //背景图
+            RepaintBoundary(
+              key: _bgKey,
               child: "${photoFile?.path}".image(w: screenWidth,fit: BoxFit.fitWidth),
-            ).container(bgColor: Colors.red),
-          ),
-        ],
+            ),
+            //显示裁剪框
+            if(bgImage==null) _forShowCropFrameWidget(),
+            if(bgImage!=null) "".container(w: screenWidth,h: screenHeight,bgColor: AppColors.black.withOpacity(0.8)),
+            if(bgImage!=null) _cropFrameWidget(),
+          ],
+        ),
       )
     );
   }
 
 
-  //裁剪区域
-  Widget _cropFrameWidget(){
+  //裁剪框网络
+  Widget _cropBorderWidget(){
+    return Column(
+      children: List.generate(3, (index) {
+        return Column(
+          children: [
+            if(index!=0) "".container(h: 0.3,bgColor: AppColors.white),
+            Row(
+              children: [
+                "".container().exp(),
+                "".container(w: 0.3,bgColor: Colors.white),
+                "".container().exp(),
+                "".container(w: 0.3,bgColor: AppColors.white),
+                "".container().exp(),
+              ],
+            ).exp(),
+          ],
+        ).exp();
+      }),
+    ).container(w: cropWidth,h: cropWidth,hasBorder: true,borderColor: AppColors.white,borderWidth: 1);
+  }
+
+  //显示给用户看的裁剪框
+  Widget _forShowCropFrameWidget(){
     return Column(
       children: [
-        //上面黑色区域
-        "".container(bgColor: AppColors.black.withOpacity(0.8)).exp(),
+        "".container(h: cropCurrentPos.dy,bgColor: AppColors.black.withOpacity(0.8)),
         Row(
           children: [
-            //左边黑色区域
-            "".container(bgColor: AppColors.black.withOpacity(0.8)).exp(),
-            //裁剪框
-            GestureDetector(
-              onScaleStart: (scaleEvent) => scaling = true,
-              onScaleEnd: (scaleEvent) => scaling = false,
-              onScaleUpdate: (scaleEvent){
-                LogUtil.printE("缩放大小：${scaleEvent.scale}");
-
-              },
-              onTapDown: (downDetails){
-                downPos = Offset(downDetails.globalPosition.dx, downDetails.globalPosition.dy);
-              },
-              // onPanUpdate: (updateDetails){
-              //   //正在缩放则不移动
-              //   if(scaling) return;
-              //   setState(() {
-              //
-              //   });
-              //
-              // },
-              onTapUp: (downDetails){
-
-              },
-              onTapCancel: (){
-
-              },
-              child: "".container(w: screenWidth*currentScale,h: 343.w,hasBorder: true,borderColor: AppColors.white),
+            "".container(w: cropCurrentPos.dx,bgColor: AppColors.black.withOpacity(0.8)),
+            Stack(
+              children: [
+                "".container(w: cropWidth,),
+                _cropBorderWidget(),
+              ],
             ),
-            //右边黑色区域
             "".container(bgColor: AppColors.black.withOpacity(0.8)).exp(),
           ],
-        ).container(h: screenWidth*currentScale),
-        //下面黑色区域
+        ).container(h: cropWidth),
         "".container(bgColor: AppColors.black.withOpacity(0.8)).exp(),
+
       ],
+    );
+  }
+
+  //裁剪区域
+  Widget _cropFrameWidget(){
+    return Stack(
+      children: [
+        //裁剪
+        RepaintBoundary(
+          key: _repaintKey,
+          child: CustomPaint(
+            painter: ExImageClipper(bgImage!,cropCurrentPos.dx,cropCurrentPos.dy,cropWidth,cropWidth),
+            size: Size(cropWidth,cropWidth),
+          ),
+        ),
+        //网格
+        _cropBorderWidget(),
+      ],
+    ).positioned(
+      left: cropCurrentPos.dx,
+      top: cropCurrentPos.dy,
     );
   }
 

@@ -4,7 +4,9 @@
 /// @Description 用户第一次登录
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/camera_util.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
@@ -22,6 +24,7 @@ class ImproveUserInfoPage extends StatefulWidget {
 }
 
 class _ImproveUserInfoPageState extends BaseState<ImproveUserInfoPage> {
+  String _userAvatar = "";
 
 
   @override
@@ -51,7 +54,7 @@ class _ImproveUserInfoPageState extends BaseState<ImproveUserInfoPage> {
         Stack(
           alignment: Alignment.bottomRight,
           children: [
-            Column(
+            if(_userAvatar.isEmpty) Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -62,11 +65,24 @@ class _ImproveUserInfoPageState extends BaseState<ImproveUserInfoPage> {
                 ).container(marginT: 4),
               ],
             ).container(w: 90.w,h: 90.w,marginL: 12.w,marginR: 12.w,marginB: 5,radius: 8,bgColor: AppColors.white),
+            if(_userAvatar.isNotEmpty) _userAvatar.image().clipRRect(radius: 8).container(w: 90.w,h: 90.w,marginL: 12.w,marginR: 12.w,marginB: 5,radius: 8,bgColor: AppColors.white),
             AppImage().iconCameraCircle.image(w: 24.w,h: 24.w),
           ],
         ).onTap(() {
-          CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index){
-
+          CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
+            XFile? photoFile;
+            //拍摄
+            if(index==0) photoFile = await CameraUtil.takePhoto();
+            //相册
+            else if(index==1) photoFile = await CameraUtil.openGallery();
+            //没有获取到图片
+            if(photoFile==null) return;
+            //跳转到裁剪页面
+            NavigatorUtil.gotPage(context, RouterName.cropPhoto,param: photoFile,backFun: (value){
+              if(value!=null) setState(() {
+                _userAvatar = value;
+              });
+            });
           });
         }),
         //性别设置提示
@@ -207,7 +223,7 @@ class _ImproveUserInfoPageState extends BaseState<ImproveUserInfoPage> {
           colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
         )
     ).onTap(() {
-      NavigatorUtil.gotPage(context, RouterName.cropPhoto);
+
     }).container(
       padL: AppSizes.pagePaddingLR,
       padR: AppSizes.pagePaddingLR,

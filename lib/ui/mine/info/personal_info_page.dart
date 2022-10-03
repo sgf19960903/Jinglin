@@ -15,6 +15,7 @@ import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_text_field.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:jinglin/ui/widgets/ex_title_view.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 
 class PersonalInfoPage extends StatefulWidget {
@@ -25,7 +26,15 @@ class PersonalInfoPage extends StatefulWidget {
 }
 
 class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
-  String photo = AppImage().iconWechat;
+  String _userAvatar = AppImage().iconWechat;//用户头像
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Permission.storage.request();
+  }
 
 
   @override
@@ -61,7 +70,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
   Widget _avatarWidget(){
     return Stack(
       children: [
-        photo.image(w: 90.w,h: 90.w,).clipRRect(radius: 8).container(marginL: 10.w,marginR: 10.w,marginB: 5),
+        _userAvatar.image(w: 90.w,h: 90.w,).clipRRect(radius: 8).container(marginL: 10.w,marginR: 10.w,marginB: 5),
         AppImage().iconCameraCircle.image(w: 20.w,h: 20.w).positioned(bottom: 0,right: 0,),
       ],
     ).onTap(() {
@@ -76,7 +85,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         //跳转到裁剪页面
         NavigatorUtil.gotPage(context, RouterName.cropPhoto,param: photoFile,backFun: (value){
           if(value!=null) setState(() {
-            photo = value;
+            _userAvatar = value;
           });
         });
       });

@@ -12,55 +12,73 @@ import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
-class ExDynamicWidget extends StatelessWidget {
+
+class ExDynamicWidget extends StatefulWidget {
   ExDynamicWidget(this.index,{
     Key? key,
     this.isSelf = false,
     this.showUserInfo = true,
   }) : super(key: key);
   int index = 0;
+  int praiseCount =0;//点赞数
+  bool readyPraise = false;//是否已经点赞
   bool isSelf = false;//是否为当前用户动态
   bool showUserInfo = true;//是否显示用户信息
+
+  @override
+  State<ExDynamicWidget> createState() => _ExDynamicWidgetState();
+}
+
+class _ExDynamicWidgetState extends State<ExDynamicWidget> {
 
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if(!isSelf&&showUserInfo) _userInfoWidget(context),
-        _contentWidget(context),
+        if(!widget.isSelf&&widget.showUserInfo) _userInfoWidget(context),
+        _contentWidget(context).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+        }),
         _locationWidget(),
         _praiseCommentWidget(context),
         "".container(h: 0.5,bgColor: AppColors.borderColor,marginT: 12,marginB: 16,),
       ],
-    ).onTap(() {
+    )/*.onTap(() {
       NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
-    });
+    })*/;
   }
 
   //用户信息、搭讪按钮
   Widget _userInfoWidget(BuildContext context){
     return Row(
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+        Row(
           children: [
-            ExTextView("小不点",),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
-                ExTextView("24",
-                  color: AppColors.white,
-                  size: AppSizes.hintFontSize,
-                ).container(marginL: 2.w),
+                ExTextView("小不点",),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                    ExTextView("24",
+                      color: AppColors.white,
+                      size: AppSizes.hintFontSize,
+                    ).container(marginL: 2.w),
+                  ],
+                ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
               ],
-            ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
+            ).container(marginL: 12.w)
           ],
-        ).container(marginL: 12.w).exp(),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.userHomePage);
+        }),
+        "".container().exp(),
         //搭讪按钮
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,10 +96,13 @@ class ExDynamicWidget extends StatelessWidget {
           radius: 999,
           hasBorder: true,
           borderColor: AppColors.themeColor,
+        ).onTap(() {
 
-        ),
+        }),
       ],
-    ).container(marginB: 12);
+    ).onTap(() {
+      NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+    }).container(marginB: 12);
   }
 
 
@@ -184,7 +205,7 @@ class ExDynamicWidget extends StatelessWidget {
 
   //动态内容
   Widget _contentWidget(BuildContext context){
-    List<String> photoList = [AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,AppImage().iconAlipay,];
+    List<String> photoList = List.generate(5, (index) => AppImage().tempBg);
     String videoImg = "";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -224,12 +245,18 @@ class ExDynamicWidget extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppImage().iconPraiseGray.image(w: 20.w,h: 20.w,),
-            ExTextView(S.of(context).text_156(152),
-              color: AppColors.grayColor,
+            "${widget.readyPraise?AppImage().iconPraiseRed:AppImage().iconPraiseGray}".image(w: 20.w,h: 20.w,),
+            ExTextView(S.of(context).text_156(widget.praiseCount),
+              color: widget.readyPraise?AppColors.themeColor:AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          setState(() {
+            if(widget.readyPraise) --widget.praiseCount;
+            else ++widget.praiseCount;
+            widget.readyPraise = !widget.readyPraise;
+          });
+        }),
         "".container(w: 32.w,),
         //评论数
         Row(
@@ -240,10 +267,12 @@ class ExDynamicWidget extends StatelessWidget {
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+        }),
         "".container(w: 32.w,),
         //举报
-        if(!isSelf) Row(
+        if(!widget.isSelf) Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppImage().iconHintGray.image(w: 20.w,h: 20.w,),
@@ -256,7 +285,7 @@ class ExDynamicWidget extends StatelessWidget {
         }),
         "".container().exp(),
         //删除动态
-        if(isSelf) Row(
+        if(widget.isSelf) Row(
           children: [
             AppImage().iconDeleteGray.image(w: 20.w,h: 20.w),
             ExTextView(S.of(context).text_94,
@@ -279,6 +308,8 @@ class ExDynamicWidget extends StatelessWidget {
     ).container(marginT: 12);
   }
 
+
 }
+
 
 

@@ -112,7 +112,9 @@ class _MinePageState extends BaseState<MinePage> {
               ],
             ).exp(),
           ],
-        ),
+        ).onTap(() {
+          NavigatorUtil.gotPage(context, RouterName.login);
+        }),
         "".container(h: 0.5,bgColor: AppColors.borderColor,marginT: 12,marginB: 12),
         //关注、粉丝、我的动态
         Row(

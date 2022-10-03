@@ -28,39 +28,36 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     Color? bgColor,
     BaseProvider? provider,
   }){
+    LogUtil.printE("里面的Context：$context");
     _provider = provider;
     double headerHeight = 0;
     if(hasHeaderBg) headerHeight = headerHeight + paddingTop;
     if(hasHeaderIntroImg) headerHeight = headerHeight + AppSizes.titleHeight;
-    /*if(provider==null) */return ExScaffold(
-      floatButton: floatWidget,
-      appBar: appBar,
-      backgroundColor: bgColor,
-      bottomInset: bottomInsert,
-      child: Stack(
-        children: [
-          if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: bgHeaderHeight,fit: BoxFit.fill),
-          if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
-          child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
-        ],
-      )
-    );
-    LogUtil.printM("创建Provider...");
-    return ChangeNotifierProvider.value(
-      value: provider,
-      child: ExScaffold(
-          floatButton: floatWidget,
-          appBar: appBar,
-          backgroundColor: bgColor,
-          bottomInset: bottomInsert,
-          child: Stack(
-            children: [
-              if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: 150,fit: BoxFit.fill),
-              if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
-              child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
-            ],
-          )
-      ),
+    // if(provider==null) return ExScaffold(
+    //   floatButton: floatWidget,
+    //   appBar: appBar,
+    //   backgroundColor: bgColor,
+    //   bottomInset: bottomInsert,
+    //   child: Stack(
+    //     children: [
+    //       if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: bgHeaderHeight,fit: BoxFit.fill),
+    //       if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
+    //       child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
+    //     ],
+    //   )
+    // );
+    return ExScaffold(
+        floatButton: floatWidget,
+        appBar: appBar,
+        backgroundColor: bgColor,
+        bottomInset: bottomInsert,
+        child: Stack(
+          children: [
+            if(hasHeaderBg) AppImage().pageHeaderBg.image(w: screenWidth,h: 150,fit: BoxFit.fill),
+            if(hasHeaderIntroImg) AppImage().mineHeaderBg.image(w: 185.w,h: 38.w,).container(marginT: paddingTop,marginL: AppSizes.pagePaddingLR),
+            child.container(marginT: headerHeight,h: (screenHeight - headerHeight))
+          ],
+        )
     );
   }
 

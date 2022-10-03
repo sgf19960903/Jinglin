@@ -17,31 +17,36 @@ class BigPhotoPage extends StatefulWidget {
 }
 
 class _BigPhotoPageState extends BaseState<BigPhotoPage> {
+  bool _isFirst = true;
   List<String> _photoList = [];//图片位置
   int _currentPhotoIndex = 0;//当前图片位置
+  late PageController _pageController;
   
-  
+  _catchArgument(){
+    if(!_isFirst) return;
+    _isFirst = false;
+    Map<String,dynamic>? argMap = ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>?;
+    _photoList = argMap?["photoList"]??[];
+    _currentPhotoIndex = argMap?["photoIndex"]??0;
+    _pageController = PageController(initialPage: _currentPhotoIndex);
+  }
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
-      Map<String,dynamic>? argMap = ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>?;
-      _photoList = argMap?["photoList"]??[];
-      _currentPhotoIndex = argMap?["photoIndex"]??0;
-      setState(() {});
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    _pageController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    _catchArgument();
     return widgetBuild(
       bgColor: Colors.transparent,
       child: Column(
@@ -60,7 +65,7 @@ class _BigPhotoPageState extends BaseState<BigPhotoPage> {
     return Hero(
       tag: "bigPhoto",
       child: PageView(
-        controller: PageController(),
+        controller: _pageController,
         onPageChanged: (index) {
           setState(() {
             _currentPhotoIndex = index;

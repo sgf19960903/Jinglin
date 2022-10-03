@@ -45,7 +45,7 @@ class ExDynamicCiteWidget extends StatelessWidget {
 
   //图片列表
   Widget _photoListWidget(BuildContext context){
-    List<String> photoList = [AppImage().iconWechat];
+    List<String> photoList = [AppImage().tempBg];
     int allPhotoLen = photoList.length;
     int maxLen = 3;
     int showLen = min(allPhotoLen, maxLen);

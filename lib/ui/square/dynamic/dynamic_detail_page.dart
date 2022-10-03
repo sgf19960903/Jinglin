@@ -11,6 +11,7 @@ import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/dialog/square_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/provider/square/dynamic_detail_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_list_view.dart';
 import 'package:jinglin/ui/widgets/ex_send_input_widget.dart';
@@ -29,12 +30,34 @@ class DynamicDetailPage extends StatefulWidget {
 }
 
 class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
+  DynamicDetailProvider _provider = DynamicDetailProvider();
   int maxShowPhotoCount = 9;//最大显示图片数量
   bool isSelf = false;
+  bool isFirst = true;
+  bool openKeyBoard = false;//开启键盘
+
+  //获取传递参数
+  _catchArgument(){
+    //避免刷新重复获取
+    if(!isFirst) return;
+    isFirst = false;
+    Map<String,dynamic>? argMap = ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>?;
+    openKeyBoard = argMap?["openKeyBoard"]??false;
+    if(openKeyBoard) WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+
+    });
+  }
 
 
   @override
+  void dispose() {
+    _provider.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    _catchArgument();
     return widgetBuild(
       bottomInsert: true,
       appBar: ExTitleView(
@@ -136,7 +159,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
 
   //动态内容
   Widget _dynamicContentWidget(){
-    List<String> photoList = List.generate(10, (index) => AppImage().iconWechat);
+    List<String> photoList = List.generate(10, (index) => AppImage().tempBg);
     String videoUrl = "";
     int photoLen = photoList.length;
     int hidePhotoNum = photoLen-maxShowPhotoCount;//隐藏图片数量
@@ -162,7 +185,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           itemBuilder: (_,index){
             return Stack(
               children: [
-                AppImage().iconWechat.image(fit: BoxFit.fill).clipRRect(radius: 8.w),
+                photoList[index].image(fit: BoxFit.fill).clipRRect(radius: 8.w),
                 if(hidePhotoNum>0&&index==showPhotoLen-1) ExTextView("+$hidePhotoNum",
                   color: AppColors.white,
                   size: 16,
