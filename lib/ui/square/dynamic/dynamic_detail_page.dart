@@ -59,7 +59,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
   Widget build(BuildContext context) {
     _catchArgument();
     return widgetBuild(
-      bottomInsert: true,
+      bottomInsert: false,
       appBar: ExTitleView(
         title: isSelf?S.of(context).text_128:null,
         titleCenter: true,

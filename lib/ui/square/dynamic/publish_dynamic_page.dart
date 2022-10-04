@@ -4,14 +4,19 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:jinglin/common/utils/camera_util.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/dialog/square_dialog_util.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/provider/square/publish_dynamic_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_text_field.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:jinglin/ui/widgets/ex_title_view.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:provider/provider.dart';
+// import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 class PublishDynamicPage extends StatefulWidget {
   const PublishDynamicPage({Key? key}) : super(key: key);
@@ -21,28 +26,37 @@ class PublishDynamicPage extends StatefulWidget {
 }
 
 class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
-
+  PublishDynamicProvider _provider = PublishDynamicProvider();
 
 
   @override
+  void dispose() {
+    _provider.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return widgetBuild(
-      bgColor: AppColors.pageGrayColor,
-      appBar: ExTitleView(
-        actionWidgets: [
-          _publishWidget(),
-        ],
+    return ChangeNotifierProvider.value(
+      value: _provider,
+      child: widgetBuild(
+          bgColor: AppColors.pageGrayColor,
+          appBar: ExTitleView(
+            actionWidgets: [
+              _publishWidget(),
+            ],
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _contentInputWidget(),
+                "".container(h: 0.5,bgColor: AppColors.borderColor),
+                _photoOrVideoWidget(),
+              ],
+            ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,bgColor: AppColors.pageColor),
+          )
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _contentInputWidget(),
-            "".container(h: 0.5,bgColor: AppColors.borderColor),
-            _photoOrVideoWidget(),
-          ],
-        ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,bgColor: AppColors.pageColor),
-      )
     );
   }
 
@@ -137,7 +151,15 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
             ).container(marginT: 1)
           ],
         ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.pageGrayColor,).onTap(() {
-          CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index){
+          CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
+            // AssetPicker.pickAssets(context,);
+            // XFile? photoFile;
+            // //拍摄
+            // if(index==0) photoFile = await CameraUtil.takePhoto();
+            // //相册
+            // else if(index==1) photoFile = await CameraUtil.openGallery();
+            // //没有获取到图片
+            // if(photoFile==null) return;
 
           });
         }),

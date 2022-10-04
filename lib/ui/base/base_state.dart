@@ -28,7 +28,6 @@ abstract class BaseState<T extends StatefulWidget> extends State<T> {
     Color? bgColor,
     BaseProvider? provider,
   }){
-    LogUtil.printE("里面的Context：$context");
     _provider = provider;
     double headerHeight = 0;
     if(hasHeaderBg) headerHeight = headerHeight + paddingTop;

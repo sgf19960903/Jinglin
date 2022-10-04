@@ -39,7 +39,6 @@ class _ReportPageState extends BaseState<ReportPage> {
     return ChangeNotifierProvider.value(
       value: _provider,
       child: widgetBuild(
-        provider: _provider,
         bgColor: AppColors.pageGrayColor,
         appBar: ExTitleView(
           title: S.of(context).text_57,

@@ -96,6 +96,7 @@ class ExTextFiledState extends State<ExTextFiled>{
     if(widget.textColor==null) widget.textColor = AppColors.textColor;
   }
 
+
   @override
   void dispose() {
     super.dispose();

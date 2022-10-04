@@ -54,14 +54,8 @@ class _UserHomePageState extends BaseState<UserHomePage> {
                   controller: _provider.scrollController,
                   slivers: [
                     _titleWidget(),
-                    SliverPersistentHeader(
-                      floating: true,
-                      pinned: true,
-                      delegate: ExSliverPersistentHeaderDelegate(
-                        child: _infoTabWidget(),
-                        maxHeight: 60,
-                        minHeight: 60,
-                      ),
+                    SliverToBoxAdapter(
+                      child: _infoTabWidget(),
                     ),
                     if(tabIndex==0) SliverToBoxAdapter(
                       child: _userDetailInfoWidget(),

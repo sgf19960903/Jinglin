@@ -104,39 +104,39 @@ Router generateRoute() {
   return Router({
     // RouterName.textHtml: BaseRouter(
     //   routerBuilder: (context, match, settings) => TextHtml(),
-    //   animate: RouterAnimate.slide_left,
+    //   animate: RouterAnimate.slide_right,
     // ),
     RouterName.login: BaseRouter(
       routerBuilder: (context, match, settings) => LoginPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.main: BaseRouter(
       routerBuilder: (context, match, settings) => MainPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.praiseNotice: BaseRouter(
       routerBuilder: (context, match, settings) => PraiseNoticePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.commentNotice: BaseRouter(
       routerBuilder: (context, match, settings) => CommentNoticePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.sysNotice: BaseRouter(
       routerBuilder: (context, match, settings) => SystemNoticePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.dynamicDetail: BaseRouter(
       routerBuilder: (context, match, settings) => DynamicDetailPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.publishDynamic: BaseRouter(
       routerBuilder: (context, match, settings) => PublishDynamicPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.report: BaseRouter(
       routerBuilder: (context, match, settings) => ReportPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.bigPhoto: BaseRouter(
       routerBuilder: (context, match, settings) => BigPhotoPage(),
@@ -145,59 +145,59 @@ Router generateRoute() {
 
     RouterName.chatSession: BaseRouter(
       routerBuilder: (context, match, settings) => ChatSessionPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.chatSettings: BaseRouter(
       routerBuilder: (context, match, settings) => ChatSettingsPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.userHomePage: BaseRouter(
       routerBuilder: (context, match, settings) => UserHomePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.userHomePageSettings: BaseRouter(
       routerBuilder: (context, match, settings) => UserHomePageSettings(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.personalInfo: BaseRouter(
       routerBuilder: (context, match, settings) => PersonalInfoPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.pushSettings: BaseRouter(
       routerBuilder: (context, match, settings) => PushSettingsPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.suggestFeedback: BaseRouter(
       routerBuilder: (context, match, settings) => SuggestFeedbackPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.myIncome: BaseRouter(
       routerBuilder: (context, match, settings) => MyIncomePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.myDiamond: BaseRouter(
       routerBuilder: (context, match, settings) => MyDiamondPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.applyWithDraw: BaseRouter(
       routerBuilder: (context, match, settings) => ApplyWithDrawPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.myFans: BaseRouter(
       routerBuilder: (context, match, settings) => MyFansPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.myFollow: BaseRouter(
       routerBuilder: (context, match, settings) => MyFollowPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.updatePhone: BaseRouter(
       routerBuilder: (context, match, settings) => UpdatePhonePage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.improveInfo: BaseRouter(
       routerBuilder: (context, match, settings) => ImproveUserInfoPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.cropPhoto: BaseRouter(
       routerBuilder: (context, match, settings) => CropPhotoPage(),
@@ -205,11 +205,11 @@ Router generateRoute() {
     ),
     RouterName.myDynamic: BaseRouter(
       routerBuilder: (context, match, settings) => MyDynamicPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
     RouterName.privacySettings: BaseRouter(
       routerBuilder: (context, match, settings) => PrivacySettingsPage(),
-      animate: RouterAnimate.slide_left,
+      animate: RouterAnimate.slide_right,
     ),
 
   });
