@@ -57,8 +57,10 @@ dependencies:
   flutter_image_compress: ^1.0.0-nullsafety
   flutter_html: ^2.1.2 #加载Html
   image: ^3.1.3 #图片处理
-#  wechat_assets_picker: ^6.2.2 #视频、图片选择器
-#  wechat_camera_picker: ^2.6.5 #视频、图片拍摄
+  video_player: ^2.2.3 #视频播放
+#  wechat_assets_picker: ^5.0.0 #视频、图片选择器
+  wechat_camera_picker: ^2.6.5 #视频、图片拍摄
+  asset_pickers: ^0.1.2
   flutter_my_picker:
     path: plugins/flutter_my_picker-1.1.2
 

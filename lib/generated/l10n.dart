@@ -1580,43 +1580,43 @@ class S {
     );
   }
 
-  /// `The front photo ID cannot be empty`
+  /// `请输入正确的手机号`
   String get text_158 {
     return Intl.message(
-      'The front photo ID cannot be empty',
+      '请输入正确的手机号',
       name: 'text_158',
       desc: '',
       args: [],
     );
   }
 
-  /// `The reverse photo ID cannot be empty`
+  /// `请输入6位验证码`
   String get text_159 {
     return Intl.message(
-      'The reverse photo ID cannot be empty',
+      '请输入6位验证码',
       name: 'text_159',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please select a nationality`
+  /// `请勾选《用户协议》和《隐私协议》`
   String get text_160 {
     return Intl.message(
-      'Please select a nationality',
+      '请勾选《用户协议》和《隐私协议》',
       name: 'text_160',
       desc: '',
       args: [],
     );
   }
 
-  /// `Handheld photo ID cannot be empty`
-  String get text_161 {
+  /// `{name}s重新获取`
+  String text_161(Object name) {
     return Intl.message(
-      'Handheld photo ID cannot be empty',
+      '${name}s重新获取',
       name: 'text_161',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 

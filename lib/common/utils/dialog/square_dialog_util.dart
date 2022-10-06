@@ -5,6 +5,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
+import 'package:jinglin/bean/event/send_input_event.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
@@ -46,6 +48,7 @@ class SquareDialogUtil {
                     Row(
                       children: [
                         AppImage().iconBackBlack.image(w: 24.w,h: 24.w,).onTap(() {
+                          App.eventBus.fire(SendInputEvent(1,"SquareDialog"));
                           Navigator.of(context).pop();
                         }),
                         ExTextView(S.of(context).text_76(4),
@@ -53,7 +56,9 @@ class SquareDialogUtil {
                         ).container(align: Alignment.center).exp(),
                         "".container(w: 24.w,h: 24.w,),
                       ],
-                    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 16,),
+                    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 16,).onTap(() {
+                      App.eventBus.fire(SendInputEvent(1,"SquareDialog"));
+                    }),
                     //评论列表
                     ExListView(
                       itemCount: 10,
@@ -62,7 +67,9 @@ class SquareDialogUtil {
                         return Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill),
+                            AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill).onTap(() {
+                              App.eventBus.fire(SendInputEvent(1,"SquareDialog"));
+                            }),
                             //评论列表
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -96,9 +103,12 @@ class SquareDialogUtil {
                                           size: 12,
                                         ).container(marginL: 2.w),
                                       ],
-                                    ),
+                                    ).onTap(() {
+                                      App.eventBus.fire(SendInputEvent(0,"SquareDialog"));
+                                    }),
                                     //举报
                                     AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w).onTap(() {
+                                      App.eventBus.fire(SendInputEvent(1,"SquareDialog"));
                                       NavigatorUtil.gotPage(context, RouterName.report);
                                     }),
                                   ],
@@ -109,13 +119,15 @@ class SquareDialogUtil {
                                 ).container(marginT: 8),
                                 "".container(h: 0.5,bgColor: AppColors.borderColor,marginT: 16,marginB: 16),
                               ],
-                            ).container(marginL: 8.w).exp(),
+                            ).onTap(() {
+                              App.eventBus.fire(SendInputEvent(1,"SquareDialog"));
+                            }).container(marginL: 8.w).exp(),
                           ],
                         );
                       },
                     ).exp(),
                     //输入框
-                    ExSendInputWidget(),
+                    ExSendInputWidget(name: "SquareDialog",),
                   ],
                 ).container(h: screenHeight - paddingTop - 20,topRightRadius: 12,topLeftRadius: 12,bgColor: AppColors.white,),
               ],

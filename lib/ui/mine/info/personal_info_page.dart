@@ -10,12 +10,15 @@ import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/camera_util.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
+import 'package:jinglin/common/utils/toast_util.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/provider/mine/personal_info_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_text_field.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 import 'package:jinglin/ui/widgets/ex_title_view.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
 
 class PersonalInfoPage extends StatefulWidget {
@@ -26,43 +29,64 @@ class PersonalInfoPage extends StatefulWidget {
 }
 
 class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
+  MyPersonalInfoProvider _provider = MyPersonalInfoProvider();
+  TextEditingController _userNameController = TextEditingController(text: "小小小");
+  TextEditingController _introController = TextEditingController(text: "");
+  DateTime? _currentDate;
+  bool _canUpdate = true;//是否能修改
   String _userAvatar = AppImage().iconWechat;//用户头像
+  String _userHeight = "165cm";
+  int sexType = 1;//0--男 1--女
+  int _age = 22;//年龄
+  int _heightSelectedIndex = 45;//高度选择位置
+  int _userNameSelectedIndex = 0;//用户名选中位置
+
 
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Permission.storage.request();
+  }
+
+  @override
+  void dispose() {
+    _userNameController.dispose();
+    _introController.dispose();
+    _provider.dispose();
+    super.dispose();
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return widgetBuild(
-      bgColor: AppColors.pageGrayColor,
-      appBar: ExTitleView(
-        title: S.of(context).text_87,
-        titleCenter: true,
+    return ChangeNotifierProvider.value(
+      value: _provider,
+      child: widgetBuild(
+          bottomInsert: true,
+          bgColor: AppColors.pageGrayColor,
+          appBar: ExTitleView(
+            title: S.of(context).text_87,
+            titleCenter: true,
+          ),
+          child: Column(
+            children: [
+              SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _avatarWidget(),
+                    _userNameWidget(),
+                    _sexWidget(),
+                    _ageWidget(),
+                    _heightWidget(),
+                    _phoneNumberWidget(),
+                    _introduceWidget(),
+                  ],
+                ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR),
+              ).exp(),
+              _updateButtonWidget(),
+            ],
+          )
       ),
-      child: Column(
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              children: [
-                _avatarWidget(),
-                _userNameWidget(),
-                _sexWidget(),
-                _ageWidget(),
-                _heightWidget(),
-                _phoneNumberWidget(),
-                _introduceWidget(),
-              ],
-            ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR),
-          ).exp(),
-          _updateButtonWidget(),
-        ],
-      )
     );
   }
 
@@ -74,6 +98,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         AppImage().iconCameraCircle.image(w: 20.w,h: 20.w).positioned(bottom: 0,right: 0,),
       ],
     ).onTap(() {
+      FocusScope.of(context).unfocus();
       CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
         XFile? photoFile;
         //拍摄
@@ -103,6 +128,12 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           size: 16,
         ).container(marginR: 8.w),
         ExTextFiled(
+          controller: _userNameController,
+          onChanged: (value) {
+            setState(() {
+              _canUpdate = value.length>0;
+            });
+          },
           hintText: S.of(context).text_22,
           hintTextSize: 16,
           textSize: 16,
@@ -146,7 +177,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           color: AppColors.grayColor,
           size: 16,
         ),
-        ExTextView("27岁",
+        ExTextView(S.of(context).text_153(_age),
           color: AppColors.textColor,
           size: 16,
           textAlign: TextAlign.right,
@@ -154,7 +185,13 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w).container(marginL: 4.w),
       ],
     ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white).onTap(() {
-      CommonDialogUtil.showDateChoiceDialog(context,);
+      FocusScope.of(context).unfocus();
+      CommonDialogUtil.showDateChoiceDialog(context,currentDate: _currentDate,selectedFunc: (dateTime){
+        _currentDate = dateTime;
+        DateTime nowDate = DateTime.now();
+        _age = nowDate.year - dateTime.year;
+        setState(() {});
+      });
 
     });
   }
@@ -169,7 +206,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           color: AppColors.grayColor,
           size: 16,
         ),
-        ExTextView("163cm",
+        ExTextView("$_userHeight",
           color: AppColors.textColor,
           size: 16,
           textAlign: TextAlign.right,
@@ -177,7 +214,14 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w).container(marginL: 4.w),
       ],
     ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white).onTap(() {
-      CommonDialogUtil.showScrollChoiceDialog(context,List.generate(80, (index) => "${120+index}cm"),selectedIndex: 45);
+      FocusScope.of(context).unfocus();
+      List<String> heightList = List.generate(80, (index) => "${120+index}cm");
+      CommonDialogUtil.showScrollChoiceDialog(context,heightList,selectedIndex: _heightSelectedIndex,selectedFunc: (index){
+        setState(() {
+          _heightSelectedIndex = index;
+          _userHeight = heightList[index];
+        });
+      });
     });
   }
 
@@ -191,7 +235,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           color: AppColors.grayColor,
           size: 16,
         ),
-        ExTextView("157****0813",
+        ExTextView("18373603863".hideCenterPhone(),
           color: AppColors.textColor,
           size: 16,
           textAlign: TextAlign.right,
@@ -199,6 +243,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         AppImage().iconArrowRight.image(w: 16.w,h: 16.w).container(marginL: 4.w),
       ],
     ).container(h: 48,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,marginT: 16,radius: 8,bgColor: AppColors.white).onTap(() {
+      FocusScope.of(context).unfocus();
       NavigatorUtil.gotPage(context, RouterName.updatePhone);
     });
   }
@@ -214,6 +259,7 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
           size: 16,
         ),
         ExTextFiled(
+          controller: _introController,
           padding: EdgeInsets.only(top: 10),
           hintText: S.of(context).text_91,
           hintTextSize: 16,
@@ -234,8 +280,15 @@ class _PersonalInfoPageState extends BaseState<PersonalInfoPage> {
         radius: 8,
         align: Alignment.center,
         bgColor: AppColors.white,
-        gradient: LinearGradient(colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor])
-    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 6,padB: 26+paddingBottom,bgColor: AppColors.white);
+        gradient: LinearGradient(colors: [
+          AppColors.gradientButtonBeginColor.withOpacity(_canUpdate?1:0.5),
+          AppColors.gradientButtonEndColor.withOpacity(_canUpdate?1:0.5),
+        ])
+    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,padT: 6,padB: 26+paddingBottom,bgColor: AppColors.white).onTap(() async{
+      FocusScope.of(context).unfocus();
+      if(!_canUpdate) return ToastUtil.showMsg(S.of(context).text_22);
+
+    });
   }
 
 }

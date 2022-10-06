@@ -4,6 +4,7 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jinglin/common/utils/camera_util.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
@@ -17,6 +18,7 @@ import 'package:jinglin/ui/widgets/ex_title_view.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:provider/provider.dart';
 // import 'package:wechat_assets_picker/wechat_assets_picker.dart';
+import 'package:wechat_camera_picker/wechat_camera_picker.dart';
 
 class PublishDynamicPage extends StatefulWidget {
   const PublishDynamicPage({Key? key}) : super(key: key);
@@ -62,23 +64,33 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
 
   //发布按钮
   Widget _publishWidget(){
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        AppImage().iconLocationWhite.image(w: 16.w,h: 16.w),
-        ExTextView(S.of(context).text_73,
-          size: 12,
-          color: AppColors.white,
-          isRegular: false,
-        ).container(marginL: 2.w),
-      ],
-    ).container(
-      w: 60.w,
-      h: 32,
-      radius: 99,
-      bgColor: AppColors.buttonNotSelected,
-      gradient: LinearGradient(colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor])
+    return Selector(
+      builder: (_,bool canPublish,child){
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppImage().iconLocationWhite.image(w: 16.w,h: 16.w),
+            ExTextView(S.of(context).text_73,
+              size: 12,
+              color: AppColors.white,
+              isRegular: false,
+            ).container(marginL: 2.w),
+          ],
+        ).container(
+            w: 60.w,
+            h: 32,
+            radius: 99,
+            bgColor: AppColors.buttonNotSelected,
+            gradient: LinearGradient(colors: [
+              AppColors.gradientButtonBeginColor.withOpacity(canPublish?1:0.3),
+              AppColors.gradientButtonEndColor.withOpacity(canPublish?1:0.3),
+            ])
+        ).onTap(() {
+          if(!canPublish) return;
+        });
+      },
+      selector: (_,PublishDynamicProvider p) => p.canPublish
     );
   }
 
@@ -89,15 +101,23 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
       alignment: Alignment.bottomRight,
       children: [
         ExTextFiled(
+          controller: _provider.contentController,
+          onChanged: _provider.textChanged,
           hintText: S.of(context).text_74,
           hintTextColor: AppColors.color_BBBBBB,
           hintTextSize: 16,
           textSize: 16,
           maxLines: 99,
+          formatters: [LengthLimitingTextInputFormatter(_provider.maxInputLen)],
         ),
-        ExTextView("0/300",
-          size: 12,
-          color: AppColors.color_BBBBBB,
+        Selector(
+          builder: (_,int inputContentLen,child){
+            return ExTextView("$inputContentLen/${_provider.maxInputLen}",
+              size: 12,
+              color: AppColors.color_BBBBBB,
+            );
+          },
+          selector: (_,PublishDynamicProvider p) => p.inputContentLen
         ).container(marginR: 8.w,marginB: 8.w),
       ],
     ).container(h: 107,marginT: 16);
@@ -105,31 +125,73 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
 
   //添加图片或视频
   Widget _photoOrVideoWidget(){
-    List<String> photoList = List.generate(0, (index) => AppImage().iconWechat);
     String videoImg = "";
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return Wrap(
+      // crossAxisAlignment: CrossAxisAlignment.start,
+      runSpacing: 12,
       children: [
         //图片列表
-        if(photoList.length>0) Row(
-          children: List.generate(photoList.length, (index) {
-            return Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                photoList[index].image(w: 100.w,h: 100.w,fit: BoxFit.fill).clipRRect(radius: 12),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        Selector(
+          builder: (_,int photoLen,child){
+            return GridView.builder(
+              itemCount: photoLen + 1,
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 12.w,
+                mainAxisSpacing: 12.w,
+              ),
+              itemBuilder: (_,index){
+                if(index==photoLen) return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AppImage().iconDelete.image(w: 16.w,h: 16.w,),
-                    ExTextView(S.of(context).text_65,
-                      color: AppColors.white,
-                    ).container(marginL: 2.w)
+                    AppImage().iconAdd.image(w: 28.w,h: 28.w,),
+                    ExTextView(S.of(context).text_67,
+                      color: AppColors.textColor,
+                      size: 13,
+                    ).container(marginT: 1)
                   ],
-                ).container(h: 24,bgColor: AppColors.black.withOpacity(0.4),bottomLeftRadius: 12,bottomRightRadius: 12),
-              ],
-            ).container(w: 100.w,h: 100.w,marginR: 12.w);
-          }),
+                ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.pageGrayColor,).onTap(() {
+                  CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
+                    List<AssetEntity> fileList = [];
+                    if(index==0) {//拍摄
+                      AssetEntity? entity = await CameraPicker.pickFromCamera(context,
+                        enableRecording: true,
+                      );
+                      if(entity!=null) fileList.add(entity);
+                    } else if(index==1) {//从相册选择
+                      // List<AssetEntity>? entityList = await AssetPicker.pickAssets(context,);
+                      // if(entityList!=null) fileList.addAll(entityList);
+                    }
+                    // //没有获取到图片
+                    // if(photoFile==null) return;
+                    // _provider.addOrRemovePhoto(photoFile);
+                  });
+                });
+                return Stack(
+                  alignment: Alignment.bottomCenter,
+                  children: [
+                    "${_provider.photoList[index].path}".image(w: 100.w,h: 100.w,fit: BoxFit.cover).clipRRect(radius: 12),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppImage().iconDelete.image(w: 16.w,h: 16.w,),
+                        ExTextView(S.of(context).text_65,
+                          color: AppColors.white,
+                        ).container(marginL: 2.w)
+                      ],
+                    ).container(h: 24,bgColor: AppColors.black.withOpacity(0.4),bottomLeftRadius: 12,bottomRightRadius: 12).onTap(() {
+                      _provider.addOrRemovePhoto(_provider.photoList[index]);
+                    }),
+                  ],
+                );
+              }
+            );
+          },
+          selector: (_,PublishDynamicProvider p) => p.photoList.length
         ),
         //视频
         if(videoImg.isNotEmpty) Stack(
@@ -140,29 +202,29 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
           ],
         ).container(w: 200.w,h: 300,radius: 8,bgColor: AppColors.black.withOpacity(0.4)),
         //上传按钮
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            AppImage().iconAdd.image(w: 28.w,h: 28.w,),
-            ExTextView(S.of(context).text_67,
-              color: AppColors.textColor,
-              size: 13,
-            ).container(marginT: 1)
-          ],
-        ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.pageGrayColor,).onTap(() {
-          CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
-            // AssetPicker.pickAssets(context,);
-            // XFile? photoFile;
-            // //拍摄
-            // if(index==0) photoFile = await CameraUtil.takePhoto();
-            // //相册
-            // else if(index==1) photoFile = await CameraUtil.openGallery();
-            // //没有获取到图片
-            // if(photoFile==null) return;
-
-          });
-        }),
+        // Column(
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     AppImage().iconAdd.image(w: 28.w,h: 28.w,),
+        //     ExTextView(S.of(context).text_67,
+        //       color: AppColors.textColor,
+        //       size: 13,
+        //     ).container(marginT: 1)
+        //   ],
+        // ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.pageGrayColor,).onTap(() {
+        //   CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{
+        //     // AssetPicker.pickAssets(context,);
+        //     XFile? photoFile;
+        //     //拍摄
+        //     if(index==0) photoFile = await CameraUtil.takePhoto();
+        //     //相册
+        //     else if(index==1) photoFile = await CameraUtil.openGallery();
+        //     //没有获取到图片
+        //     if(photoFile==null) return;
+        //     _provider.addOrRemovePhoto(photoFile);
+        //   });
+        // }),
 
       ],
     ).container(padT: 12,padB: 16);

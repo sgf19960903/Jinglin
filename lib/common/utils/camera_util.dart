@@ -9,6 +9,7 @@ class CameraUtil {
   //拍照
   static Future<XFile?> takePhoto({double? maxWidth,double? maxHeight}) async{
     // _cameraPermission();
+
     return await ImagePicker().pickImage(source: ImageSource.camera,maxWidth: maxWidth,maxHeight: maxHeight);
   }
 

@@ -121,6 +121,7 @@ class AppImage {
   String iconPhi40 = "assets/images/icon_phiz40.png";
   String iconPhi41 = "assets/images/icon_phiz41.png";
   String iconPlayVideo = "assets/images/icon_play_video.png";
+  String iconPauseVideo = "assets/images/icon_pause_video.png";
   String iconPraiseGray = "assets/images/icon_praise_gray.png";
   String iconPraiseRed = "assets/images/icon_praise_red.png";
   String iconRefresh = "assets/images/icon_refresh.png";

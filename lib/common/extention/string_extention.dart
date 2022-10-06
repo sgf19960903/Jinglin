@@ -33,8 +33,15 @@ extension StringExtention on String {
   //验证手机号
   bool isPhone(code) {
     if (this.isNotEmpty != true) return false;
-    if(code=="86"||code=="+86") return RegExp(r'^(1[2-9])\d{9}$').hasMatch(this);
+    if(code=="86"||code=="+86"||code==86) return RegExp(r'^(1[2-9])\d{9}$').hasMatch(this);
     else return true;
+  }
+
+  //隐藏手机号中建部分
+  String hideCenterPhone(){
+    String front = this.substring(0,3);
+    String behind = this.substring(this.length-4);
+    return "$front****$behind";
   }
 
 

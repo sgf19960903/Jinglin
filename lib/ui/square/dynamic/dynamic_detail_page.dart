@@ -6,6 +6,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
+import 'package:jinglin/bean/event/send_input_event.dart';
 import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/dialog/square_dialog_util.dart';
@@ -43,9 +45,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
     isFirst = false;
     Map<String,dynamic>? argMap = ModalRoute.of(context)?.settings.arguments as Map<String,dynamic>?;
     openKeyBoard = argMap?["openKeyBoard"]??false;
-    if(openKeyBoard) WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
 
-    });
   }
 
 
@@ -96,7 +96,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
             ],
           ).exp(),
           //评论输入框
-          ExSendInputWidget(),
+          ExSendInputWidget(name: "DynamicDetail",showKeyboard: openKeyBoard,),
         ],
       ),
     );
@@ -153,7 +153,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           borderColor: AppColors.themeColor,
         ),
       ],
-    );
+    ).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+    });
   }
 
 
@@ -170,7 +172,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
         ExTextView("跟你谈钱的老板才是好人，跟你谈理想的，都TM不想给你钱！",
           size: AppSizes.titleFontSize,
           maxLines: 99,
-        ),
+        ).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+        }),
         //图片
         GridView.builder(
           itemCount: showPhotoLen,
@@ -192,6 +196,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
                 ).container(radius: 8,align: Alignment.center,bgColor: AppColors.black.withOpacity(0.4)),
               ],
             ).onTap(() {
+              App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
               NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
                 "photoList":photoList,
                 "photoIndex":index,
@@ -222,7 +227,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           size: 12,
         ),
       ],
-    ).container(marginT: 8,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR);
+    ).container(marginT: 8,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+    });
   }
 
   //点赞数、评论数、举报
@@ -238,7 +245,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
               color: AppColors.grayColor,
             ).container(marginL: 2.w),
           ],
-        ),
+        ).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+        }),
         "".container(w: 32.w,),
         //评论数
         Row(
@@ -250,7 +259,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
             ).container(marginL: 2.w),
           ],
         ).onTap(() {
-
+          App.eventBus.fire(SendInputEvent(0,"DynamicDetail"));
         }),
         "".container(w: 32.w,),
         //举报
@@ -263,6 +272,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
             ).container(marginL: 2.w),
           ],
         ).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
           NavigatorUtil.gotPage(context, RouterName.report);
         }),
         "".container().exp(),
@@ -276,6 +286,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
             ).container(marginL: 2.w),
           ],
         ).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
           CommonDialogUtil.showSureDialog(context,
               title: S.of(context).text_94,
               content: S.of(context).text_126,
@@ -287,7 +298,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           );
         }),
       ],
-    ).container(marginT: 12,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR);
+    ).container(marginT: 12,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+    });
   }
 
   //评论总数
@@ -305,7 +318,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           size: 13,
         ).container(marginL: 4.w),
       ],
-    ).container(h: 48,bgColor: AppColors.pageColor,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
+    ).container(h: 48,bgColor: AppColors.pageColor,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+    });
   }
 
   //评论列表
@@ -325,6 +340,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
           NavigatorUtil.gotPage(context, RouterName.userHomePage);
         }),
         //评论列表
@@ -360,9 +376,12 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
                       size: 12,
                     ).container(marginL: 2.w),
                   ],
-                ),
+                ).onTap(() {
+                  App.eventBus.fire(SendInputEvent(0,"DynamicDetail"));
+                }),
                 //举报
                 AppImage().iconHintGray.image(w: 16.w,h: 16.w).container(marginL: 16.w).onTap(() {
+                  App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
                   NavigatorUtil.gotPage(context, RouterName.report);
                 }),
               ],
@@ -385,6 +404,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
                     AppImage().iconArrowRight.image(w: 16.w,h: 16.w,).container(marginL: 4.w),
                   ],
                 ).onTap(() {
+                  App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
                   SquareDialogUtil.showCommentListDialog(context);
                 });
                 //评论显示
@@ -411,7 +431,9 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
           ],
         ).container(marginL: 8.w).exp(),
       ],
-    ).container(marginB: 16);
+    ).container(marginB: 16).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
+    });
   }
 
 

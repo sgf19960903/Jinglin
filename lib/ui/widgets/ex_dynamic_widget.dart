@@ -268,7 +268,9 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
             ).container(marginL: 2.w),
           ],
         ).onTap(() {
-          NavigatorUtil.gotPage(context, RouterName.dynamicDetail);
+          NavigatorUtil.gotPage(context, RouterName.dynamicDetail,param: {
+            "openKeyBoard":true
+          });
         }),
         "".container(w: 32.w,),
         //举报

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SharedPreferencesName {
-  static const String USER_UUID = "uuid";
+  static const String TOKEN = "token";
   static const String USER_INFO = "userInfo";
   static const String OPTIONS = "options";
   static const String LANGUAGE = "language";

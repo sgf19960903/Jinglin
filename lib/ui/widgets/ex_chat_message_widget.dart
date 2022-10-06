@@ -5,9 +5,14 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
+import 'package:jinglin/bean/event/send_input_event.dart';
 import 'package:jinglin/common/res/res_path.dart';
+import 'package:jinglin/common/router/router_manager.dart';
+import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
+import 'package:jinglin/ui/widgets/ex_video_widget.dart';
 
 
 class ExChatMessageWidget extends StatelessWidget {
@@ -24,7 +29,9 @@ class ExChatMessageWidget extends StatelessWidget {
         _timeWidget(),
         _contentWidget(),
       ],
-    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR);
+    ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
+      App.eventBus.fire(SendInputEvent(1,"ChatSession"));
+    });
   }
 
 
@@ -46,9 +53,9 @@ class ExChatMessageWidget extends StatelessWidget {
         Column(
           crossAxisAlignment: isSelf?CrossAxisAlignment.end:CrossAxisAlignment.start,
           children: [
-            // _textContentWidget(),
+            _textContentWidget(),
             // _photoContentWidget(),
-            _videoContentWidget(),
+            // _videoContentWidget(),
           ],
         ).exp(),
         "".container(w: 12.w),
@@ -87,9 +94,9 @@ class ExChatMessageWidget extends StatelessWidget {
   }
 
   //图片内容
-  Widget _photoContentWidget(){
+  Widget _photoContentWidget(BuildContext context){
     return Column(
-      children: List.generate(5, (index) {
+      children: List.generate(1, (index) {
         return Stack(
           alignment: Alignment.topRight,
           children: [
@@ -105,7 +112,13 @@ class ExChatMessageWidget extends StatelessWidget {
             ),
             if(!isSelf) AppImage().iconDiamondPurple.image(w: 12.w,h: 12.w),
           ],
-        ).container(w: 174.w,);
+        ).container(w: 174.w,).onTap(() {
+          App.eventBus.fire(SendInputEvent(1,"ChatSession"));
+          NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
+            "photoList":[AppImage().iconAlipay],
+            "photoIndex":index,
+          });
+        });
       }),
     );
   }
@@ -113,18 +126,20 @@ class ExChatMessageWidget extends StatelessWidget {
   //视频内容
   Widget _videoContentWidget(){
     return Column(
-      children: List.generate(5, (index) {
+      children: List.generate(1, (index) {
         return Column(
           crossAxisAlignment: isSelf?CrossAxisAlignment.end:CrossAxisAlignment.start,
           children: [
             Stack(
               alignment: Alignment.center,
               children: [
-                AppImage().iconAlipay.image(w: 170.w,h: 238.w,fit: BoxFit.fill).container(
-                  marginT: index==0?4:16,
+                ExVideoWidget(
+                  // videoUrl: "https://haokan.baidu.com/v?pd=wisenatural&vid=13044371044988382522",
+                  videoUrl: "/data/user/0/com.zhonghaizhi.jinglin.jinglin/cache/image_picker8611768778119426668.mp4",
+                ).container(
+                  marginT: index==0?4:4,
                   marginR: 4.w,
                 ),
-                AppImage().iconPlayVideo.image(w: 36.w,h: 36.w),
                 if(!isSelf) AppImage().iconDiamondPurple.image(w: 12.w,h: 12.w).positioned(top: 0,right: 0),
               ],
             ).container(
@@ -133,7 +148,7 @@ class ExChatMessageWidget extends StatelessWidget {
             ),
             if(!isSelf) _incomeWidget(),
           ],
-        );
+        ).container(marginT: index==0?0:12);
       }),
     );
   }

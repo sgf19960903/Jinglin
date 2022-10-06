@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
+import 'package:jinglin/common/utils/toast_util.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/provider/login/login_provider.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_text_field.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
+import 'package:provider/provider.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -21,24 +24,36 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseState<LoginPage> {
+  LoginProvider _provider = LoginProvider();
+
+
+
+  @override
+  void dispose() {
+    _provider.dispose();
+    super.dispose();
+  }
 
 
   @override
   Widget build(BuildContext context) {
-    return widgetBuild(
-      bgColor: AppColors.pageGrayColor,
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              AppImage().loginTopBg.image(w: double.infinity,h: 358,fit: BoxFit.fill),
-              AppImage().loginHeaderOtherBg.image(w: screenWidth/2,h: 110).positioned(left: AppSizes.pagePaddingLR,top: 115),
-              // _firstLoginWidget(),
-              _commonLoginWidget(),
-            ],
-          ).exp(),
-          // _switchWidget().container(marginB: paddingBottom),
-        ],
+    return ChangeNotifierProvider.value(
+      value: _provider,
+      child: widgetBuild(
+        bgColor: AppColors.pageGrayColor,
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                AppImage().loginTopBg.image(w: double.infinity,h: 358,fit: BoxFit.fill),
+                AppImage().loginHeaderOtherBg.image(w: screenWidth/2,h: 110).positioned(left: AppSizes.pagePaddingLR,top: 115),
+                if(_provider.autoCatchPhoto) _firstLoginWidget(),
+                if(!_provider.autoCatchPhoto) _commonLoginWidget(),
+              ],
+            ).exp(),
+            if(_provider.autoCatchPhoto) _switchWidget().container(marginB: 20 + paddingBottom),
+          ],
+        ),
       ),
     );
   }
@@ -69,10 +84,13 @@ class _LoginPageState extends BaseState<LoginPage> {
           children: [
             AppImage().iconPhoneGray.image(w: 24.w,h: 24.w,),
             ExTextFiled(
+              controller: _provider.phoneController,
+              onChanged: _provider.textChanged,
               padding: EdgeInsets.only(left: 12.w),
               hintTextSize: 16,
               textSize: 16,
               hintText: S.of(context).text_10,
+              keyboardType: TextInputType.number,
             ).exp(),
           ],
         ).container(h: 48,radius: 8,bgColor: AppColors.white,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR),
@@ -84,20 +102,31 @@ class _LoginPageState extends BaseState<LoginPage> {
               children: [
                 AppImage().iconSecuritySafety.image(w: 24.w,h: 24.w,),
                 ExTextFiled(
+                  controller: _provider.verifyCodeController,
+                  onChanged: _provider.textChanged,
                   padding: EdgeInsets.only(left: 12.w),
                   hintTextSize: 16,
                   textSize: 16,
                   hintText: S.of(context).text_11,
+                  keyboardType: TextInputType.number,
                 ).exp(),
               ],
             ).container(h: double.infinity,radius: 8,bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).exp(),
             "".container(w: 16.w),
             //获取验证码
-            ExTextView(S.of(context).text_6,
-              size: 16,
-              isRegular: false,
-              color: AppColors.manColor,
-            ).container(w: 115.w,h: double.infinity,align: Alignment.center,radius: 8,bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR),
+            Selector(
+                builder: (_,int countDown,child){
+                  return ExTextView(countDown==-1?S.of(context).text_6:S.of(context).text_161(countDown),
+                    size: 16,
+                    color: countDown==-1?AppColors.manColor:AppColors.color_BBBBBB,
+                    isRegular: false,
+                  );
+                },
+                selector: (_,LoginProvider p) => p.countDown
+            ).container(w: 115.w,h: double.infinity,align: Alignment.center,radius: 8,bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
+              FocusScope.of(context).unfocus();
+              _provider.catchVerifyCode();
+            }),
           ],
         ).container(h: 48,marginT: 16,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR,),
         _loginButtonAndProtocolWidget().container(marginT: 80),
@@ -110,31 +139,55 @@ class _LoginPageState extends BaseState<LoginPage> {
   Widget _loginButtonAndProtocolWidget(){
     return Column(
       children: [
-        ExTextView(S.of(context).text_0,
-          color: AppColors.white,
-          size: 16,
-        ).container(
-          h: 44,
-          align: Alignment.center,
-          radius: 8,
-          marginL: AppSizes.pagePaddingLR,
-          marginR: AppSizes.pagePaddingLR,
-          bgColor: AppColors.white,
-          gradient: LinearGradient(
-            colors: [AppColors.gradientButtonBeginColor,AppColors.gradientButtonEndColor],
-          )
+        Selector(
+          builder: (_,bool canLogin,child){
+            return ExTextView(S.of(context).text_0,
+              color: AppColors.white,
+              size: 16,
+            ).container(
+                h: 44,
+                align: Alignment.center,
+                radius: 8,
+                marginL: AppSizes.pagePaddingLR,
+                marginR: AppSizes.pagePaddingLR,
+                bgColor: AppColors.white,
+                gradient: LinearGradient(
+                  colors: [
+                    AppColors.gradientButtonBeginColor.withOpacity(canLogin?1:0.3)
+                    ,AppColors.gradientButtonEndColor.withOpacity(canLogin?1:0.3),
+                  ],
+                )
+            );
+          },
+          selector: (_,LoginProvider p) => p.canLogin
         ).onTap(() {
-          NavigatorUtil.gotPage(context, RouterName.improveInfo);
+          FocusScope.of(context).unfocus();
+          _provider.login(context);
         }),
         //勾选用户、隐私协议
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppImage().iconNoSelectedRectangle.image(w: 16.w,h: 16.w),
+            Selector(
+              builder: (_,bool selected,child){
+                return "${selected?AppImage().iconSelectedRectangle:AppImage().iconNoSelectedRectangle}".image(w: 16.w,h: 16.w);
+              },
+              selector: (_,LoginProvider p) => p.selectedProtocol
+            ).onTap(() {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                _provider.selectedProtocol = !_provider.selectedProtocol;
+              });
+            }),
             ExTextView(S.of(context).text_7,
               size: 12,
-            ).container(marginL: 4.w),
+            ).container(marginL: 4.w).onTap(() {
+              FocusScope.of(context).unfocus();
+              setState(() {
+                _provider.selectedProtocol = !_provider.selectedProtocol;
+              });
+            }),
             ExTextView(" ${S.of(context).text_8}",
               size: 12,
               color: AppColors.manColor,
@@ -154,8 +207,13 @@ class _LoginPageState extends BaseState<LoginPage> {
     return ExTextView(S.of(context).text_14,
       color: AppColors.themeColor,
     ).container(marginB: 16,marginT: 16).onTap(() {
-
+      FocusScope.of(context).unfocus();
+      setState(() {
+        _provider.autoCatchPhoto = false;
+        _provider.canLogin = false;
+      });
     });
   }
+
 }
 

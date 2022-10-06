@@ -8,7 +8,7 @@ typedef DateChangedCallback(DateTime time);
 typedef CancelCallback();
 typedef String StringAtIndexCallBack(int index);
 
-final padding = EdgeInsets.all(6.0);
+final padding = EdgeInsets.all(0);
 final headerHeight = 48;
 final startTime = null; // DateTime.parse('2018-05-16 08:21');
 final endTime = null; // DateTime.parse('2022-05-06 09:21');
@@ -424,51 +424,61 @@ class _MyDatePickerState extends State<MyDatePicker> {
       ScrollController scrollController,
       ValueChanged<int> selectedChangedWhenScrolling,
       ValueChanged<int> selectedChangedWhenScrollEnd}) {
-    return Container(
-        padding: padding,
-        height: widget.pickerHeight, // theme.containerHeight
-        // decoration: BoxDecoration(color: Colors.white),
-        child: NotificationListener(
-            onNotification: (ScrollNotification notification) {
-              if (notification.depth == 0 &&
-                  selectedChangedWhenScrollEnd != null &&
-                  notification is ScrollEndNotification &&
-                  notification.metrics is FixedExtentMetrics) {
-                final FixedExtentMetrics metrics = notification.metrics;
-                final int currentItemIndex = metrics.itemIndex;
-                selectedChangedWhenScrollEnd(currentItemIndex);
-              }
-              return false;
-            },
-            child: CupertinoPicker.builder(
-                key: key,
-                backgroundColor: widget.background ?? Colors.white,
-                scrollController: scrollController,
-                itemExtent: widget.itemHeight, // theme.itemHeight,
-                onSelectedItemChanged: (int index) {
-                  selectedChangedWhenScrolling(index);
-                },
-                useMagnifier: true,
-                magnification: widget.magnification,
-                squeeze: widget.squeeze,
-                offAxisFraction: widget.offAxisFraction,
-                itemBuilder: (BuildContext context, int index) {
-                  final content = stringAtIndexCB(index);
-                  if (content == null) {
-                    return null;
-                  }
-                  return Container(
-                    height: widget.itemHeight, // theme.itemHeight,
-                    alignment: Alignment.center,
-                    child: Text(
-                      content,
-                      style: const TextStyle(fontSize: 18).copyWith(
-                          color: widget.color ??
-                              Color(0xFF000046)), // theme.itemStyle,
-                      textAlign: TextAlign.start,
-                    ),
-                  );
-                })));
+    return Expanded(
+      flex: 2,
+      child: Container(
+          padding: EdgeInsets.zero,
+          height: widget.pickerHeight, // theme.containerHeight
+          // decoration: BoxDecoration(color: Colors.white),
+          child: NotificationListener(
+              onNotification: (ScrollNotification notification) {
+                if (notification.depth == 0 &&
+                    selectedChangedWhenScrollEnd != null &&
+                    notification is ScrollEndNotification &&
+                    notification.metrics is FixedExtentMetrics) {
+                  final FixedExtentMetrics metrics = notification.metrics;
+                  final int currentItemIndex = metrics.itemIndex;
+                  selectedChangedWhenScrollEnd(currentItemIndex);
+                }
+                return false;
+              },
+              child: CupertinoPicker.builder(
+                  key: key,
+                  backgroundColor: widget.background ?? Colors.white,
+                  scrollController: scrollController,
+                  itemExtent: widget.itemHeight, // theme.itemHeight,
+                  onSelectedItemChanged: (int index) {
+                    selectedChangedWhenScrolling(index);
+                  },
+                  useMagnifier: true,
+                  magnification: widget.magnification,
+                  squeeze: widget.squeeze,
+                  offAxisFraction: widget.offAxisFraction,
+                  selectionOverlay: Column(
+                    children: [
+                      Container(width: double.infinity,height: 0.5,color: Color(0xFFE5E5E5),),
+                      Expanded(child: Container()),
+                      Container(width: double.infinity,height: 0.5,color: Color(0xFFE5E5E5),),
+                    ],
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final content = stringAtIndexCB(index);
+                    if (content == null) {
+                      return null;
+                    }
+                    return Container(
+                      height: widget.itemHeight, // theme.itemHeight,
+                      alignment: Alignment.center,
+                      child: Text(
+                        content,
+                        style: const TextStyle(fontSize: 18).copyWith(
+                            color: Color(0xFF333333) ??
+                                Color(0xAF333333)), // theme.itemStyle,
+                        textAlign: TextAlign.start,
+                      ),
+                    );
+                  })))
+    );
   }
 
   Widget renderHeader() {

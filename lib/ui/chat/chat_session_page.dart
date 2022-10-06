@@ -4,6 +4,9 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:jinglin/application/app.dart';
+import 'package:jinglin/bean/event/send_input_event.dart';
 import 'package:jinglin/common/res/app_color.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
@@ -30,6 +33,7 @@ class ChatSessionPage extends StatefulWidget {
 class _ChatSessionPageState extends BaseState<ChatSessionPage> {
   ChatSessionProvider _provider = ChatSessionProvider();
   bool showExpress = false;
+  ImagePicker picker = ImagePicker();
 
 
   @override
@@ -80,6 +84,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
             ),
             actionWidgets: [
               AppImage().iconMore.image(w: 24.w,h: 24.w,).onTap(() {
+                App.eventBus.fire(SendInputEvent(1,"ChatSession"));
                 NavigatorUtil.gotPage(context, RouterName.chatSettings);
               }),
             ],
@@ -93,6 +98,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
                 padding: EdgeInsets.only(bottom: 16),
                 itemBuilder: (_,index) => ExChatMessageWidget(),
               ).onTap(() {
+                App.eventBus.fire(SendInputEvent(1,"ChatSession"));
                 FocusScope.of(context).unfocus();
                 setState(() {
                   showExpress = false;
@@ -100,6 +106,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
                 _provider.showOrHideExpressList(false);
               }).exp(),
               ExSendInputWidget(
+                name: "ChatSession",
                 hasPhotoEntry: true,
                 // showExpressList: showExpress,
               ).container(bgColor: AppColors.white).onTap(() {

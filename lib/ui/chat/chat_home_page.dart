@@ -29,6 +29,9 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
   Widget build(BuildContext context) {
     return widgetBuild(
       hasHeaderBg: true,
+      floatWidget: AppImage().oneKeyMatchBg.image(w: 136.w,h: 94.w,).onTap(() {
+
+      }),
       child: ChangeNotifierProvider.value(
         value: _provider,
         child: Column(

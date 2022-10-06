@@ -179,7 +179,8 @@ class CommonDialogUtil {
 
 
   //日期选择弹框
-  static Future showDateChoiceDialog(BuildContext context,{String? title,int selectedIndex=-1,Function(int)? selectedFunc}){
+  static Future showDateChoiceDialog(BuildContext context,{String? title,DateTime? currentDate,Function(DateTime)? selectedFunc}){
+    DateTime selectedDate = DateTime(2000);
     return showGeneralDialog(
         context: context,
         barrierColor: Color(0x73000000),
@@ -219,14 +220,28 @@ class CommonDialogUtil {
                           size: 16,
                           color: AppColors.themeColor,
                         ).container(h: double.infinity,align: Alignment.center,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR,).onTap(() {
-
+                          Navigator.of(context).pop();
+                          if(selectedFunc!=null) selectedFunc(selectedDate);
                         }),
                       ],
                     ).container(h: 46,onlyBottomBorder: true,),
-                    //日期选择
                     MyDatePicker(
                       isShowHeader: false,
-                    ),
+                      current: currentDate,
+                      end: DateTime.now(),
+                      onChange: (dateTime){
+                        selectedDate = dateTime;
+                      },
+                    ).container(h: 195),
+                    //日期选择
+                    // CupertinoDatePicker(
+                    //   mode: CupertinoDatePickerMode.date,
+                    //   initialDateTime: DateTime(2000),
+                    //   maximumDate: DateTime(DateTime.now().year),
+                    //   onDateTimeChanged: (dateTime){
+                    //     selectedDate = dateTime;
+                    //   }
+                    // ).container(h: 186),
                   ],
                 ).container(topRightRadius: 12,topLeftRadius: 12,bgColor: AppColors.white,padB: paddingBottom),
               ],
@@ -277,7 +292,8 @@ class CommonDialogUtil {
                           size: 16,
                           color: AppColors.themeColor,
                         ).container(h: double.infinity,align: Alignment.center,marginL: AppSizes.pagePaddingLR,marginR: AppSizes.pagePaddingLR,).onTap(() {
-
+                          Navigator.of(context).pop();
+                          if(selectedFunc!=null) selectedFunc(selectedIndex);
                         }),
                       ],
                     ).container(h: 46,onlyBottomBorder: true,),
@@ -289,7 +305,7 @@ class CommonDialogUtil {
 
                       selectionOverlay: "".container(h: 44,hasBorder: true,borderWidth: 0.3),
                       onSelectedItemChanged: (index){
-
+                        selectedIndex = index;
                       },
                       itemBuilder: (_,index){
                         return ExTextView(contentList[index],

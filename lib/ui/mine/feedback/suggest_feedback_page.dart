@@ -134,7 +134,7 @@ class _SuggestFeedbackPageState extends BaseState<SuggestFeedbackPage> {
                       alignment: Alignment.bottomCenter,
                       children: [
                         //图片
-                        "${_provider.photoList[index].path}".image(w: 100.w,h: 100.w,fit: BoxFit.contain).clipRRect(radius: 12).container(bgColor: AppColors.white,radius: 12),
+                        "${_provider.photoList[index].path}".image(w: 100.w,h: 100.w,fit: BoxFit.cover).clipRRect(radius: 12).container(bgColor: AppColors.white,radius: 12),
                         //移除
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
