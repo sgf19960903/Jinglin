@@ -6,11 +6,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:jinglin/provider/base/base_provider.dart';
+import 'package:wechat_assets_picker/wechat_assets_picker.dart';
 
 
 class PublishDynamicProvider extends BaseProvider {
   TextEditingController contentController = TextEditingController();
-  List<XFile> photoList = [];
+  List<AssetEntity> fileList = [];
+  AssetType? currentListType;
   int reportTypeIndex = -1;//举报类型选中位置
   int inputContentLen = 0;//内容数量
   int maxInputLen = 500;//最大内容数量
@@ -19,16 +21,21 @@ class PublishDynamicProvider extends BaseProvider {
   //内容监听
   textChanged(String value){
     inputContentLen = value.length;
-    canPublish = inputContentLen>0||photoList.length>0;
+    canPublish = inputContentLen>0||fileList.length>0;
     notifyListeners();
   }
 
 
   //添加或移除图片
-  addOrRemovePhoto(XFile photoFile){
-    if(photoList.contains(photoFile)) photoList.remove(photoFile);
-    else photoList.add(photoFile);
-    canPublish = inputContentLen>0||photoList.length>0;
+  addOrRemovePhoto(List<AssetEntity> entityList){
+    if(entityList.length==1) {
+      AssetEntity entity = entityList[0];
+      if(fileList.contains(entity)) fileList.remove(entity);
+      else fileList.add(entity);
+    }else fileList.addAll(entityList);
+    if(fileList.length>0) currentListType = fileList[0].type;
+    else currentListType = null;
+    canPublish = inputContentLen>0||fileList.length>0;
     notifyListeners();
   }
 

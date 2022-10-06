@@ -1620,20 +1620,20 @@ class S {
     );
   }
 
-  /// `The handheld agreement cannot be empty`
+  /// `不能同时上传视频和图片`
   String get text_162 {
     return Intl.message(
-      'The handheld agreement cannot be empty',
+      '不能同时上传视频和图片',
       name: 'text_162',
       desc: '',
       args: [],
     );
   }
 
-  /// `The purchase amount is out of range`
+  /// `只能上传一个视频文件`
   String get text_163 {
     return Intl.message(
-      'The purchase amount is out of range',
+      '只能上传一个视频文件',
       name: 'text_163',
       desc: '',
       args: [],

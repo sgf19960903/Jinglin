@@ -137,10 +137,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_16": MessageLookupByLibrary.simpleMessage("性别一旦设置后降无法修改"),
         "text_160": MessageLookupByLibrary.simpleMessage("请勾选《用户协议》和《隐私协议》"),
         "text_161": m6,
-        "text_162": MessageLookupByLibrary.simpleMessage(
-            "The handheld agreement cannot be empty"),
-        "text_163": MessageLookupByLibrary.simpleMessage(
-            "The purchase amount is out of range"),
+        "text_162": MessageLookupByLibrary.simpleMessage("不能同时上传视频和图片"),
+        "text_163": MessageLookupByLibrary.simpleMessage("只能上传一个视频文件"),
         "text_164": MessageLookupByLibrary.simpleMessage(
             "Order error, please contact administrator"),
         "text_165": MessageLookupByLibrary.simpleMessage(

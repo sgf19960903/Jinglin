@@ -41,6 +41,7 @@ class _ExVideoWidgetState extends State<ExVideoWidget> {
       setState(() {});
     });
     File file = File(widget.videoUrl);
+    // LogUtil.printE("视频路径：${file.existsSync()}--${file.path}--${widget.videoUrl}");
     _playerController.addListener(() {
       bool isPlaying = _playerController.value.isPlaying;
       bool isLoading = _playerController.value.isBuffering||!_playerController.value.isInitialized;
