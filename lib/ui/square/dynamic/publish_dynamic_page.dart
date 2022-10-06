@@ -139,7 +139,7 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
             if(assetType==null||assetType==AssetType.image) Selector(
                 builder: (_,int photoLen,child){
                   return GridView.builder(
-                      itemCount: photoLen + 1,
+                      itemCount: photoLen==9?photoLen:photoLen + 1,
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -148,7 +148,7 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
                         mainAxisSpacing: 12.w,
                       ),
                       itemBuilder: (_,index){
-                        if(index==photoLen) return Column(
+                        if(index==photoLen&&index!=9) return Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -201,6 +201,8 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
                                 if(len>1) return ToastUtil.showMsg(S.of(context).text_163);
                               }
                               if(entityList!=null) fileList.addAll(entityList);
+                              if(fileList.length==0) return;
+                              _provider.fileList.clear();
                             }
                             // //没有获取到图片
                             if(fileList.length==0) return;
