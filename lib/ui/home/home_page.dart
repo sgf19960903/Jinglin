@@ -36,17 +36,24 @@ class _HomePageState extends BaseState<HomePage> {
       provider: _provider,
       child: ChangeNotifierProvider.value(
         value: _provider,
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: _bannerWidget(),
-            ),
-            SliverToBoxAdapter(
-              child: _tabListWidget(),
-            ),
-            SliverToBoxAdapter(
-              child: _friendListWidget(),
-            ),
+        // child: CustomScrollView(
+        //   slivers: [
+        //     SliverToBoxAdapter(
+        //       child: _bannerWidget(),
+        //     ),
+        //     SliverToBoxAdapter(
+        //       child: _tabListWidget(),
+        //     ),
+        //     SliverToBoxAdapter(
+        //       child: _listContentWidget(),
+        //     ),
+        //   ],
+        // ),
+        child: Column(
+          children: [
+            _bannerWidget(),
+            _tabListWidget(),
+            _listContentWidget().exp(),
           ],
         ),
       )
@@ -97,24 +104,37 @@ class _HomePageState extends BaseState<HomePage> {
         selector: (_,HomeProvider p) => p.listTabIndex
       ).onTap(() {
         _provider.changeListTabIndex(index);
-      }).container(marginR: 24.w,)),
+      }).container(marginR: 16.w,)),
     ).container(bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
   }
 
+  //内容列表
+  Widget _listContentWidget(){
+    return PageView(
+      controller: _provider.pageController,
+      onPageChanged: (index){
+        _provider.changeListTabIndex(index);
+      },
+      children: [
+        _friendListWidget(),
+        _friendListWidget(),
+      ],
+    );
+  }
 
   //交友列表
   Widget _friendListWidget(){
     return ExListView(
       itemCount: 10,
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      // shrinkWrap: false,
+      // physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: AppSizes.pagePaddingLR,right: AppSizes.pagePaddingLR,top: 13),
       itemBuilder: (_,index){
         return Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //用户头像
-            AppImage().iconWechat.image(w: 64.w,h: 64.w,),
+            AppImage().iconTempAvatar.image(w: 64.w,h: 64.w,).clipRRect(radius: 12),
             //间距
             "".container(w: 12.w),
             //用户其他信息
@@ -126,7 +146,7 @@ class _HomePageState extends BaseState<HomePage> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ExTextView("是朱不是猪",).exp(),
+                    ExTextView("是朱不是猪",isRegular: false,).exp(),
                     AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
                     ExTextView("北京",
                       color: AppColors.grayColor,
@@ -150,7 +170,7 @@ class _HomePageState extends BaseState<HomePage> {
                               size: AppSizes.hintFontSize,
                             ).container(marginL: 2.w),
                           ],
-                        ).container(padL: 3.w,padR: 3.w,padT: 2,padB: 2,marginT: 8,bgColor: AppColors.womanColor,radius: 99),
+                        ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 8,bgColor: AppColors.womanColor,radius: 99),
                         //个性签名
                         ExTextView("没留下什么东西",
                           color: AppColors.grayColor,

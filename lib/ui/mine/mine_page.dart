@@ -4,14 +4,18 @@
 /// @Description TODO
 
 import 'package:flutter/material.dart';
+import 'package:jinglin/application/app.dart';
 import 'package:jinglin/common/res/app_color.dart';
 import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
+import 'package:jinglin/common/utils/shared_preferences_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
+
+import '../../application/app.dart';
 
 
 class MinePage extends StatefulWidget {
@@ -113,7 +117,7 @@ class _MinePageState extends BaseState<MinePage> {
             ).exp(),
           ],
         ).onTap(() {
-          NavigatorUtil.gotPage(context, RouterName.login);
+          // NavigatorUtil.gotPage(context, RouterName.login);
         }),
         "".container(h: 0.5,bgColor: AppColors.borderColor,marginT: 12,marginB: 12),
         //关注、粉丝、我的动态
@@ -269,7 +273,9 @@ class _MinePageState extends BaseState<MinePage> {
           else if(index==3) CommonDialogUtil.showSureDialog(context,
             title: S.of(context).text_125,
             rightClickFunc: (){
-
+              App.token = "";
+              SharedPreferencesUtil.remove(SharedPreferencesName.TOKEN);
+              NavigatorUtil.goPageAndRemove(context, RouterName.login);
             }
           );
         });

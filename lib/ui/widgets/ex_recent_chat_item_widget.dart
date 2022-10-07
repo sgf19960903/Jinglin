@@ -15,90 +15,104 @@ import 'package:jinglin/ui/widgets/ex_text_view.dart';
 
 
 class ExRecentChatItemWidget extends StatefulWidget {
-  const ExRecentChatItemWidget({Key? key}) : super(key: key);
+  ExRecentChatItemWidget({
+    Key? key,
+    this.isSelected = false,
+  }) : super(key: key);
+  bool isSelected = false;
 
   @override
   State<ExRecentChatItemWidget> createState() => _ExRecentChatItemWidgetState();
 }
 
 class _ExRecentChatItemWidgetState extends State<ExRecentChatItemWidget> {
+
+
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        Stack(
-          alignment: Alignment.topRight,
+        Row(
           children: [
-            AppImage().iconWechat.image(w: 56.w,h: 56.w).container(marginR: 8.w,marginT: 8.w),
-            ExTextView("99",
-              color: AppColors.white,
-              textAlign: TextAlign.center,
-            ).container(
-              radius: 999,
-              h: 24,
-              bgColor: AppColors.themeColor,
-              hasBorder: true,
-              borderColor: AppColors.white,
-              borderWidth: 2,
-              boxConstraints: BoxConstraints(maxWidth: 40,minWidth: 24),
-            ),
-          ],
-        ),
-        "".container(w: 10.w),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //昵称、性别、定位
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            Stack(
+              alignment: Alignment.topRight,
               children: [
-                ExTextView("小不点",
-                  size: 16,
-                  isRegular: false,
-                ).container(h: 24,align: Alignment.centerLeft),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
-                    ExTextView("24",
-                      color: AppColors.white,
-                      size: AppSizes.hintFontSize,
-                    ).container(marginL: 2.w),
-                  ],
-                ).container(marginL: 4.w,padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
-                "".container().exp(),
-                //定位
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
-                    ExTextView("北京",
-                      color: AppColors.grayColor,
-                      size: 12,
-                    ),
-                  ],
+                AppImage().iconTempAvatar.image(w: 56.w,h: 56.w).clipRRect(radius: 8).container(marginR: 8.w,marginT: 8.w),
+                ExTextView("8",
+                  color: AppColors.white,
+                  textAlign: TextAlign.center,
+                ).container(
+                  radius: 999,
+                  h: 24,
+                  w: 24,
+                  align: Alignment.center,
+                  bgColor: AppColors.themeColor,
+                  hasBorder: true,
+                  borderColor: AppColors.white,
+                  borderWidth: 2,
+                  // boxConstraints: BoxConstraints(maxWidth: 40,minWidth: 24),
                 ),
               ],
             ),
-            //最新一条聊天记录、时间
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            "".container(w: 4.w),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ExTextView("那个老六把我的对象谈了 真诚交友非诚",
-                  color: AppColors.color_666666,
-                ).exp(),
-                ExTextView("16:23",
-                  color: AppColors.color_BBBBBB,
-                  size: 12,
-                ).container(marginL: 8.w),
+                //昵称、性别、定位
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ExTextView("小不点",
+                      size: 16,
+                      isRegular: false,
+                    ).container(h: 24,align: Alignment.centerLeft),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                        ExTextView("24",
+                          color: AppColors.white,
+                          size: AppSizes.hintFontSize,
+                        ).container(marginL: 2.w),
+                      ],
+                    ).container(marginL: 4.w,padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
+                    "".container().exp(),
+                    //定位
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
+                        ExTextView("北京",
+                          color: AppColors.grayColor,
+                          size: 12,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                //最新一条聊天记录、时间
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    ExTextView("那个老六把我的对象谈了 真诚交友非诚",
+                      color: AppColors.color_666666,
+                    ).exp(),
+                    ExTextView("16:23",
+                      color: AppColors.color_BBBBBB,
+                      size: 12,
+                    ).container(marginL: 8.w),
+                  ],
+                ).container(marginT: 8),
               ],
-            ).container(marginT: 8),
+            ).exp(),
           ],
         ).exp(),
+        "".container(w: double.infinity,h: 0.4,bgColor: AppColors.borderColor),
       ],
-    ).container(h: 88,onlyBottomBorder: true).onTap(() {
+    ).container(h: 88,padL: 16.w,padR: 16.w,bgColor: widget.isSelected?AppColors.color_F5F5F5:AppColors.white,).onTap(() {
       NavigatorUtil.gotPage(context, RouterName.chatSession);
     });
   }

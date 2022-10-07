@@ -16,18 +16,19 @@ import 'package:jinglin/ui/widgets/ex_video_widget.dart';
 
 
 class ExChatMessageWidget extends StatelessWidget {
-  ExChatMessageWidget({
+  ExChatMessageWidget(this.index,{
     Key? key,
     this.isSelf = true,
   }) : super(key: key);
   bool isSelf;//是否为自己发送的消息
+  int index;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         _timeWidget(),
-        _contentWidget(),
+        _contentWidget(context),
       ],
     ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
       App.eventBus.fire(SendInputEvent(1,"ChatSession"));
@@ -44,22 +45,22 @@ class ExChatMessageWidget extends StatelessWidget {
   }
 
   //聊天内容
-  Widget _contentWidget(){
+  Widget _contentWidget(BuildContext context){
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if(!isSelf) AppImage().iconWechat.image(w: 36.w,h: 36.w).container(marginT: 4),
+        if(!isSelf) AppImage().iconTempAvatar.image(w: 36.w,h: 36.w).clipRRect(radius: 8).container(marginT: 4),
         "".container(w: 12.w),
         Column(
           crossAxisAlignment: isSelf?CrossAxisAlignment.end:CrossAxisAlignment.start,
           children: [
-            _textContentWidget(),
-            // _photoContentWidget(),
-            // _videoContentWidget(),
+            if(index!=2&&index!=3) _textContentWidget(),
+            if(index==2)  _photoContentWidget(context),
+            if(index==3)  _videoContentWidget(),
           ],
         ).exp(),
         "".container(w: 12.w),
-        if(isSelf) AppImage().iconWechat.image(w: 36.w,h: 36.w).container(marginT: 4),
+        if(isSelf) AppImage().iconTempAvatar.image(w: 36.w,h: 36.w).clipRRect(radius: 8).container(marginT: 4),
 
       ],
     ).container(marginT: 12);
@@ -102,7 +103,7 @@ class ExChatMessageWidget extends StatelessWidget {
           children: [
             Column(
               children: [
-                AppImage().iconAlipay.image(w: 170.w,h: 238.w,fit: BoxFit.fill).container(
+                AppImage().tempBg.image(w: 170.w,h: 238.w,fit: BoxFit.cover).clipRRect(radius: 8).container(
                   marginT: index==0?4:16,
                   marginR: 4.w,
                   align: isSelf?Alignment.centerRight:Alignment.centerLeft,
@@ -115,7 +116,7 @@ class ExChatMessageWidget extends StatelessWidget {
         ).container(w: 174.w,).onTap(() {
           App.eventBus.fire(SendInputEvent(1,"ChatSession"));
           NavigatorUtil.gotPage(context, RouterName.bigPhoto,param: {
-            "photoList":[AppImage().iconAlipay],
+            "photoList":[AppImage().tempBg],
             "photoIndex":index,
           });
         });
@@ -134,8 +135,7 @@ class ExChatMessageWidget extends StatelessWidget {
               alignment: Alignment.center,
               children: [
                 ExVideoWidget(
-                  // videoUrl: "https://haokan.baidu.com/v?pd=wisenatural&vid=13044371044988382522",
-                  videoUrl: "/data/user/0/com.zhonghaizhi.jinglin.jinglin/cache/image_picker8611768778119426668.mp4",
+                  videoUrl: "https://video.yinyuetai.com/6bd60be8b76e4430a2767f89d51dd52c.mp4",
                 ).container(
                   marginT: index==0?4:4,
                   marginR: 4.w,

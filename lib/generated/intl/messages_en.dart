@@ -34,30 +34,32 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m6(name) => "${name}s重新获取";
 
-  static String m7(quantity, code) =>
-      "The minimum withdrawal quantity is ${quantity}${code}";
+  static String m7(name) => "跳过(${name})";
 
   static String m8(quantity, code) =>
+      "The minimum withdrawal quantity is ${quantity}${code}";
+
+  static String m9(quantity, code) =>
       "\nThe minimum number of coins to withdraw is:${quantity} ${code}. \n\nTo protect the safety of funds, when your account security policy changes, password changes, we will conduct manual review of coin withdrawals, please wait patiently for staff email contact. Please make sure that your computer and browser are secure to prevent information from being changed or leaked.";
 
-  static String m9(name) => "${name} block confirmation";
+  static String m10(name) => "${name} block confirmation";
 
-  static String m10(name) => "${name} Network Confirmation";
+  static String m11(name) => "${name} Network Confirmation";
 
-  static String m11(name) =>
+  static String m12(name) =>
       "Rate: ${name}% | Absenteeism fee paid at your own expense";
 
-  static String m12(name) => "距你${name}";
+  static String m13(name) => "距你${name}";
 
-  static String m13(name) => "BTC Buy Vol ${name} BTC";
+  static String m14(name) => "BTC Buy Vol ${name} BTC";
 
-  static String m14(name) => "BTC Sell Vol ${name} BTC";
+  static String m15(name) => "BTC Sell Vol ${name} BTC";
 
-  static String m15(name) => "共${name}条回复";
+  static String m16(name) => "共${name}条回复";
 
-  static String m16(name) => "最多可上传${name}张";
+  static String m17(name) => "最多可上传${name}张";
 
-  static String m17(name) => "${name}条评论";
+  static String m18(name) => "${name}条评论";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -139,18 +141,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_161": m6,
         "text_162": MessageLookupByLibrary.simpleMessage("不能同时上传视频和图片"),
         "text_163": MessageLookupByLibrary.simpleMessage("只能上传一个视频文件"),
-        "text_164": MessageLookupByLibrary.simpleMessage(
-            "Order error, please contact administrator"),
-        "text_165": MessageLookupByLibrary.simpleMessage(
-            "The selected currency cannot be the same"),
-        "text_166": MessageLookupByLibrary.simpleMessage(
-            "The selected currency cannot be empty"),
-        "text_167": MessageLookupByLibrary.simpleMessage(
-            "The network address cannot be empty"),
-        "text_168": MessageLookupByLibrary.simpleMessage(
-            "Quantity must be greater than zero"),
-        "text_169": MessageLookupByLibrary.simpleMessage(
-            "Please use the correct email address"),
+        "text_164": MessageLookupByLibrary.simpleMessage("全部"),
+        "text_165": MessageLookupByLibrary.simpleMessage("互动"),
+        "text_166": m7,
+        "text_167": MessageLookupByLibrary.simpleMessage("取消置顶"),
+        "text_168": MessageLookupByLibrary.simpleMessage("从列表删除"),
+        "text_169": MessageLookupByLibrary.simpleMessage("sssss"),
         "text_17": MessageLookupByLibrary.simpleMessage("男性"),
         "text_170": MessageLookupByLibrary.simpleMessage(
             "The verification code is incorrect"),
@@ -316,14 +312,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_277": MessageLookupByLibrary.simpleMessage("Transfer"),
         "text_278":
             MessageLookupByLibrary.simpleMessage("Number of coins withdrawn"),
-        "text_279": m7,
+        "text_279": m8,
         "text_28": MessageLookupByLibrary.simpleMessage("保存"),
         "text_280": MessageLookupByLibrary.simpleMessage("Withdrawal address"),
         "text_281":
             MessageLookupByLibrary.simpleMessage("Withdrawal Instructions"),
         "text_282":
             MessageLookupByLibrary.simpleMessage("Number of withdrawals"),
-        "text_283": m8,
+        "text_283": m9,
         "text_284": MessageLookupByLibrary.simpleMessage("Address Book"),
         "text_285": MessageLookupByLibrary.simpleMessage(
             "More than 8 characters, at least letters + numbers, no spaces"),
@@ -345,8 +341,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Please select a currency"),
         "text_296": MessageLookupByLibrary.simpleMessage(
             "Please enter the withdrawal address"),
-        "text_297": m9,
-        "text_298": m10,
+        "text_297": m10,
+        "text_298": m11,
         "text_299":
             MessageLookupByLibrary.simpleMessage("Coin withdrawal successful"),
         "text_3": MessageLookupByLibrary.simpleMessage("广场"),
@@ -356,7 +352,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cannot be less than the minimum number of coin withdrawals"),
         "text_301": MessageLookupByLibrary.simpleMessage("Use"),
         "text_302": MessageLookupByLibrary.simpleMessage("Redeem to"),
-        "text_303": m11,
+        "text_303": m12,
         "text_304": MessageLookupByLibrary.simpleMessage("exchange_rate"),
         "text_305":
             MessageLookupByLibrary.simpleMessage("Please enter the quantity"),
@@ -437,7 +433,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please set a new login password"),
         "text_359": MessageLookupByLibrary.simpleMessage(
             "Click back again to exit the program"),
-        "text_36": m12,
+        "text_36": m13,
         "text_360":
             MessageLookupByLibrary.simpleMessage("Please enter your last name"),
         "text_361": MessageLookupByLibrary.simpleMessage("Please enter a name"),
@@ -479,8 +475,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_383":
             MessageLookupByLibrary.simpleMessage("BTC Contract Long/Short"),
         "text_384": MessageLookupByLibrary.simpleMessage("USDT OTC Premium"),
-        "text_385": m13,
-        "text_386": m14,
+        "text_385": m14,
+        "text_386": m15,
         "text_387": MessageLookupByLibrary.simpleMessage(
             "BTC Contract Basis Difference"),
         "text_388": MessageLookupByLibrary.simpleMessage("Current Week"),
@@ -528,7 +524,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_53": MessageLookupByLibrary.simpleMessage("说点什么吧..."),
         "text_54": MessageLookupByLibrary.simpleMessage("发送"),
         "text_55": MessageLookupByLibrary.simpleMessage("楼主"),
-        "text_56": m15,
+        "text_56": m16,
         "text_57": MessageLookupByLibrary.simpleMessage("举报"),
         "text_58": MessageLookupByLibrary.simpleMessage("举报类型"),
         "text_59": MessageLookupByLibrary.simpleMessage("必填"),
@@ -537,7 +533,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_61": MessageLookupByLibrary.simpleMessage("举报原因"),
         "text_62": MessageLookupByLibrary.simpleMessage("请输入您举报的原因，有利于我们核实"),
         "text_63": MessageLookupByLibrary.simpleMessage("上传图片"),
-        "text_64": m16,
+        "text_64": m17,
         "text_65": MessageLookupByLibrary.simpleMessage("删除"),
         "text_66": MessageLookupByLibrary.simpleMessage("提交"),
         "text_67": MessageLookupByLibrary.simpleMessage("上传"),
@@ -550,7 +546,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "text_73": MessageLookupByLibrary.simpleMessage("发布"),
         "text_74": MessageLookupByLibrary.simpleMessage("这一刻你想说什么..."),
         "text_75": MessageLookupByLibrary.simpleMessage("全部评论"),
-        "text_76": m17,
+        "text_76": m18,
         "text_77": MessageLookupByLibrary.simpleMessage("设置"),
         "text_78": MessageLookupByLibrary.simpleMessage("粉丝"),
         "text_79": MessageLookupByLibrary.simpleMessage("我的动态"),

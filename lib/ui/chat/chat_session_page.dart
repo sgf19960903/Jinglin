@@ -56,7 +56,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
                 //昵称
                 ExTextView(S.of(context).app_name,
                   isRegular: false,
-                ),
+                ).container(h: 20),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +66,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                        AppImage().iconWomanGray.image(w: 8.w,h: 8.w,),
                         ExTextView("24",
                           color: AppColors.white,
                           size: AppSizes.hintFontSize,
@@ -79,7 +79,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
                       size: 11,
                     ).container(marginL: 4.w),
                   ],
-                ).container(marginT: 4,),
+                ).container(marginT: 2,),
               ],
             ),
             actionWidgets: [
@@ -96,7 +96,7 @@ class _ChatSessionPageState extends BaseState<ChatSessionPage> {
               ExListView(
                 itemCount: 50,
                 padding: EdgeInsets.only(bottom: 16),
-                itemBuilder: (_,index) => ExChatMessageWidget(),
+                itemBuilder: (_,index) => ExChatMessageWidget(index,isSelf: index%2==0,),
               ).onTap(() {
                 App.eventBus.fire(SendInputEvent(1,"ChatSession"));
                 FocusScope.of(context).unfocus();

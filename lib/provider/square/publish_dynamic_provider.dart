@@ -15,7 +15,7 @@ class PublishDynamicProvider extends BaseProvider {
   AssetType? currentListType;
   int reportTypeIndex = -1;//举报类型选中位置
   int inputContentLen = 0;//内容数量
-  int maxInputLen = 500;//最大内容数量
+  int maxInputLen = 300;//最大内容数量
   bool canPublish = false;//是否能发布
 
   //内容监听

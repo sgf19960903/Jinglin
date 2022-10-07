@@ -48,29 +48,7 @@ class _UserHomePageState extends BaseState<UserHomePage> {
         value: _provider,
         child: Column(
           children: [
-            Selector(
-              builder: (_,int tabIndex,child){
-                return CustomScrollView(
-                  controller: _provider.scrollController,
-                  slivers: [
-                    _titleWidget(),
-                    SliverToBoxAdapter(
-                      child: _infoTabWidget(),
-                    ),
-                    if(tabIndex==0) SliverToBoxAdapter(
-                      child: _userDetailInfoWidget(),
-                    ),
-                    if(tabIndex==1) SliverToBoxAdapter(
-                      child: _dynamicListWidget(),
-                    ),
-                    if(tabIndex==0) SliverToBoxAdapter(
-                      child: "".container(h: 500),
-                    ),
-                  ],
-                );
-              },
-              selector: (_,UserHomePageProvider p) => p.tabIndex,
-            ).exp(),
+            _contentWidget().exp(),
             _accostWidget(),
           ],
         ),
@@ -173,20 +151,20 @@ class _UserHomePageState extends BaseState<UserHomePage> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        AppImage().iconWomanGray.image(w: 8.w,h: 12.w,),
+                        AppImage().iconWomanGray.image(w: 8.w,h: 8.w,),
                         ExTextView("24",
                           color: AppColors.white,
                           size: AppSizes.hintFontSize,
-                        ).container(marginL: 2.w),
+                        ),
                       ],
-                    ).container(marginL: 4.w,padL: 3.w,padR: 3.w,padT: 1,padB: 1,bgColor: AppColors.womanColor,radius: 99),
+                    ).container(align: Alignment.center,padL: 3.w,padR: 3.w,bgColor: AppColors.womanColor,radius: 99),
                     //身高
                     ExTextView("165cm",
                       color: AppColors.white,
                       size: 12,
-                    ).container(marginL: 4.w),
+                    ).container(marginL: 8.w),
                   ],
-                ).container(marginT: 8,),
+                ).container(marginT: 8,marginL: 2.w),
               ],
             ).exp(),
             //关注按钮
@@ -198,10 +176,11 @@ class _UserHomePageState extends BaseState<UserHomePage> {
                 ExTextView(S.of(context).text_131,
                   color: AppColors.white,
                   size: AppSizes.contentFontSize,
+                  isStrutStyle: true,
                 ).container(marginL: 2.w),
               ],
             ).container(
-              h: 28,
+              h: 32,
               w: 74.w,
               radius: 999,
               bgColor: AppColors.themeColor
@@ -248,6 +227,7 @@ class _UserHomePageState extends BaseState<UserHomePage> {
             )
           ],
         ).onTap(() {
+          _provider.pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.linear);
           _provider.changeTabIndex(0);
         }),
         "".container(w: 32.w),
@@ -271,12 +251,72 @@ class _UserHomePageState extends BaseState<UserHomePage> {
             )
           ],
         ).onTap(() {
+          _provider.pageController.animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.linear);
           _provider.changeTabIndex(1);
         }),
       ],
     ).container(h: 60,bgColor: AppColors.white,bgImg: _provider.tabIndex==1?null:AppImage().userHomePageTabBg);
   }
 
+  //内容
+  Widget _contentWidget(){
+    return Selector(
+      builder: (_,data,child){
+        return PageView(
+          controller: _provider.pageController,
+          onPageChanged: (index){
+            _provider.changeTabIndex(index);
+          },
+          children: [
+            _tabOneWidget(),
+            _tabTwoWidget(),
+          ],
+        );
+      },
+      selector: (_,UserHomePageProvider p) => p.tabIndex
+    );
+  }
+
+  //Tab为0时的视图
+  Widget _tabOneWidget(){
+    return CustomScrollView(
+      controller: _provider.scrollController,
+      slivers: [
+        _titleWidget(),
+        SliverToBoxAdapter(
+          child: _infoTabWidget(),
+        ),
+        SliverToBoxAdapter(
+          child: _userDetailInfoWidget(),
+        ),
+        SliverToBoxAdapter(
+          child: "".container(h: 500),
+        ),
+      ],
+    );
+  }
+
+  //Tab为1时的视图
+  Widget _tabTwoWidget(){
+    return Column(
+      children: [
+        "".container(h: paddingTop),
+        Row(
+          children: [
+            AppImage().iconBackBlack.image(w: 24.w,h: 24.w).container(marginL: 12.w,marginR: 12.w).onTap(() {
+              Navigator.of(context).pop();
+            }),
+            _scaleUserBaseInfoWidget().exp(),
+            AppImage().iconMore.image(w: 24.w,h: 24.w).container(marginL: 12.w,marginR: 12.w).onTap(() {
+              NavigatorUtil.gotPage(context, RouterName.userHomePageSettings);
+            }),
+          ],
+        ),
+        _infoTabWidget(),
+        _dynamicListWidget().exp(),
+      ],
+    );
+  }
 
   //用户详细信息
   Widget _userDetailInfoWidget(){
@@ -349,9 +389,9 @@ class _UserHomePageState extends BaseState<UserHomePage> {
   Widget _dynamicListWidget(){
     return ExListView(
       itemCount: 10,
-      shrinkWrap: true,
+      // shrinkWrap: false,
+      // physics: NeverScrollableScrollPhysics(),
       padding: EdgeInsets.only(left: AppSizes.pagePaddingLR,right: AppSizes.pagePaddingLR),
-      physics: NeverScrollableScrollPhysics(),
       itemBuilder: (_,index) => ExDynamicWidget(index,showUserInfo: false,),
     );
   }

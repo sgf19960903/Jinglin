@@ -10,6 +10,7 @@ import 'package:jinglin/common/utils/dialog/common_dialog_util.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
+import 'package:jinglin/ui/widgets/ex_video_widget.dart';
 
 
 
@@ -55,7 +56,7 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
       children: [
         Row(
           children: [
-            AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+            AppImage().iconTempAvatar.image(w: 36.w,h: 36.w,).clipRRect(radius: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -87,7 +88,7 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
             ExTextView(S.of(context).text_35,
               color: AppColors.themeColor,
               size: AppSizes.contentFontSize,
-            ).container(marginL: 2.w),
+            ).container(marginL: 2.w,),
           ],
         ).container(
           h: 24,
@@ -190,23 +191,21 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
 
 
   //视频展示
-  Widget _videoWidget(String videoImg){
-    if(videoImg.isEmpty) return Container();
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        "".image(w: 200.w,h: 300,fit: BoxFit.contain).clipRRect(radius: 8.w),
-        AppImage().iconPlayVideo.image(w: 48.w,h: 48.w,),
-      ],
-    ).container(w: 200.w,h: 300,marginT: 8,radius: 8,bgColor: AppColors.black.withOpacity(0.4));
+  Widget _videoWidget(String videoUrl){
+    if(videoUrl.isEmpty) return Container();
+    return ExVideoWidget(
+      videoUrl: videoUrl,
+      width: 200.w,
+      height: 300.w,
+    ).container(marginT: 8);
   }
 
 
 
   //动态内容
   Widget _contentWidget(BuildContext context){
-    List<String> photoList = List.generate(5, (index) => AppImage().tempBg);
-    String videoImg = "";
+    List<String> photoList = List.generate(widget.index, (i) => AppImage().tempBg);
+    String videoUrl = widget.index==0?"https://video.yinyuetai.com/6bd60be8b76e4430a2767f89d51dd52c.mp4":"";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -218,7 +217,7 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
         //图片
         _photoWidget(context,photoList),
         //视频
-        _videoWidget(videoImg),
+        _videoWidget(videoUrl),
       ],
     );
   }
@@ -231,7 +230,7 @@ class _ExDynamicWidgetState extends State<ExDynamicWidget> {
         AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
         ExTextView("北京",
           color: AppColors.grayColor,
-          size: 12,
+          size: 13,
         ),
       ],
     ).container(marginT: 8);

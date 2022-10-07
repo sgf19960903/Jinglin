@@ -5,6 +5,7 @@ import 'package:jinglin/application/providers.dart';
 import 'package:jinglin/generated/l10n.dart';
 import 'package:jinglin/ui/login/login_page.dart';
 import 'package:jinglin/ui/main_page.dart';
+import 'package:jinglin/ui/splash_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -28,11 +29,11 @@ class MyApp extends StatelessWidget {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               navigatorKey: App.appGlobal,
-              title: "鲸邻交友",
+              title: "鲸邻",
               navigatorObservers: [App.routeObserver],
               onGenerateTitle: (context){
                 ScreenUtil.init(BoxConstraints(maxWidth: 375,maxHeight: 810),context:context);
-                return "鲸邻交友";
+                return "鲸邻";
               },
               locale: languageProvider.currentLocale,
               localizationsDelegates: [
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               supportedLocales: [
                 Locale("en"),
               ],
-              home: App.token.isEmpty?LoginPage():MainPage(),
+              home: SplashPage(),
             );
           },
         ),

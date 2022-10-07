@@ -17,8 +17,12 @@ class ExVideoWidget extends StatefulWidget {
   ExVideoWidget({
     Key? key,
     required this.videoUrl,
+    this.width,
+    this.height,
   }) : super(key: key);
   String videoUrl;
+  double? width;
+  double? height;
 
   @override
   State<ExVideoWidget> createState() => _ExVideoWidgetState();
@@ -76,7 +80,7 @@ class _ExVideoWidgetState extends State<ExVideoWidget> {
           child: Stack(
             alignment: Alignment.center,
             children: [
-              "".container(bgColor: AppColors.black.withOpacity(0.6),radius: 12.w),
+              "".container(bgColor: AppColors.black.withOpacity(0.4),radius: 12.w),
               if(!isLoading) "${isPlaying?AppImage().iconPauseVideo:AppImage().iconPlayVideo}".image(w: 36.w,h: 36.w).onTap(() async{
                 App.eventBus.fire(SendInputEvent(1,"ChatSession"));
                 if(_playerController.value.isPlaying) await _playerController.pause();
@@ -92,7 +96,7 @@ class _ExVideoWidgetState extends State<ExVideoWidget> {
           strokeWidth: 2,
         ).container(w: 36.w,h: 36.w,),
       ],
-    ).container(w: 170.w,h: 238.w,bgColor: AppColors.black.withOpacity(0.8),radius: 12.w).onTap(() {
+    ).container(w: widget.width??170.w,h: widget.height??238.w,bgColor: AppColors.black.withOpacity(0.8),radius: 12.w).onTap(() {
       App.eventBus.fire(SendInputEvent(1,"ChatSession"));
       setState(() {
         showButton = !showButton;

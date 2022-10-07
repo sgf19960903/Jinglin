@@ -10,6 +10,7 @@ import 'package:jinglin/provider/base/base_provider.dart';
 
 
 class UserHomePageProvider extends BaseProvider {
+  PageController pageController = PageController();
   ScrollController scrollController = ScrollController();
   int tabIndex = 0;//0--用户信息  1--动态列表
   double titleOpacity = 0;//标题用户信息透明度
@@ -33,6 +34,12 @@ class UserHomePageProvider extends BaseProvider {
   }
 
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    scrollController.dispose();
+    super.dispose();
+  }
 
 
 

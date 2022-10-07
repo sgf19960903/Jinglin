@@ -108,11 +108,11 @@ Router generateRoute() {
     // ),
     RouterName.login: BaseRouter(
       routerBuilder: (context, match, settings) => LoginPage(),
-      animate: RouterAnimate.slide_right,
+      animate: RouterAnimate.fade,
     ),
     RouterName.main: BaseRouter(
       routerBuilder: (context, match, settings) => MainPage(),
-      animate: RouterAnimate.slide_right,
+      animate: RouterAnimate.fade,
     ),
     RouterName.praiseNotice: BaseRouter(
       routerBuilder: (context, match, settings) => PraiseNoticePage(),

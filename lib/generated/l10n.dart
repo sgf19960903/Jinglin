@@ -1640,60 +1640,60 @@ class S {
     );
   }
 
-  /// `Order error, please contact administrator`
+  /// `全部`
   String get text_164 {
     return Intl.message(
-      'Order error, please contact administrator',
+      '全部',
       name: 'text_164',
       desc: '',
       args: [],
     );
   }
 
-  /// `The selected currency cannot be the same`
+  /// `互动`
   String get text_165 {
     return Intl.message(
-      'The selected currency cannot be the same',
+      '互动',
       name: 'text_165',
       desc: '',
       args: [],
     );
   }
 
-  /// `The selected currency cannot be empty`
-  String get text_166 {
+  /// `跳过({name})`
+  String text_166(Object name) {
     return Intl.message(
-      'The selected currency cannot be empty',
+      '跳过($name)',
       name: 'text_166',
       desc: '',
-      args: [],
+      args: [name],
     );
   }
 
-  /// `The network address cannot be empty`
+  /// `取消置顶`
   String get text_167 {
     return Intl.message(
-      'The network address cannot be empty',
+      '取消置顶',
       name: 'text_167',
       desc: '',
       args: [],
     );
   }
 
-  /// `Quantity must be greater than zero`
+  /// `从列表删除`
   String get text_168 {
     return Intl.message(
-      'Quantity must be greater than zero',
+      '从列表删除',
       name: 'text_168',
       desc: '',
       args: [],
     );
   }
 
-  /// `Please use the correct email address`
+  /// `sssss`
   String get text_169 {
     return Intl.message(
-      'Please use the correct email address',
+      'sssss',
       name: 'text_169',
       desc: '',
       args: [],

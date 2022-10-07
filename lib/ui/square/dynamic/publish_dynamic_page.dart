@@ -48,6 +48,7 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
       child: widgetBuild(
           bgColor: AppColors.pageGrayColor,
           appBar: ExTitleView(
+            bottomLine: false,
             actionWidgets: [
               _publishWidget(),
             ],
@@ -57,7 +58,7 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 _contentInputWidget(),
-                "".container(h: 0.5,bgColor: AppColors.borderColor),
+                "".container(h: 0.4,bgColor: AppColors.borderColor,marginT: 12),
                 _photoOrVideoWidget(),
               ],
             ).container(padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,bgColor: AppColors.pageColor),
@@ -86,10 +87,10 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
             h: 32,
             radius: 99,
             bgColor: AppColors.buttonNotSelected,
-            gradient: LinearGradient(colors: [
-              AppColors.gradientButtonBeginColor.withOpacity(canPublish?1:0.3),
-              AppColors.gradientButtonEndColor.withOpacity(canPublish?1:0.3),
-            ])
+            gradient: canPublish?LinearGradient(colors: [
+              AppColors.gradientButtonBeginColor,
+              AppColors.gradientButtonEndColor,
+            ]) : null
         ).onTap(() {
           if(!canPublish) return;
         });
@@ -153,10 +154,6 @@ class _PublishDynamicPageState extends BaseState<PublishDynamicPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             AppImage().iconAdd.image(w: 28.w,h: 28.w,),
-                            ExTextView(S.of(context).text_67,
-                              color: AppColors.textColor,
-                              size: 13,
-                            ).container(marginT: 1)
                           ],
                         ).container(w: 100.w,h: 100.w,radius: 12,bgColor: AppColors.pageGrayColor,).onTap(() async{
                           CommonDialogUtil.showChoiceDialog(context, [S.of(context).text_37,S.of(context).text_38],selectedFunc: (index) async{

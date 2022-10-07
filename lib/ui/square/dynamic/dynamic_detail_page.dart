@@ -110,7 +110,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
         //用户信息
         Row(
           children: [
-            AppImage().iconWechat.image(w: 36.w,h: 36.w,),
+            AppImage().iconTempAvatar.image(w: 36.w,h: 36.w,).clipRRect(radius: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +161,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
 
   //动态内容
   Widget _dynamicContentWidget(){
-    List<String> photoList = List.generate(10, (index) => AppImage().tempBg);
+    List<String> photoList = List.generate(9, (index) => AppImage().tempBg);
     String videoUrl = "";
     int photoLen = photoList.length;
     int hidePhotoNum = photoLen-maxShowPhotoCount;//隐藏图片数量

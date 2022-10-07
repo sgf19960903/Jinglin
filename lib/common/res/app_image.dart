@@ -37,6 +37,7 @@ class AppImage {
   String diamondPackDicountBg = "assets/images/diamond_pack_discount_bg.png";
   String userHomePageTabBg = "assets/images/user_home_page_tab_bg.png";
   String tempBg = "assets/images/temp_bg.webp";
+  String launcherBg = "assets/images/launcher_bg.png";
 
 
   ///Icon
@@ -149,6 +150,7 @@ class AppImage {
   String iconSex = "assets/images/icon_sex.png";
   String iconHeight = "assets/images/icon_height.png";
   String iconCoin = "assets/images/icon_coin.png";
+  String iconTempAvatar = "assets/images/icon_temp_avatar.webp";
 
 
 

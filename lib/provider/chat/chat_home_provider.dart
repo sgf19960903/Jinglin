@@ -3,13 +3,28 @@
 /// @Date 2022/9/30 17:26
 /// @Description TODO
 
+import 'package:flutter/cupertino.dart';
+import 'package:jinglin/common/utils/log_util.dart';
 import 'package:jinglin/provider/base/base_provider.dart';
 
 
 class ChatHomeProvider extends BaseProvider {
-  int listTabIndex = 0;
+  PageController pageController = PageController();
+  int listTabIndex = 0;//
+
+  //更改列表Tab位置
+  changeListTabIndex(index){
+    listTabIndex = index;
+    LogUtil.printE("跳珠难道：$index");
+    notifyListeners();
+  }
 
 
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
 
 
 
