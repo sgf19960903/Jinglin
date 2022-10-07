@@ -1,5 +1,6 @@
 
 
+import 'package:jinglin/my_app.dart';
 import 'package:jinglin/ui/chat/chat_session_page.dart';
 import 'package:jinglin/ui/chat/chat_settings_page.dart';
 import 'package:jinglin/ui/chat/user_home_page.dart';
@@ -97,6 +98,8 @@ class RouterName {
   static const String myDynamic = "myDynamic";
   //隐私设置
   static const String privacySettings = "privacySettings";
+  //app
+  static const String myApp = "myApp";
 
 }
 
@@ -106,6 +109,10 @@ Router generateRoute() {
     //   routerBuilder: (context, match, settings) => TextHtml(),
     //   animate: RouterAnimate.slide_right,
     // ),
+    RouterName.myApp: BaseRouter(
+      routerBuilder: (context, match, settings) => MyApp(),
+      animate: RouterAnimate.slide_right,
+    ),
     RouterName.login: BaseRouter(
       routerBuilder: (context, match, settings) => LoginPage(),
       animate: RouterAnimate.fade,

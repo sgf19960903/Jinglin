@@ -12,6 +12,7 @@ import 'package:jinglin/common/res/res_path.dart';
 import 'package:jinglin/common/router/router_manager.dart';
 import 'package:jinglin/common/utils/navigator_util.dart';
 import 'package:jinglin/generated/l10n.dart';
+import 'package:jinglin/my_app.dart';
 import 'package:jinglin/ui/base/base_state.dart';
 import 'package:jinglin/ui/widgets/ex_text_view.dart';
 

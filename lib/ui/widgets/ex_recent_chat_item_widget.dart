@@ -38,7 +38,7 @@ class _ExRecentChatItemWidgetState extends State<ExRecentChatItemWidget> {
             Stack(
               alignment: Alignment.topRight,
               children: [
-                AppImage().iconTempAvatar.image(w: 56.w,h: 56.w).clipRRect(radius: 8).container(marginR: 8.w,marginT: 8.w),
+                AppImage().iconTempAvatar.image(w: 56,h: 56).clipRRect(radius: 8).container(marginR: 8.w,marginT: 8.w),
                 ExTextView("8",
                   color: AppColors.white,
                   textAlign: TextAlign.center,
@@ -92,7 +92,7 @@ class _ExRecentChatItemWidgetState extends State<ExRecentChatItemWidget> {
                       ],
                     ),
                   ],
-                ),
+                ).container(marginT: 10),
                 //最新一条聊天记录、时间
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -105,7 +105,7 @@ class _ExRecentChatItemWidgetState extends State<ExRecentChatItemWidget> {
                       size: 12,
                     ).container(marginL: 8.w),
                   ],
-                ).container(marginT: 8),
+                ).container(h: 20,align: Alignment.centerLeft,marginT: 8),
               ],
             ).exp(),
           ],

@@ -15,7 +15,6 @@ class ChatHomeProvider extends BaseProvider {
   //更改列表Tab位置
   changeListTabIndex(index){
     listTabIndex = index;
-    LogUtil.printE("跳珠难道：$index");
     notifyListeners();
   }
 

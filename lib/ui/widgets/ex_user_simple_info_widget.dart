@@ -23,7 +23,7 @@ class ExUserSimpleInfoWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppImage().iconWechat.image(w: 64.w,h: 64.w,).clipRRect(radius: 8),
+        AppImage().iconTempAvatar.image(w: 64.w,h: 64.w,).clipRRect(radius: 8),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,

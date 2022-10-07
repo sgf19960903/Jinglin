@@ -103,6 +103,7 @@ class _HomePageState extends BaseState<HomePage> {
         },
         selector: (_,HomeProvider p) => p.listTabIndex
       ).onTap(() {
+        _provider.pageController.jumpToPage(index);
         _provider.changeListTabIndex(index);
       }).container(marginR: 16.w,)),
     ).container(bgColor: AppColors.white,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR,);
@@ -134,7 +135,7 @@ class _HomePageState extends BaseState<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //用户头像
-            AppImage().iconTempAvatar.image(w: 64.w,h: 64.w,).clipRRect(radius: 12),
+            AppImage().iconTempAvatar.image(w: 64,h: 64,).clipRRect(radius: 12),
             //间距
             "".container(w: 12.w),
             //用户其他信息
@@ -168,9 +169,10 @@ class _HomePageState extends BaseState<HomePage> {
                             ExTextView("24",
                               color: AppColors.white,
                               size: AppSizes.hintFontSize,
+                              textAlign: TextAlign.center,
                             ).container(marginL: 2.w),
                           ],
-                        ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 8,bgColor: AppColors.womanColor,radius: 99),
+                        ).container(h: 12,padL: 3.w,padR: 3.w,marginT: 8,bgColor: AppColors.womanColor,radius: 99),
                         //个性签名
                         ExTextView("没留下什么东西",
                           color: AppColors.grayColor,

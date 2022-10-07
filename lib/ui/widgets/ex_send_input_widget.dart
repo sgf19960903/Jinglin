@@ -136,7 +136,6 @@ class _ExSendInputWidgetState extends State<ExSendInputWidget> with WidgetsBindi
                   node: _focusNode,
                   canRequestFocus: true,
                   onFocusChange: (hasFocus){
-                    LogUtil.printE("表情焦点：$hasFocus");
                     // if(!hasFocus) setState(() {
                     //   showExpressList = false;
                     //   _crossFadeState = CrossFadeState.showFirst;

@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jinglin/application/app.dart';
 import 'package:jinglin/application/providers.dart';
 import 'package:jinglin/generated/l10n.dart';
-import 'package:jinglin/ui/login/login_page.dart';
 import 'package:jinglin/ui/main_page.dart';
 import 'package:jinglin/ui/splash_page.dart';
 import 'package:provider/provider.dart';

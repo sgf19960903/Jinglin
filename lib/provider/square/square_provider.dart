@@ -14,7 +14,7 @@ class SquareProvider extends BaseProvider {
   //更改列表Tab位置
   changeListTabIndex(index){
     listTabIndex = index;
-    pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.linear);
+    // pageController.animateToPage(index, duration: Duration(milliseconds: 300), curve: Curves.linear);
     notifyListeners();
   }
 

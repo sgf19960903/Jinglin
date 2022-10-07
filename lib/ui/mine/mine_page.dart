@@ -55,7 +55,7 @@ class _MinePageState extends BaseState<MinePage> {
         Row(
           children: [
             //头像
-            AppImage().iconWechat.image(w: 60.w,h: 60.w).clipRRect(radius: 8,),
+            AppImage().iconTempAvatar.image(w: 60.w,h: 60.w).clipRRect(radius: 8,),
             "".container(w: 14.w),
             //昵称、性别、设置、个性签名
             Column(

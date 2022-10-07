@@ -148,6 +148,7 @@ class _SquarePageState extends BaseState<SquarePage> {
             )
           ],
         ).onTap(() {
+          _provider.pageController.jumpToPage(index);
           _provider.changeListTabIndex(index);
           }).container(marginR: 16.w,)),
         );

@@ -30,7 +30,7 @@ class _MyDiamondPageState extends BaseState<MyDiamondPage> {
     return widgetBuild(
       bgColor: AppColors.color_FFE8B1,
       appBar: ExTitleView(
-        title: S.of(context).app_name,
+        title: S.of(context).text_85,
         titleCenter: true,
         titleColor: Colors.transparent,
       ),

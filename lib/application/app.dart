@@ -55,9 +55,7 @@ class App {
         SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
       }
     }
-
     await judgeIsLogin();
-    await Future.delayed(Duration(seconds: 3));
   }
 
   //判断是否登录

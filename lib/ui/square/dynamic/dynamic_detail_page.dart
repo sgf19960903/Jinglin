@@ -224,7 +224,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
         AppImage().iconLocationGray.image(w: 16.w,h: 16.w,).container(marginR: 2.w,),
         ExTextView("北京",
           color: AppColors.grayColor,
-          size: 12,
+          size: 13,
         ),
       ],
     ).container(marginT: 8,padL: AppSizes.pagePaddingLR,padR: AppSizes.pagePaddingLR).onTap(() {
@@ -339,7 +339,7 @@ class _DynamicDetailPageState extends BaseState<DynamicDetailPage> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        AppImage().iconWechat.image(w: 36.w,h: 36.w,fit: BoxFit.fill).onTap(() {
+        AppImage().iconTempAvatar.image(w: 36.w,h: 36.w,fit: BoxFit.fill).clipRRect(radius: 8).onTap(() {
           App.eventBus.fire(SendInputEvent(1,"DynamicDetail"));
           NavigatorUtil.gotPage(context, RouterName.userHomePage);
         }),

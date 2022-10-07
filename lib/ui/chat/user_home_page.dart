@@ -62,7 +62,7 @@ class _UserHomePageState extends BaseState<UserHomePage> {
       backgroundColor: AppColors.white,
       leadingWidth: 36.w,
       toolbarHeight: 44,
-      expandedHeight: _provider.tabIndex==0?375:44,
+      expandedHeight: 375,
       pinned: true,
       floating: false,
       elevation: 0,
@@ -94,7 +94,7 @@ class _UserHomePageState extends BaseState<UserHomePage> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              AppImage().iconWechat.image(w: 36.w,h: 36.w).container(marginR: 12.w,),
+              AppImage().iconTempAvatar.image(w: 36.w,h: 36.w).clipRRect(radius: 8).container(marginR: 12.w,),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,7 +112,7 @@ class _UserHomePageState extends BaseState<UserHomePage> {
                         size: AppSizes.hintFontSize,
                       ).container(marginL: 2.w),
                     ],
-                  ).container(marginL: 4.w,padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
+                  ).container(padL: 3.w,padR: 3.w,padT: 1,padB: 1,marginT: 4,bgColor: AppColors.womanColor,radius: 99),
                 ],
               ).exp(),
             ],
@@ -227,7 +227,8 @@ class _UserHomePageState extends BaseState<UserHomePage> {
             )
           ],
         ).onTap(() {
-          _provider.pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.linear);
+          _provider.pageController.jumpToPage(0);
+          // _provider.pageController.animateToPage(0, duration: Duration(milliseconds: 300), curve: Curves.linear);
           _provider.changeTabIndex(0);
         }),
         "".container(w: 32.w),
@@ -251,7 +252,8 @@ class _UserHomePageState extends BaseState<UserHomePage> {
             )
           ],
         ).onTap(() {
-          _provider.pageController.animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.linear);
+          _provider.pageController.jumpToPage(1);
+          // _provider.pageController.animateToPage(1, duration: Duration(milliseconds: 300), curve: Curves.linear);
           _provider.changeTabIndex(1);
         }),
       ],

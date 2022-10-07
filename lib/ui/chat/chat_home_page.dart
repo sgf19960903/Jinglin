@@ -25,7 +25,11 @@ class ChatHomePage extends StatefulWidget {
 
 class _ChatHomePageState extends BaseState<ChatHomePage> {
   ChatHomeProvider _provider = ChatHomeProvider();
-  List<GlobalKey> keyList = List.generate(20, (index) => GlobalKey());
+  Map<int,List<GlobalKey>> keyMap = {
+    0: List.generate(20, (index) => GlobalKey()),
+    1: List.generate(20, (index) => GlobalKey()),
+    2: List.generate(20, (index) => GlobalKey()),
+  };
   Map<int,int> selectIndexMap = {
     0: -1,
     1: -1,
@@ -131,7 +135,7 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
       itemCount: 20,
       padding: EdgeInsets.only(top: 8,),
       itemBuilder: (_,index) => ExRecentChatItemWidget(
-        key: keyList[index],
+        key: keyMap[tabIndex]?[index],
         isSelected: selectIndexMap[tabIndex]==index,
       ).onTap(() {},onLongTap: (){
         selectIndexMap[tabIndex] = index;
@@ -145,8 +149,8 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
   OverlayEntry? _entry;
   //长按菜单框
   _showMenuOverlay(int index){
-    GlobalKey key = keyList[index];
-    RenderBox? box = key.currentContext?.findRenderObject() as RenderBox?;
+    GlobalKey? key = keyMap[_provider.listTabIndex]?[index];
+    RenderBox? box = key?.currentContext?.findRenderObject() as RenderBox?;
     Offset clickOffset = Offset.zero;
     clickOffset = box?.localToGlobal(Offset.zero)??Offset.zero;
     bool isBottom = clickOffset.dy + 64 + 100 > screenHeight - 48;//是否到底了
@@ -158,10 +162,8 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
       builder: (_){
         return Stack(
           children: [
-
             CustomPaint(
-              size: Size(120,108),
-              painter: ExChatMenuWidget(),
+              painter: ExChatMenuWidget(!isBottom),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -175,17 +177,11 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
               ).container(
                 w: 120,
                 h: 108,
-                padT: 8,
-                shadow: [
-                  BoxShadow(
-                    blurRadius: 14,
-                    spreadRadius: 0,
-                    offset: Offset(0, 3),
-                    color: AppColors.black.withOpacity(0.1)
-                  ),
-                ]
+                padT: isBottom?8:16,
+                padB: isBottom?16:8,
               ),
             ).positioned(top: isBottom? (clickOffset.dy + 24 - 100 - 8): clickOffset.dy + 64,left: 170.w),
+
             // Column(
             //   crossAxisAlignment: CrossAxisAlignment.center,
             //   mainAxisAlignment: MainAxisAlignment.center,
@@ -198,19 +194,10 @@ class _ChatHomePageState extends BaseState<ChatHomePage> {
             //   ],
             // ).container(
             //   w: 120,
-            //   h: 100,
+            //   h: 108,
             //   padT: 8,
             //   padB: 8,
-            //   bgColor: AppColors.white,
-            //   radius: 4,
-            //   shadow: [
-            //     BoxShadow(
-            //       blurRadius: 14,
-            //       spreadRadius: 0,
-            //       offset: Offset(0, 3),
-            //       color: AppColors.black.withOpacity(0.1)
-            //     ),
-            //   ]
+            //   bgColor: Colors.red
             // ).positioned(top: isBottom? (clickOffset.dy + 24 - 100 - 8): clickOffset.dy + 64,left: 170.w),
           ],
         ).container(bgColor: Colors.transparent).onTap(() {

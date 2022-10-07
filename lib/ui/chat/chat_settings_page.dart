@@ -51,7 +51,7 @@ class _ChatSettingsPageState extends BaseState<ChatSettingsPage> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        AppImage().iconWechat.image(w: 56.w,h: 56.w).container(marginR: 12.w,marginT: 8.w),
+        AppImage().iconTempAvatar.image(w: 56.w,h: 56.w).clipRRect(radius: 8).container(marginR: 12.w,marginT: 8.w),
         Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
